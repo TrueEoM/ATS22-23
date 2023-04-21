@@ -1,5 +1,8 @@
 package Model;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 public class SmartCamera extends SmartDevice{
     private String resolucao;//(z x y)
     private double tamanho;//em MB
@@ -50,7 +53,12 @@ public class SmartCamera extends SmartDevice{
     public double consumoDiario(){
         String s = (this.resolucao.substring( 1, this.resolucao.length() - 1 ) );
         String[] tokens = s.split("x");
-        return (Integer. parseInt(tokens[0]) * Integer.parseInt(tokens[1]))*this.tamanho;
+        double res = (Integer. parseInt(tokens[0]) * Integer.parseInt(tokens[1])* (1 + this.tamanho/10))/100000;
+
+        DecimalFormat df = new DecimalFormat("#,##");
+        df.setRoundingMode(RoundingMode.UP);
+
+        return Double.parseDouble(df.format(res));
 
     }
 
@@ -67,7 +75,7 @@ public class SmartCamera extends SmartDevice{
         StringBuilder sb = new StringBuilder();
         sb.append(super.toString());
         sb.append("\tTamanho: ").append(this.tamanho).append("Mb ").append("; ")
-                .append("\tResolução: ").append(this.resolucao).append(";\n");
+                .append("\tResolução: ").append(this.resolucao).append("; ");
         return sb.toString();
     }
 
