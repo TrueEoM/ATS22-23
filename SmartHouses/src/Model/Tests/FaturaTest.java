@@ -89,7 +89,7 @@ public class FaturaTest
     {
         Fatura fat = new Fatura(5.0,"fatura1",LocalDateTime.of(2022,3,25,15,45),LocalDateTime.of(2022,3,25,15,45),"Rua 25 Abril",123456789,"EDP",10.0); 
         fat.setNIF(987654321);
-        assertEquals(987654321,fat.getIdFornecedor());
+        assertEquals(987654321,fat.getNIF());
     }
 
     @Test
@@ -152,7 +152,7 @@ public class FaturaTest
     public void testToString()
     {
         Fatura fat = new Fatura(5.0,"fatura1",LocalDateTime.of(2022,3,25,15,45),LocalDateTime.of(2022,3,25,15,45),"Rua 25 Abril",123456789,"EDP",10.0); 
-        assertEquals("IdFatura: fatura1; IdFornecedor: EDP; NIF: 123456789; Consumo: 5.0; Valor: 10.0; Inicio: 2022-3-25 15:45; Fim: 2022-3-25 15:45;",fat.toString());
+        assertEquals("IdFatura: fatura1; IdFornecedor: EDP; NIF: 123456789; Consumo: 5.0; Valor: 10.0; Inicio: 2022-03-25 15:45; Fim: 2022-03-25 15:45;",fat.toString());
     }
 
     @Test
