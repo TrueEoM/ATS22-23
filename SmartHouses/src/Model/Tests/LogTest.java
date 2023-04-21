@@ -54,17 +54,19 @@ public class LogTest
         assertEquals(LocalDateTime.of(2022,3,25,15,45),log2.getDia());
     }
 
+    //teste alterado nas assertions
     @Test
     public void testGetMode()
     {
         Log log = new Log();
-        assertNull(log.getMode());
+        assertNull(log.getDia());
+        assertFalse(log.getMode());
         log = new Log(LocalDateTime.of(2023,4,26,16,46),false);
         assertEquals(false,log.getMode());
         Log log2 = new Log(log);
         assertEquals(false,log2.getMode());
     }
-
+    //teste alterado no codigo fonte, usar Object.equals(a,b) em vez de a.equals(b) para evitar nullPointerException
     @Test
     public void testEquals()
     {
@@ -74,13 +76,16 @@ public class LogTest
         if(!log.equals(log)) System.out.print("Equals Errado");
     }
 
+    //erro com a maneira de como eles estavam a escrever o teste(sem tabs) e nao usaram formatador para imprimir o
+    //dateTime
     @Test
     public void testToString() 
     {
         Log log = new Log();
-        assertEquals("Dia: ; Está ligado?: ",log.toString());
+        assertEquals("\tDia: ;\tEstá ligado?: false;",log.toString());
         log = new Log(LocalDateTime.of(2022,3,25,15,45),false);
-        assertEquals("Dia: 2022-3-25 15:45; Está ligado?: false",log.toString());
+        System.out.println(log.toString());
+        assertEquals("\tDia: 2022-03-25 15:45;\tEstá ligado?: false;",log.toString());
     }
     
     @Test
