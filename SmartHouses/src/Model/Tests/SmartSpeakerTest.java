@@ -31,6 +31,9 @@ public class SmartSpeakerTest {
     {
         SmartSpeaker smartSpeaker = new SmartSpeaker("speaker1",50,"JBL","Radio Comercial",5.0);
         smartSpeaker.volumeUp();
+        Assertions.assertEquals(1, smartSpeaker.getVolume());
+        smartSpeaker = new SmartSpeaker("speaker1",false,50,"JBL","Radio Comercial",5.0);
+        smartSpeaker.volumeUp();
         Assertions.assertEquals(51, smartSpeaker.getVolume());
         smartSpeaker = new SmartSpeaker("speaker1",false,100,"JBL","Radio Comercial",5.0);
         smartSpeaker.volumeUp();
@@ -41,6 +44,9 @@ public class SmartSpeakerTest {
     public void testVolumeDown() 
     {
         SmartSpeaker smartSpeaker = new SmartSpeaker("speaker1",50,"JBL","Radio Comercial",5.0);
+        smartSpeaker.volumeDown();
+        Assertions.assertEquals(0, smartSpeaker.getVolume());
+        smartSpeaker = new SmartSpeaker("speaker1",false,50,"JBL","Radio Comercial",5.0);
         smartSpeaker.volumeDown();
         Assertions.assertEquals(49, smartSpeaker.getVolume());
     }

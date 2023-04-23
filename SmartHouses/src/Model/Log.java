@@ -1,8 +1,6 @@
 package Model;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Objects;
 
 public class Log {
     private LocalDateTime dia;
@@ -11,7 +9,6 @@ public class Log {
     public Log()
     {
         this.dia = null;
-
         this.mode = false;
     }
 
@@ -43,7 +40,7 @@ public class Log {
         if(o==this) return true;
         if(o==null || o.getClass()!=this.getClass()) return false;
         Log l = (Log) o;
-        return Objects.equals(this.dia, l.getDia()) &&
+        return this.dia.equals(l.getDia()) &&
                 this.mode == l.getMode();
     }
 
@@ -53,8 +50,8 @@ public class Log {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("\tDia: ").append( this.dia == null ? "" : DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").format(this.dia) ).append(";")
-                .append("\tEstá ligado?: ").append(this.mode).append(";");
+        sb.append("\tDia: ").append(this.dia).append("; ")
+                .append("\tEstá ligado?: ").append(this.mode).append("; ");
         return sb.toString();
     }
 

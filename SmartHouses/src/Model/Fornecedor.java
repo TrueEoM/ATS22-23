@@ -124,7 +124,8 @@ public class Fornecedor{
     {
         StringBuilder sb = new StringBuilder();
         sb.append("Id: ").append(this.id).append("; ")
-            .append("Imposto: ").append(this.imposto).append(";");
+            .append("Imposto: ").append(this.imposto).append(";")
+                .append("Formula: ").append(this.formula).append(";\n");
         allCasas.forEach((id,casa)->{sb.append(casa.toString());});
         //sb.append(allCasas);
         return sb.toString();

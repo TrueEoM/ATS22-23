@@ -18,7 +18,6 @@ public class SmartBulb extends SmartDevice{
         }
         return null;
     }
-
     private Mode mode;
 
     private int dimensao;
@@ -123,17 +122,17 @@ public class SmartBulb extends SmartDevice{
     }
 
     //consumo total acumulado
-    public double calculaWarm(){
-        return 4 * cwarm;
-    } //cwarm = 2.2
-    //consumo total acumulado
     public double calculaCold(){
-        return 2 * ccold;
-    } //ccold = 1.8
+        return 4 * cwarm;
+    }
+    //consumo total acumulado
+    public double calculaWarm(){
+        return 1 * ccold;
+    }
     //consumo total acumulado
     public double calculaNeutral(){
-        return 1 * cneutral;
-    } //cneutral = 1.7
+        return 2 * cneutral;
+    }
     /*
         //consumo desde a última vez que se desligou a lampada
         public double consumoAtual() {
@@ -149,6 +148,7 @@ public class SmartBulb extends SmartDevice{
         // consumoAtual : mede o consumo atual
         double total=0;
         if(this.mode==Mode.WARM) {
+            calculaWarm();
             total = calculaWarm();
         }
         else if(this.mode==Mode.COLD) {
