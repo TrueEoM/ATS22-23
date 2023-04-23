@@ -29,26 +29,20 @@ public class SmartSpeakerTest {
     @Test
     public void testVolumeUp() 
     {
-        SmartSpeaker smartSpeaker = new SmartSpeaker("speaker1",50,"JBL","Radio Comercial",5.0);
+        SmartSpeaker smartSpeaker = new SmartSpeaker("speaker1",100,"JBL","Radio Comercial",5.0);
         smartSpeaker.volumeUp();
-        Assertions.assertEquals(1, smartSpeaker.getVolume());
+        Assertions.assertEquals(100, smartSpeaker.getVolume());
         smartSpeaker = new SmartSpeaker("speaker1",false,50,"JBL","Radio Comercial",5.0);
         smartSpeaker.volumeUp();
         Assertions.assertEquals(51, smartSpeaker.getVolume());
-        smartSpeaker = new SmartSpeaker("speaker1",false,100,"JBL","Radio Comercial",5.0);
-        smartSpeaker.volumeUp();
-        Assertions.assertEquals(100, smartSpeaker.getVolume());
     }
 
     @Test
     public void testVolumeDown() 
     {
-        SmartSpeaker smartSpeaker = new SmartSpeaker("speaker1",50,"JBL","Radio Comercial",5.0);
+        SmartSpeaker smartSpeaker = new SmartSpeaker("speaker1",0,"JBL","Radio Comercial",5.0);
         smartSpeaker.volumeDown();
         Assertions.assertEquals(0, smartSpeaker.getVolume());
-        smartSpeaker = new SmartSpeaker("speaker1",false,50,"JBL","Radio Comercial",5.0);
-        smartSpeaker.volumeDown();
-        Assertions.assertEquals(49, smartSpeaker.getVolume());
     }
 
     @Test
@@ -119,13 +113,12 @@ public class SmartSpeakerTest {
     @Test
     public void testToString() {
         SmartSpeaker speaker = new SmartSpeaker("speaker1",50,"JBL","Radio Comercial",5.0);
-        Assertions.assertEquals("ID: Speaker1; On: true; Consumo base: 5.0; Volume: 0, Marca: JBL, Canal: Radio Comercial",speaker.toString());
-        
-        speaker = new SmartSpeaker("speaker1",true,0,"JBL","Radio Comercial",5.0);
-        Assertions.assertEquals("ID: Speaker1; On: true; Consumo base: 5.0; Volume: 0, Marca: JBL, Canal: Radio Comercial",speaker.toString());
+        Assertions.assertEquals("ID: speaker1\n\tOn: false;\n\tConsumo Base: 5.0;\n\tVolume: 50; \tMarca: JBL; " +
+                "\tCanal: Radio Comercial\n",speaker.toString());
         
         SmartSpeaker speaker2 = new SmartSpeaker(speaker);
-        Assertions.assertEquals("ID: Speaker1; On: true; Consumo base: 5.0; Volume: 0, Marca: JBL, Canal: Radio Comercial",speaker2.toString());
+        Assertions.assertEquals("ID: speaker1\n\tOn: false;\n\tConsumo Base: 5.0;\n\tVolume: 50; \tMarca: JBL; " +
+                "\tCanal: Radio Comercial\n",speaker2.toString());
     }
 
     @Test

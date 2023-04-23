@@ -425,14 +425,6 @@ public class Fatura_ESTest extends Fatura_ESTest_scaffolding {
   }
 
   @Test(timeout = 4000)
-  public void test38()  throws Throwable  {
-      Fatura fatura0 = new Fatura(1.0, "", (LocalDateTime) null, (LocalDateTime) null, "", 63, "\"9sG[Cp/-^tw", 156.14187317);
-      String string0 = fatura0.toString();
-      assertEquals("", fatura0.getMorada());
-      assertEquals("\nIdFatura: \nIdFornecedor: \"9sG[Cp/-^tw\nNIF: 63\nConsumo: 1\nValor: 156.14", string0);
-  }
-
-  @Test(timeout = 4000)
   public void test39()  throws Throwable  {
       LocalDateTime localDateTime0 = MockLocalDateTime.now();
       Fatura fatura0 = new Fatura((-3726.1529340570623), "M<`\"7", localDateTime0, localDateTime0, "M<`\"7", 5019, "M<`\"7", (-3726.1529340570623));

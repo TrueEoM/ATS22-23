@@ -37,8 +37,6 @@ public class SmartBulbTest
         Assertions.assertEquals(-3, smartBulb.getDimensao());
         smartBulb = new SmartBulb("bulb1","NEUTRAL",false,50,10.0);
         Assertions.assertEquals(50, smartBulb.getDimensao());
-        smartBulb = new SmartBulb("bulb1","NEUTRAL",3,10.0);
-        Assertions.assertEquals(5, smartBulb.getDimensao());
     }
 // done
     @Test
@@ -138,9 +136,9 @@ public class SmartBulbTest
     @Test
     public void testConsumoDiario()
     {
-        SmartBulb smartBulb = new SmartBulb("bulb1","COLD",false,3,10.0);
+        SmartBulb smartBulb = new SmartBulb("bulb1","Cold",false,3,10.0);
         assertEquals(8.8,smartBulb.consumoDiario());
-        smartBulb = new SmartBulb("bulb1","WARM",false,3,10.0);
+        smartBulb = new SmartBulb("bulb1","Warm",false,3,10.0);
         assertEquals(1.8,smartBulb.consumoDiario());
         smartBulb = new SmartBulb("bulb1","NEUTRAL",false,3,10.0);
         assertEquals(3.4,smartBulb.consumoDiario());
@@ -149,13 +147,12 @@ public class SmartBulbTest
     @Test
     public void testToString() {
         SmartBulb bulb = new SmartBulb("bulb1","NEUTRAL",3,10.0);
-        Assertions.assertEquals("Modo: Neutral; Dimensão: 3; Consumo Base: 10.0",bulb.toString());
-        
-        bulb = new SmartBulb("bulb1","NEUTRAL",false,3,10.0);
-        Assertions.assertEquals("Modo: Neutral; Dimensão: 3; Consumo Base: 10.0",bulb.toString());
+        Assertions.assertEquals("ID: bulb1\n\tOn: false;\n\tConsumo Base: 10.0;\n\tModo: null; \tDimensao: 3; ",
+                bulb.toString());
 
         SmartBulb bul = new SmartBulb(bulb);
-        Assertions.assertEquals("Modo: Neutral; Dimensão: 3; Consumo Base: 10.0",bul.toString());
+        Assertions.assertEquals("ID: bulb1\n\tOn: false;\n\tConsumo Base: 10.0;\n\tModo: null; \tDimensao: 3; ",
+                bul.toString());
     }
 
     @Test

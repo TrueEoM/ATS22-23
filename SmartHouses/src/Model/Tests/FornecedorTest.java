@@ -71,7 +71,7 @@ public class FornecedorTest {
         FormulaEDP form =  new FormulaEDP();
 
         Fornecedor forn= new Fornecedor(10,"EDP",form);
-        assertEquals(2, forn.getImposto());
+        assertEquals(10, forn.getImposto());
         forn= new Fornecedor(-2,"EDP",form);
         assertEquals(-2, forn.getImposto());
         forn= new Fornecedor(forn);
@@ -106,7 +106,7 @@ public class FornecedorTest {
         FormulaEDP form =  new FormulaEDP();
 
         Fornecedor forn = new Fornecedor(10,"EDP",form);
-        assertEquals("Id: EDP; Imposto:10;",forn.toString());
+        assertEquals("Id: EDP; Imposto: 10.0;\n",forn.toString());
     }
     
     @Test

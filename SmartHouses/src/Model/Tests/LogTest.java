@@ -58,7 +58,7 @@ public class LogTest
     public void testGetMode()
     {
         Log log = new Log();
-        assertNull(log.getMode());
+        assertFalse(log.getMode());
         log = new Log(LocalDateTime.of(2023,4,26,16,46),false);
         assertEquals(false,log.getMode());
         Log log2 = new Log(log);
@@ -70,17 +70,17 @@ public class LogTest
     {
         Log log = new Log();
         Log log2 = new Log(LocalDateTime.of(2023,4,26,16,46),false);
-        if(log.equals(log2)) System.out.print("Equals Errado");
-        if(!log.equals(log)) System.out.print("Equals Errado");
+        assertEquals(log, log);
+        assertNotEquals(log2, log);
     }
 
     @Test
     public void testToString() 
     {
         Log log = new Log();
-        assertEquals("Dia: ; Está ligado?: ",log.toString());
+        assertEquals("\tDia: null; \tEstá ligado?: false; ",log.toString());
         log = new Log(LocalDateTime.of(2022,3,25,15,45),false);
-        assertEquals("Dia: 2022-3-25 15:45; Está ligado?: false",log.toString());
+        assertEquals("\tDia: 2022-03-25T15:45; \tEstá ligado?: false; ",log.toString());
     }
     
     @Test

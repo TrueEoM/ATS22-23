@@ -2,6 +2,7 @@ package Model;
 
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Fatura {
     private String idFatura;
@@ -131,12 +132,15 @@ public class Fatura {
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        DecimalFormat formato = new DecimalFormat("#.##");
-        sb.append("\nIdFatura: " + this.getIdFatura())
-            .append("\nIdFornecedor: " + this.getIdFornecedor())
-            .append("\nNIF: " + this.getNIF())
-            .append("\nConsumo: " + formato.format(this.getConsumo()))
-            .append("\nValor: " + formato.format(this.getValor()));
+        DecimalFormat formato = new DecimalFormat("#.0#");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        sb.append("IdFatura: " + this.getIdFatura())
+                .append("\nIdFornecedor: " + this.getIdFornecedor())
+                .append("\nNIF: " + this.getNIF())
+                .append("\nConsumo: " + formato.format(this.getConsumo()))
+                .append("\nValor: " + formato.format(this.getValor()))
+                .append("\nInicio: " + this.getInicio().format(formatter))
+                .append("\nFim: " + this.getFim().format(formatter) + ";");
         return sb.toString();
     }
 

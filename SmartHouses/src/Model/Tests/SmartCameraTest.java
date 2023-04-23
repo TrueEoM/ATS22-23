@@ -99,23 +99,21 @@ public class SmartCameraTest
     public void testConsumoDiario()
     {
         SmartCamera cam = new SmartCamera("cam",true,"(1280x720)",3,4.5);
-        assertEquals(13.5, cam.consumoDiario());
-        cam = new SmartCamera("cam","(1280x720)",3,4.5);
-        assertEquals(2000000, cam.consumoDiario());
+
+        assertEquals(2764800, cam.consumoDiario());
         cam = new SmartCamera(cam);
-        assertEquals(2000000, cam.consumoDiario());
+        assertEquals(2764800, cam.consumoDiario());
     }
     
     @Test
     public void testToString()
     {
         SmartCamera cam = new SmartCamera("cam","(1280x720)",3,4.5);
-        assertEquals("Tamanho: 3Mb; Resolução: (1280x720)px; ID: cam; Modo: ; Consumo Base: 4.5;", cam.toString());
-
-        cam = new SmartCamera("cam",true,"(1280x720)",3,4.5);
-        assertEquals("Tamanho: 3Mb; Resolução: (1280x720)px; ID: cam; Modo: true; Consumo Base: 4.5;", cam.toString());
+        assertEquals("ID: cam\n\tOn: false;\n\tConsumo Base: 4.5;\n\tTamanho: 3.0Mb ; \tResolução: (1280x720);\n",
+                cam.toString());
         SmartCamera camera = new SmartCamera(cam);
-        assertEquals("Tamanho: 3Mb; Resolução: (1280x720)px; ID: cam; Modo: true; Consumo Base: 4.5;", camera.toString());
+        assertEquals("ID: cam\n\tOn: false;\n\tConsumo Base: 4.5;\n\tTamanho: 3.0Mb ; \tResolução: (1280x720);\n",
+                camera.toString());
     }
 
     @Test

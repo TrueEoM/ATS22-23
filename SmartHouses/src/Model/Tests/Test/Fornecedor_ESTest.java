@@ -665,7 +665,7 @@ public class Fornecedor_ESTest extends Fornecedor_ESTest_scaffolding {
   public void test51()  throws Throwable  {
       Fornecedor fornecedor0 = new Fornecedor("", 1.7);
       String string0 = fornecedor0.toString();
-      assertEquals("Id: ; Imposto: 1.7;Formula: null;\n", string0);
+      assertEquals("Id: ; Imposto: 1.7;\n", string0);
   }
 
   @Test(timeout = 4000)
