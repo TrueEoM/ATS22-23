@@ -3,17 +3,33 @@ import Test.QuickCheck
 fornecedores :: [String]
 fornecedores = ["EDP Comercial","Galp Energia","Iberdrola","Endesa","Gold Energy","Coopernico","Enat","YIce","Meo Energia","Muon","Luzboa","Energia Simples","SU Eletricidade","EDA"]
 
-genFornecedor :: Gen (String,Float)
+data Fornecedor = Fornecedor String Float
+
+instance Arbitrary Fornecedor where 
+    arbitrary = genFornecedor
+
+instance Show Fornecedor where
+    show (Fornecedor x y) = x ++ "," ++ show y
+
+genFornecedor :: Gen Fornecedor
 genFornecedor =  do s <- elements fornecedores
                     f <- choose(0.0,1.0)
-                    return (s,f)
+                    return (Fornecedor s f)
 
-genSmartBulb :: Gen (String,Int,Float,String)
+data SmartBulb = SmartBulb String Int Float String
+
+instance Arbitrary SmartBulb where 
+    arbitrary = genSmartBulb
+
+instance Show SmartBulb where
+    show (SmartBulb a b c d) = a ++ "," ++ show b ++ "," ++ show c ++ "," ++ d
+
+genSmartBulb :: Gen SmartBulb
 genSmartBulb = do mode <- elements ["Warm","Neutral","Cold"]
                   dim <- choose (0,20)
                   intensidade <- choose (0.0,10.0)
                   id <- listOf1 $ elements "123456789" 
-                  return (mode,dim,intensidade,"Bulb" ++ id)
+                  return (SmartBulb mode dim intensidade ("Bulb" ++ id))
 
 data Resolucao = Resolucao Int Int 
 
@@ -27,12 +43,20 @@ genResolucao = do res1 <- choose(1,5000)
                   res2 <- choose(1,5000)
                   return (Resolucao res1 res2)
 
-genSmartCamera :: Gen (Resolucao,Int,Float,String)
+data SmartCamera = SmartCamera Resolucao Int Float String
+
+instance Arbitrary SmartCamera where 
+    arbitrary = genSmartCamera
+
+instance Show SmartCamera where
+    show (SmartCamera a b c d) = show a ++ "," ++ show b ++ "," ++ show c ++ "," ++ d
+
+genSmartCamera :: Gen SmartCamera
 genSmartCamera = do res <- arbitrary
                     tamanho <- choose(0,200)
                     consumo <- choose(0.0,10.0)
                     id <- listOf1 $ elements "123456789" 
-                    return (res,tamanho,consumo, "Camera" ++ id)
+                    return (SmartCamera res tamanho consumo ("Camera" ++ id))
 
 genSmartSpeaker :: Gen (Int,String,String,Float,String)
 genSmartSpeaker = do volume <- choose (0,100)
@@ -42,9 +66,17 @@ genSmartSpeaker = do volume <- choose (0,100)
                      id <- listOf1 $ elements "123456789" 
                      return (volume,estacao,marca,consumo,"Speaker"++id)
 
-genDivisoes :: Gen String
+data Divisao = Divisao String
+
+instance Arbitrary Divisao where 
+    arbitrary = genDivisoes
+
+instance Show Divisao where
+    show (Divisao a) = "Divisao:" ++ a
+
+genDivisoes :: Gen Divisao
 genDivisoes = do d <- listOf1 $ choose('a','z')
-                 return ("Divisao:" ++ d)
+                 return (Divisao d)
 
 genCasa :: Gen (String,String,String,String,String)
 genCasa = do proprietario <- listOf1 $ choose('a','z')
