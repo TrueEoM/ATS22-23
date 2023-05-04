@@ -66,7 +66,9 @@ genSmartSpeaker = do volume <- choose (0,100)
                      id <- listOf1 $ elements "123456789" 
                      return (volume,estacao,marca,consumo,"Speaker"++id)
 
-data Divisao = Divisao String
+data SmartDevice = SmartCamera | SmartSpeaker | SmartBulb
+
+data Divisao = Divisao String [SmartDevice]
 
 instance Arbitrary Divisao where 
     arbitrary = genDivisoes
@@ -76,15 +78,16 @@ instance Show Divisao where
 
 genDivisoes :: Gen Divisao
 genDivisoes = do d <- listOf1 $ choose('a','z')
-                 return (Divisao d)
+                 dev <- (listOf1 $ genSmartCamera) ++ (listOf1 $ genSmartBulb) ++ (listOf1 $ genSmartSpeaker)
+                 return (Divisao d dev)
 
-data Casa = Casa String String String String String
+data Casa = Casa String String String String String [Divisao]
 
 instance Arbitrary Casa where 
     arbitrary = genCasa
 
 instance Show Casa where
-    show (Casa prop nif forn id morada) = "Casa:" ++ prop ++ "," ++ nif ++ "," ++ forn ++ "," ++ id ++ "," ++ morada
+    show (Casa prop nif forn id morada divs) = "Casa:" ++ prop ++ "," ++ nif ++ "," ++ forn ++ "," ++ id ++ "," ++ morada ++ show divs
 
 genCasa :: Gen Casa
 genCasa = do proprietario <- listOf1 $ choose('a','z')
@@ -92,5 +95,17 @@ genCasa = do proprietario <- listOf1 $ choose('a','z')
              fornecedor <- elements fornecedores
              id <- listOf1 $ elements "123456789"
              morada <- listOf1 $ choose('a','z')
-             return (proprietario,nif,fornecedor,"Casa"++id,morada)
-            
+             divs <- listOf1 $ arbitrary
+             return (Casa proprietario nif fornecedor ("Casa"++id) morada divs)
+
+
+createForn :: Int -> String
+auxForn n = show genFornecedor ++ "\n" ++ auxForn n-1
+
+createCasas :: Int -> String
+createLog n = show genCasa ++ "\n" ++ createCasas n-1
+
+main = do
+    [path, n] <- getArgs
+    s <- createForn n ++ "\n" ++ createCasas n
+    show s
