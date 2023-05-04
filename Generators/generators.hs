@@ -86,7 +86,7 @@ instance Arbitrary Casa where
 instance Show Casa where
     show (Casa prop nif forn id morada) = "Casa:" ++ prop ++ "," ++ nif ++ "," ++ forn ++ "," ++ id ++ "," ++ morada
 
-genCasa :: Gen (String,String,String,String,String)
+genCasa :: Gen Casa
 genCasa = do proprietario <- listOf1 $ choose('a','z')
              nif <- vectorOf 9 $ elements "123456789"
              fornecedor <- elements fornecedores
