@@ -78,6 +78,14 @@ genDivisoes :: Gen Divisao
 genDivisoes = do d <- listOf1 $ choose('a','z')
                  return (Divisao d)
 
+data Casa = Casa String String String String String
+
+instance Arbitrary Casa where 
+    arbitrary = genCasa
+
+instance Show Casa where
+    show (Casa prop nif forn id morada) = "Casa:" ++ prop ++ "," ++ nif ++ "," ++ forn ++ "," ++ id ++ "," ++ morada
+
 genCasa :: Gen (String,String,String,String,String)
 genCasa = do proprietario <- listOf1 $ choose('a','z')
              nif <- vectorOf 9 $ elements "123456789"
