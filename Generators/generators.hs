@@ -92,5 +92,5 @@ genCasa = do proprietario <- listOf1 $ choose('a','z')
              fornecedor <- elements fornecedores
              id <- listOf1 $ elements "123456789"
              morada <- listOf1 $ choose('a','z')
-             return (proprietario,nif,fornecedor,"Casa"++id,morada)
+             return (Casa proprietario nif fornecedor ("Casa"++id) morada)
             
