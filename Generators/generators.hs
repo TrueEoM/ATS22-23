@@ -1,4 +1,5 @@
 import Test.QuickCheck
+import System.Environment
 
 fornecedores :: [String]
 fornecedores = ["EDP Comercial","Galp Energia","Iberdrola","Endesa","Gold Energy","Coopernico","Enat","YIce","Meo Energia","Muon","Luzboa","Energia Simples","SU Eletricidade","EDA"]
@@ -9,7 +10,7 @@ instance Arbitrary Fornecedor where
     arbitrary = genFornecedor
 
 instance Show Fornecedor where
-    show (Fornecedor x y) = x ++ "," ++ show y
+    show (Fornecedor x y) = x ++ "," ++ show y ++ "\n"
 
 genFornecedor :: Gen Fornecedor
 genFornecedor =  do s <- elements fornecedores
@@ -22,7 +23,7 @@ instance Arbitrary SmartBulb where
     arbitrary = genSmartBulb
 
 instance Show SmartBulb where
-    show (SmartBulb a b c d) = a ++ "," ++ show b ++ "," ++ show c ++ "," ++ d
+    show (SmartBulb a b c d) = a ++ "," ++ show b ++ "," ++ show c ++ "," ++ d ++ "\n"
 
 genSmartBulb :: Gen SmartBulb
 genSmartBulb = do mode <- elements ["Warm","Neutral","Cold"]
@@ -49,7 +50,7 @@ instance Arbitrary SmartCamera where
     arbitrary = genSmartCamera
 
 instance Show SmartCamera where
-    show (SmartCamera a b c d) = show a ++ "," ++ show b ++ "," ++ show c ++ "," ++ d
+    show (SmartCamera a b c d) = show a ++ "," ++ show b ++ "," ++ show c ++ "," ++ d ++ "\n"
 
 genSmartCamera :: Gen SmartCamera
 genSmartCamera = do res <- arbitrary
@@ -58,28 +59,36 @@ genSmartCamera = do res <- arbitrary
                     id <- listOf1 $ elements "123456789" 
                     return (SmartCamera res tamanho consumo ("Camera" ++ id))
 
-genSmartSpeaker :: Gen (Int,String,String,Float,String)
+data SmartSpeaker = SmartSpeaker Int String String Float String
+
+instance Arbitrary SmartSpeaker where 
+    arbitrary = genSmartSpeaker
+
+instance Show SmartSpeaker where
+    show (SmartSpeaker a b c d e) = show a ++ "," ++ b ++ "," ++ c ++ "," ++ show d ++ "," ++ e ++ "\n"
+
+genSmartSpeaker :: Gen SmartSpeaker
 genSmartSpeaker = do volume <- choose (0,100)
                      estacao <- listOf1 $ choose('a','z')
                      marca <- listOf1 $ choose('a','z')
                      consumo <- choose(0.0,10.0)
                      id <- listOf1 $ elements "123456789" 
-                     return (volume,estacao,marca,consumo,"Speaker"++id)
+                     return (SmartSpeaker volume estacao marca consumo ("Speaker"++id))
 
-data SmartDevice = SmartCamera | SmartSpeaker | SmartBulb
-
-data Divisao = Divisao String [SmartDevice]
+data Divisao = Divisao String [SmartCamera] [SmartSpeaker] [SmartBulb]
 
 instance Arbitrary Divisao where 
     arbitrary = genDivisoes
 
 instance Show Divisao where
-    show (Divisao a) = "Divisao:" ++ a
+    show (Divisao a dev1 dev2 dev3) = "Divisao:" ++ a ++ "\n" ++ show dev1 ++ "\n" ++ show dev2 ++ "\n" ++ show dev3
 
 genDivisoes :: Gen Divisao
 genDivisoes = do d <- listOf1 $ choose('a','z')
-                 dev <- (listOf1 $ genSmartCamera) ++ (listOf1 $ genSmartBulb) ++ (listOf1 $ genSmartSpeaker)
-                 return (Divisao d dev)
+                 dev1 <- listOf1 $ genSmartCamera
+                 dev2 <- listOf1 $ genSmartBulb
+                 dev3 <- listOf1 $ genSmartSpeaker
+                 return (Divisao d dev1 dev3 dev2)
 
 data Casa = Casa String String String String String [Divisao]
 
@@ -87,7 +96,7 @@ instance Arbitrary Casa where
     arbitrary = genCasa
 
 instance Show Casa where
-    show (Casa prop nif forn id morada divs) = "Casa:" ++ prop ++ "," ++ nif ++ "," ++ forn ++ "," ++ id ++ "," ++ morada ++ show divs
+    show (Casa prop nif forn id morada divs) = "Casa:" ++ prop ++ "," ++ nif ++ "," ++ forn ++ "," ++ id ++ "," ++ morada ++ "\n" ++show divs
 
 genCasa :: Gen Casa
 genCasa = do proprietario <- listOf1 $ choose('a','z')
@@ -97,15 +106,3 @@ genCasa = do proprietario <- listOf1 $ choose('a','z')
              morada <- listOf1 $ choose('a','z')
              divs <- listOf1 $ arbitrary
              return (Casa proprietario nif fornecedor ("Casa"++id) morada divs)
-
-
-createForn :: Int -> String
-auxForn n = show genFornecedor ++ "\n" ++ auxForn n-1
-
-createCasas :: Int -> String
-createLog n = show genCasa ++ "\n" ++ createCasas n-1
-
-main = do
-    [path, n] <- getArgs
-    s <- createForn n ++ "\n" ++ createCasas n
-    show s
