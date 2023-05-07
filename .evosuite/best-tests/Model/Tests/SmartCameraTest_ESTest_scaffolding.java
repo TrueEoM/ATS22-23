@@ -27,7 +27,7 @@ public class SmartCameraTest_ESTest_scaffolding {
 
   @BeforeClass 
   public static void initEvoSuiteFramework() { 
-    org.evosuite.runtime.RuntimeSettings.className = "Model.Tests.SmartCameraTest"; 
+    org.evosuite.runtime.RuntimeSettings.className = "Model.Tests.Test.SmartCameraTest";
     org.evosuite.runtime.GuiSupport.initialize(); 
     org.evosuite.runtime.RuntimeSettings.maxNumberOfThreads = 100; 
     org.evosuite.runtime.RuntimeSettings.maxNumberOfIterationsPerLoop = 10000; 
@@ -87,7 +87,7 @@ public class SmartCameraTest_ESTest_scaffolding {
     org.evosuite.runtime.classhandling.ClassStateSupport.initializeClasses(SmartCameraTest_ESTest_scaffolding.class.getClassLoader() ,
       "org.opentest4j.ValueWrapper",
       "org.opentest4j.AssertionFailedError",
-      "Model.Tests.SmartCameraTest",
+      "Model.Tests.Test.SmartCameraTest",
       "Model.SmartCamera",
       "Model.SmartDevice"
     );
@@ -97,7 +97,7 @@ public class SmartCameraTest_ESTest_scaffolding {
     org.evosuite.runtime.classhandling.ClassResetter.getInstance().setClassLoader(SmartCameraTest_ESTest_scaffolding.class.getClassLoader()); 
 
     org.evosuite.runtime.classhandling.ClassStateSupport.resetClasses(
-      "Model.Tests.SmartCameraTest",
+      "Model.Tests.Test.SmartCameraTest",
       "Model.SmartDevice",
       "Model.SmartCamera"
     );

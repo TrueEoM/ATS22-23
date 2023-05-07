@@ -299,7 +299,7 @@
         </generation>
     </cut>
     <cut>
-        <fullNameOfTargetClass>Model.Tests.FornecedorTest</fullNameOfTargetClass>
+        <fullNameOfTargetClass>Model.Tests.Test.FornecedorTest</fullNameOfTargetClass>
         <fullNameOfTestSuite>Model.Tests.FornecedorTest_ESTest</fullNameOfTestSuite>
         <generation>
             <id>0</id>
@@ -1092,7 +1092,7 @@
         </generation>
     </cut>
     <cut>
-        <fullNameOfTargetClass>Model.Tests.SmartBulbTest</fullNameOfTargetClass>
+        <fullNameOfTargetClass>Model.Tests.Test.SmartBulbTest</fullNameOfTargetClass>
         <fullNameOfTestSuite>Model.Tests.SmartBulbTest_ESTest</fullNameOfTestSuite>
         <generation>
             <id>0</id>
@@ -1519,7 +1519,7 @@
         </generation>
     </cut>
     <cut>
-        <fullNameOfTargetClass>Model.Tests.CasaInteligenteTest</fullNameOfTargetClass>
+        <fullNameOfTargetClass>Model.Tests.Test.CasaInteligenteTest</fullNameOfTargetClass>
         <fullNameOfTestSuite>Model.Tests.CasaInteligenteTest_ESTest</fullNameOfTestSuite>
         <generation>
             <id>0</id>
@@ -2007,7 +2007,7 @@
         </generation>
     </cut>
     <cut>
-        <fullNameOfTargetClass>Model.Tests.SmartCameraTest</fullNameOfTargetClass>
+        <fullNameOfTargetClass>Model.Tests.Test.SmartCameraTest</fullNameOfTargetClass>
         <fullNameOfTestSuite>Model.Tests.SmartCameraTest_ESTest</fullNameOfTestSuite>
         <generation>
             <id>0</id>
@@ -2251,7 +2251,7 @@
         </generation>
     </cut>
     <cut>
-        <fullNameOfTargetClass>Model.Tests.FaturaTest</fullNameOfTargetClass>
+        <fullNameOfTargetClass>Model.Tests.Test.FaturaTest</fullNameOfTargetClass>
         <fullNameOfTestSuite>Model.Tests.FaturaTest_ESTest</fullNameOfTestSuite>
         <generation>
             <id>0</id>
@@ -2617,7 +2617,7 @@
         </generation>
     </cut>
     <cut>
-        <fullNameOfTargetClass>Model.Tests.LogTest</fullNameOfTargetClass>
+        <fullNameOfTargetClass>Model.Tests.Test.LogTest</fullNameOfTargetClass>
         <fullNameOfTestSuite>Model.Tests.LogTest_ESTest</fullNameOfTestSuite>
         <generation>
             <id>0</id>
@@ -2678,7 +2678,7 @@
         </generation>
     </cut>
     <cut>
-        <fullNameOfTargetClass>Model.Tests.SmartSpeakerTest</fullNameOfTargetClass>
+        <fullNameOfTargetClass>Model.Tests.Test.SmartSpeakerTest</fullNameOfTargetClass>
         <fullNameOfTestSuite>Model.Tests.SmartSpeakerTest_ESTest</fullNameOfTestSuite>
         <generation>
             <id>0</id>

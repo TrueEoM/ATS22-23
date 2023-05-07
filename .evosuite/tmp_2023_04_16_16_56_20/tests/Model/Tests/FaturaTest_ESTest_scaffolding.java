@@ -27,7 +27,7 @@ public class FaturaTest_ESTest_scaffolding {
 
   @BeforeClass 
   public static void initEvoSuiteFramework() { 
-    org.evosuite.runtime.RuntimeSettings.className = "Model.Tests.FaturaTest"; 
+    org.evosuite.runtime.RuntimeSettings.className = "Model.Tests.Test.FaturaTest";
     org.evosuite.runtime.GuiSupport.initialize(); 
     org.evosuite.runtime.RuntimeSettings.maxNumberOfThreads = 100; 
     org.evosuite.runtime.RuntimeSettings.maxNumberOfIterationsPerLoop = 10000; 
@@ -85,7 +85,7 @@ public class FaturaTest_ESTest_scaffolding {
 
   private static void initializeClasses() {
     org.evosuite.runtime.classhandling.ClassStateSupport.initializeClasses(FaturaTest_ESTest_scaffolding.class.getClassLoader() ,
-      "Model.Tests.FaturaTest",
+      "Model.Tests.Test.FaturaTest",
       "Model.Fatura"
     );
   } 
@@ -94,7 +94,7 @@ public class FaturaTest_ESTest_scaffolding {
     org.evosuite.runtime.classhandling.ClassResetter.getInstance().setClassLoader(FaturaTest_ESTest_scaffolding.class.getClassLoader()); 
 
     org.evosuite.runtime.classhandling.ClassStateSupport.resetClasses(
-      "Model.Tests.FaturaTest",
+      "Model.Tests.Test.FaturaTest",
       "Model.Fatura"
     );
   }

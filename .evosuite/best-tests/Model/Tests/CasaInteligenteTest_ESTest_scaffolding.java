@@ -27,7 +27,7 @@ public class CasaInteligenteTest_ESTest_scaffolding {
 
   @BeforeClass 
   public static void initEvoSuiteFramework() { 
-    org.evosuite.runtime.RuntimeSettings.className = "Model.Tests.CasaInteligenteTest"; 
+    org.evosuite.runtime.RuntimeSettings.className = "Model.Tests.Test.CasaInteligenteTest";
     org.evosuite.runtime.GuiSupport.initialize(); 
     org.evosuite.runtime.RuntimeSettings.maxNumberOfThreads = 100; 
     org.evosuite.runtime.RuntimeSettings.maxNumberOfIterationsPerLoop = 10000; 
@@ -87,7 +87,7 @@ public class CasaInteligenteTest_ESTest_scaffolding {
     org.evosuite.runtime.classhandling.ClassStateSupport.initializeClasses(CasaInteligenteTest_ESTest_scaffolding.class.getClassLoader() ,
       "Model.Exceptions.FaturaNotExistsException",
       "Model.Exceptions.SmartDeviceNotExistsException",
-      "Model.Tests.CasaInteligenteTest",
+      "Model.Tests.Test.CasaInteligenteTest",
       "Model.Exceptions.SmartDeviceAlreadyExistsException",
       "Model.Fatura",
       "Model.Exceptions.RoomNotExistsException",
@@ -103,7 +103,7 @@ public class CasaInteligenteTest_ESTest_scaffolding {
     org.evosuite.runtime.classhandling.ClassResetter.getInstance().setClassLoader(CasaInteligenteTest_ESTest_scaffolding.class.getClassLoader()); 
 
     org.evosuite.runtime.classhandling.ClassStateSupport.resetClasses(
-      "Model.Tests.CasaInteligenteTest",
+      "Model.Tests.Test.CasaInteligenteTest",
       "Model.CasaInteligente",
       "Model.SmartDevice",
       "Model.SmartCamera",

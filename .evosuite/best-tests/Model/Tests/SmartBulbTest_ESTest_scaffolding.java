@@ -27,7 +27,7 @@ public class SmartBulbTest_ESTest_scaffolding {
 
   @BeforeClass 
   public static void initEvoSuiteFramework() { 
-    org.evosuite.runtime.RuntimeSettings.className = "Model.Tests.SmartBulbTest"; 
+    org.evosuite.runtime.RuntimeSettings.className = "Model.Tests.Test.SmartBulbTest";
     org.evosuite.runtime.GuiSupport.initialize(); 
     org.evosuite.runtime.RuntimeSettings.maxNumberOfThreads = 100; 
     org.evosuite.runtime.RuntimeSettings.maxNumberOfIterationsPerLoop = 10000; 
@@ -86,7 +86,7 @@ public class SmartBulbTest_ESTest_scaffolding {
   private static void initializeClasses() {
     org.evosuite.runtime.classhandling.ClassStateSupport.initializeClasses(SmartBulbTest_ESTest_scaffolding.class.getClassLoader() ,
       "org.opentest4j.ValueWrapper",
-      "Model.Tests.SmartBulbTest",
+      "Model.Tests.Test.SmartBulbTest",
       "org.opentest4j.AssertionFailedError",
       "Model.SmartBulb$Mode",
       "Model.SmartDevice",
@@ -98,7 +98,7 @@ public class SmartBulbTest_ESTest_scaffolding {
     org.evosuite.runtime.classhandling.ClassResetter.getInstance().setClassLoader(SmartBulbTest_ESTest_scaffolding.class.getClassLoader()); 
 
     org.evosuite.runtime.classhandling.ClassStateSupport.resetClasses(
-      "Model.Tests.SmartBulbTest",
+      "Model.Tests.Test.SmartBulbTest",
       "Model.SmartBulb$Mode",
       "Model.SmartDevice",
       "Model.SmartBulb"

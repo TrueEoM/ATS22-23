@@ -27,7 +27,7 @@ public class SmartSpeakerTest_ESTest_scaffolding {
 
   @BeforeClass 
   public static void initEvoSuiteFramework() { 
-    org.evosuite.runtime.RuntimeSettings.className = "Model.Tests.SmartSpeakerTest"; 
+    org.evosuite.runtime.RuntimeSettings.className = "Model.Tests.Test.SmartSpeakerTest";
     org.evosuite.runtime.GuiSupport.initialize(); 
     org.evosuite.runtime.RuntimeSettings.maxNumberOfThreads = 100; 
     org.evosuite.runtime.RuntimeSettings.maxNumberOfIterationsPerLoop = 10000; 
@@ -86,7 +86,7 @@ public class SmartSpeakerTest_ESTest_scaffolding {
   private static void initializeClasses() {
     org.evosuite.runtime.classhandling.ClassStateSupport.initializeClasses(SmartSpeakerTest_ESTest_scaffolding.class.getClassLoader() ,
       "org.opentest4j.ValueWrapper",
-      "Model.Tests.SmartSpeakerTest",
+      "Model.Tests.Test.SmartSpeakerTest",
       "Model.SmartSpeaker",
       "org.opentest4j.AssertionFailedError",
       "Model.SmartDevice"
@@ -97,7 +97,7 @@ public class SmartSpeakerTest_ESTest_scaffolding {
     org.evosuite.runtime.classhandling.ClassResetter.getInstance().setClassLoader(SmartSpeakerTest_ESTest_scaffolding.class.getClassLoader()); 
 
     org.evosuite.runtime.classhandling.ClassStateSupport.resetClasses(
-      "Model.Tests.SmartSpeakerTest",
+      "Model.Tests.Test.SmartSpeakerTest",
       "Model.SmartDevice",
       "Model.SmartSpeaker"
     );

@@ -27,7 +27,7 @@ public class FornecedorTest_ESTest_scaffolding {
 
   @BeforeClass 
   public static void initEvoSuiteFramework() { 
-    org.evosuite.runtime.RuntimeSettings.className = "Model.Tests.FornecedorTest"; 
+    org.evosuite.runtime.RuntimeSettings.className = "Model.Tests.Test.FornecedorTest";
     org.evosuite.runtime.GuiSupport.initialize(); 
     org.evosuite.runtime.RuntimeSettings.maxNumberOfThreads = 100; 
     org.evosuite.runtime.RuntimeSettings.maxNumberOfIterationsPerLoop = 10000; 
@@ -86,7 +86,7 @@ public class FornecedorTest_ESTest_scaffolding {
   private static void initializeClasses() {
     org.evosuite.runtime.classhandling.ClassStateSupport.initializeClasses(FornecedorTest_ESTest_scaffolding.class.getClassLoader() ,
       "Model.Formulas.FormulaEDP",
-      "Model.Tests.FornecedorTest",
+      "Model.Tests.Test.FornecedorTest",
       "Model.Exceptions.SmartDeviceAlreadyExistsException",
       "Model.Exceptions.RoomNotExistsException",
       "Model.Exceptions.LogAlreadyExistsException",
@@ -109,7 +109,7 @@ public class FornecedorTest_ESTest_scaffolding {
     org.evosuite.runtime.classhandling.ClassResetter.getInstance().setClassLoader(FornecedorTest_ESTest_scaffolding.class.getClassLoader()); 
 
     org.evosuite.runtime.classhandling.ClassStateSupport.resetClasses(
-      "Model.Tests.FornecedorTest",
+      "Model.Tests.Test.FornecedorTest",
       "Model.Formulas.FormulaEDP",
       "Model.Fornecedor"
     );

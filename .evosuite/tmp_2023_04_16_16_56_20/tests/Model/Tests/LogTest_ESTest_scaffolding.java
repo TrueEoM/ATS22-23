@@ -27,7 +27,7 @@ public class LogTest_ESTest_scaffolding {
 
   @BeforeClass 
   public static void initEvoSuiteFramework() { 
-    org.evosuite.runtime.RuntimeSettings.className = "Model.Tests.LogTest"; 
+    org.evosuite.runtime.RuntimeSettings.className = "Model.Tests.Test.LogTest";
     org.evosuite.runtime.GuiSupport.initialize(); 
     org.evosuite.runtime.RuntimeSettings.maxNumberOfThreads = 100; 
     org.evosuite.runtime.RuntimeSettings.maxNumberOfIterationsPerLoop = 10000; 
@@ -85,7 +85,7 @@ public class LogTest_ESTest_scaffolding {
 
   private static void initializeClasses() {
     org.evosuite.runtime.classhandling.ClassStateSupport.initializeClasses(LogTest_ESTest_scaffolding.class.getClassLoader() ,
-      "Model.Tests.LogTest",
+      "Model.Tests.Test.LogTest",
       "org.opentest4j.ValueWrapper",
       "org.opentest4j.AssertionFailedError",
       "Model.Log"
@@ -96,7 +96,7 @@ public class LogTest_ESTest_scaffolding {
     org.evosuite.runtime.classhandling.ClassResetter.getInstance().setClassLoader(LogTest_ESTest_scaffolding.class.getClassLoader()); 
 
     org.evosuite.runtime.classhandling.ClassStateSupport.resetClasses(
-      "Model.Tests.LogTest",
+      "Model.Tests.Test.LogTest",
       "Model.Log"
     );
   }
