@@ -1,13 +1,12 @@
 package Model.Tests.HandMade;
 
-import Model.CasaInteligente;
+import Model.*;
 import Model.Exceptions.SmartDeviceAlreadyExistsException;
 import Model.Exceptions.SmartDeviceNotExistsException;
-import Model.SmartDevice;
-import Model.SmartSpeaker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -168,43 +167,152 @@ public class TestCasaInteligente {
     @Test
     public void testEquals()
     {
+        ArrayList<String> l = new ArrayList<>();
+        l.add("S");
+        l.add("S2");
+        HashMap<String, List<String>> space = new HashMap<>();
+        space.put("A", l);
 
+        HashMap<String, SmartDevice> dv = new HashMap<>();
+        dv.put("S", new SmartSpeaker("id", false, 10, "asd", "abc", 0.2));
+        dv.put("S2", new SmartSpeaker("id2", true, 10, "asd", "abc", 0.2));
+        dv.put("S3", new SmartSpeaker("id3", false, 10, "asd", "abc", 0.2));
+
+        CasaInteligente def2 = new CasaInteligente("123", "abc", 123456789, "Rua A", "ID");
+        def2.setDevices(dv);
+        def2.setLocations(space);
+
+        assertTrue(def.equals(def2));
+        assertTrue(def2.equals(def));
     }
 
     @Test
     public void testToString()
     {
+
+        String expected = "\nID Home: " + def.getIdHome() + "\n"
+                + "Morada: " + def.getMorada() + "\n"
+                + "Fornecedor: " + def.getIdFornecedor() + "\n"
+                + "Proprietario: " + def.getProprietario() + "\n"
+                + "NIF: " + def.getNIF() + "\n"
+                + "----------------------Divisão/Dispositivos----------------------" + "\n"
+                + "{S3=ID: id3\n"
+                + "\tOn: false;\n"
+                + "\tConsumo Base: 0.2;\n"
+                + "\tVolume: 10;\n"
+                + "\tMarca: asd;\n"
+                + "\tCanal: abc\n"
+                + ", S=ID: id\n"
+                + "\tOn: false;\n"
+                + "\tConsumo Base: 0.2;\n"
+                + "\tVolume: 10;\n"
+                + "\tMarca: asd;\n"
+                + "\tCanal: abc\n"
+                + ", S2=ID: id2\n"
+                + "\tOn: true;\n"
+                + "\tConsumo Base: 0.2;\n"
+                + "\tVolume: 10;\n"
+                + "\tMarca: asd;\n"
+                + "\tCanal: abc\n"
+                + "}\n"
+                + "----------------------------------------------------------------";
+
+        assertEquals(expected, def.toString());
     }
 
     @Test
     public void testParseCasa()
     {
+        String line = "Casa123,4,42,MoradaDEF,FornecedorXYZ";
+
+        CasaInteligente casa = CasaInteligente.parseCasa(line);
+
+        assertEquals("Casa123", casa.getIdHome());
+        assertEquals("ProprietarioABC", casa.getProprietario());
+        assertEquals(42, casa.getNIF());
+        assertEquals("MoradaDEF", casa.getMorada());
+        assertEquals("FornecedorXYZ", casa.getIdFornecedor());
     }
 
     @Test
     public void testClone()
     {
+        CasaInteligente def2 = def.clone();
+
+        assertNotSame(def, def2);
+        assertEquals(def.getIdHome(), def2.getIdHome());
+        assertEquals(def.getProprietario(), def2.getProprietario());
+        assertEquals(def.getNIF(), def2.getNIF());
+        assertEquals(def.getMorada(), def2.getMorada());
+        assertEquals(def.getIdFornecedor(), def2.getIdFornecedor());
     }
 
     @Test
     public void testAddDevice()
     {
+        SmartDevice s = new SmartSpeaker("id090", true, 11, "abc", "def", 0.2);
+
+        int result = def.addDevice(s);
+        assertEquals(0, result);
+
+
+        int duplicateResult = def.addDevice(s);
+        assertEquals(1, duplicateResult);
     }
 
     @Test
     public void testGetDevice()
     {
+        // Create a SmartDevice object
+        SmartDevice device = new SmartSpeaker("id090", true, 11, "abc", "def", 0.2);
+
+        // Add the device to the CasaInteligente object
+        def.addDevice(device);
+
+        // Test getting an existing device
+        try {
+            SmartDevice retrievedDevice = def.getDevice(device.getID());
+            assertNotNull(retrievedDevice);
+            assertEquals(device, retrievedDevice);
+        } catch (SmartDeviceNotExistsException e) {}
+
+        // Test getting a non-existing device
+        String nonExistingDeviceID = "non-existing-device-id";
+        try {
+            def.getDevice(nonExistingDeviceID);
+        } catch (SmartDeviceNotExistsException e) {
+            assertEquals("O Model.SmartDevice com id " + nonExistingDeviceID + " não existe", e.getMessage());
+        }
     }
 
     @Test
     public void testAddFatura()
     {
+        String idFornecedor = "FornecedorXYZ";
+        LocalDateTime init = LocalDateTime.of(2023, 5, 1, 0, 0);
+        LocalDateTime finit = LocalDateTime.of(2023, 5, 31, 23, 59);
+        double valor = 100.0;
+
+        def.addFatura(idFornecedor,init,finit,valor);
+
+        List<Fatura> addedFatura = def.getFaturas(idFornecedor);
+
+        assertNotNull(addedFatura);
+        assertEquals(1, addedFatura.size());
+
+        Fatura fatura = addedFatura.get(0);
+        assertEquals(idFornecedor, fatura.getIdFornecedor());
+        assertEquals(init,fatura.getInicio());
+        assertEquals(finit,fatura.getFim());
+        assertEquals(valor, fatura.getValor(), 0.001);
     }
 
     @Test
     public void testHasFatura()
     {
+
     }
+
 
     @Test
     public void testRemoveFatura()
@@ -219,6 +327,7 @@ public class TestCasaInteligente {
     @Test
     public void testHasLog()
     {
+
     }
 
     @Test
