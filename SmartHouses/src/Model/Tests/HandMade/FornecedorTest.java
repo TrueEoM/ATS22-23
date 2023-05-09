@@ -121,23 +121,44 @@ class FornecedorTest {
 
     @Test
     void parseFornecedor() {
-
+        String line = "ABC,123.45";
+        Map<String, FormulaEnergia> formulas = new HashMap<>();
+        formulas.put("ABC", new FormulaCoopernico());
+        Fornecedor fornecedor = Fornecedor.parseFornecedor(line, formulas);
+        assertNotNull(fornecedor);
+        assertEquals("ABC", fornecedor.getId());
+        assertEquals(123.45, fornecedor.getImposto(), 0.001);
+        assertNotNull(fornecedor.getFormula());
     }
 
     @Test
     void testEquals() {
+        Fornecedor forn2 = new Fornecedor("f001", 0.23);
+        formula = new FormulaEnergiaSimples();
+        forn2.setFormula(formula);
+
+        CasaInteligente casa1 = new CasaInteligente("casa1", "Joao",123456789,"Rua de cima", "MEO");
+        forn.addCasa(casa1);
+
+        CasaInteligente casa2 = new CasaInteligente("casa2", "Ana",987654321,"Rua de baixo", "NOS");
+        forn.addCasa(casa2);
+        assertTrue(forn.testEquals(forn2));
     }
 
     @Test
     void testToString() {
+
     }
 
     @Test
     void testClone() {
+        Fornecedor forn2 =  forn.clone();
+        assertEquals (forn,forn2);
     }
 
     @Test
     void casaGastouMaisPeriodo() {
+        //TODO
     }
 
     @Test
@@ -146,6 +167,7 @@ class FornecedorTest {
 
     @Test
     void addFatura() {
+        forn.add
     }
 
     @Test
