@@ -23,7 +23,7 @@ instance Arbitrary SmartBulb where
     arbitrary = genSmartBulb
 
 instance Show SmartBulb where
-    show (SmartBulb a b c d) = a ++ "," ++ show b ++ "," ++ show c ++ "," ++ d ++ "\n"
+    show (SmartBulb a b c d) = a ++ "," ++ show b ++ "," ++ show c ++ "," ++ d
 
 genSmartBulb :: Gen SmartBulb
 genSmartBulb = do mode <- elements ["Warm","Neutral","Cold"]
@@ -50,7 +50,7 @@ instance Arbitrary SmartCamera where
     arbitrary = genSmartCamera
 
 instance Show SmartCamera where
-    show (SmartCamera a b c d) = show a ++ "," ++ show b ++ "," ++ show c ++ "," ++ d ++ "\n"
+    show (SmartCamera a b c d) = show a ++ "," ++ show b ++ "," ++ show c ++ "," ++ d
 
 genSmartCamera :: Gen SmartCamera
 genSmartCamera = do res <- arbitrary
@@ -65,7 +65,7 @@ instance Arbitrary SmartSpeaker where
     arbitrary = genSmartSpeaker
 
 instance Show SmartSpeaker where
-    show (SmartSpeaker a b c d e) = show a ++ "," ++ b ++ "," ++ c ++ "," ++ show d ++ "," ++ e ++ "\n"
+    show (SmartSpeaker a b c d e) = show a ++ "," ++ b ++ "," ++ c ++ "," ++ show d ++ "," ++ e
 
 genSmartSpeaker :: Gen SmartSpeaker
 genSmartSpeaker = do volume <- choose (0,100)
@@ -81,7 +81,9 @@ instance Arbitrary Divisao where
     arbitrary = genDivisoes
 
 instance Show Divisao where
-    show (Divisao a dev1 dev2 dev3) = "Divisao:" ++ a ++ "\n" ++ show dev1 ++ "\n" ++ show dev2 ++ "\n" ++ show dev3
+    show (Divisao a dev1 dev2 dev3) = "Divisao:" ++ a ++ "\n" ++ aux dev1 ++ aux dev2 ++ aux dev3    
+        where aux (h:[]) = show h
+              aux (h:t) = show h ++ "\n" ++ aux t
 
 genDivisoes :: Gen Divisao
 genDivisoes = do d <- listOf1 $ choose('a','z')
@@ -96,7 +98,9 @@ instance Arbitrary Casa where
     arbitrary = genCasa
 
 instance Show Casa where
-    show (Casa prop nif forn id morada divs) = "Casa:" ++ prop ++ "," ++ nif ++ "," ++ forn ++ "," ++ id ++ "," ++ morada ++ "\n" ++show divs
+    show (Casa prop nif forn id morada divs) = "Casa:" ++ prop ++ "," ++ nif ++ "," ++ forn ++ "," ++ id ++ "," ++ morada ++ "\n" ++ aux divs
+        where aux (h:[]) = show h
+              aux (h:t) = show h ++ "\n" ++ aux t
 
 genCasa :: Gen Casa
 genCasa = do proprietario <- listOf1 $ choose('a','z')
@@ -106,3 +110,11 @@ genCasa = do proprietario <- listOf1 $ choose('a','z')
              morada <- listOf1 $ choose('a','z')
              divs <- listOf1 $ arbitrary
              return (Casa proprietario nif fornecedor ("Casa"++id) morada divs)
+
+-- auxF 0 = show generate genFornecedor
+-- auxF n = show generate genFornecedor ++ auxF (n-1)
+
+main = do x <- generate genFornecedor
+          y <- generate genCasa
+          let xstr = show x ++ show y
+          writeFile "a.txt" xstr
