@@ -1,7 +1,10 @@
 package Model.Tests.HandMade;
 
 import Model.CasaInteligente;
+import Model.Exceptions.LogNotExistsException;
+import Model.Fatura;
 import Model.Formulas.FormulaCoopernico;
+import Model.Formulas.FormulaEDP;
 import Model.Formulas.FormulaEnergia;
 import Model.Formulas.FormulaEnergiaSimples;
 import Model.Fornecedor;
@@ -9,9 +12,12 @@ import Model.SmartBulb;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.evosuite.shaded.org.mockito.ArgumentMatchers.anyDouble;
+import static org.evosuite.shaded.org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.*;
 
 class FornecedorTest {
@@ -138,16 +144,19 @@ class FornecedorTest {
         forn2.setFormula(formula);
 
         CasaInteligente casa1 = new CasaInteligente("casa1", "Joao",123456789,"Rua de cima", "MEO");
-        forn.addCasa(casa1);
+        forn2.addCasa(casa1);
 
         CasaInteligente casa2 = new CasaInteligente("casa2", "Ana",987654321,"Rua de baixo", "NOS");
-        forn.addCasa(casa2);
-        assertTrue(forn.testEquals(forn2));
+        forn2.addCasa(casa2);
+        assertTrue(forn.equals(forn2));
     }
 
     @Test
     void testToString() {
+        FormulaEDP form =  new FormulaEDP();
 
+        Fornecedor forn = new Fornecedor(10,"EDP",form);
+        assertEquals("Id: EDP; Imposto: 10.0;\n",forn.toString());
     }
 
     @Test
@@ -163,15 +172,39 @@ class FornecedorTest {
 
     @Test
     void getValorFornecedor() {
+        String idCasa = "abc";
+        LocalDateTime init = LocalDateTime.now();
+        LocalDateTime finit = LocalDateTime.now();
     }
 
     @Test
-    void addFatura() {
-
+    void addFatura(){
+        LocalDateTime init = LocalDateTime.of(2023, 5, 1, 0, 0);
+        LocalDateTime finit = LocalDateTime.of(2023, 5, 1, 23, 59);
+        try {
+            forn.addFatura(init,finit);
+        } catch (LogNotExistsException e) {
+            assertTrue(true);
+        }
     }
 
     @Test
     void faturasEmitidas() {
+
+        LocalDateTime inicio = LocalDateTime.of(2023, 5, 1, 0, 0, 0);
+        LocalDateTime fim = LocalDateTime.of(2023, 5, 31, 23, 59, 59);
+        double consumo = 100.0;
+        String idFatura = "fatura";
+        String morada = "Rua do Exemplo, 123";
+        int NIF = 123456789;
+        String idFornecedor = "MEO";
+        double valor = 50.0;
+
+        //CasaInteligente casa1 = new CasaInteligente("abc");
+        //CasaInteligente casa2 = new CasaInteligente("def");
+        Fatura fatura1 = new Fatura(consumo, idFatura, inicio, fim, morada, NIF, idFornecedor, valor);
+
+        //forn.addFatura(fatura1);
     }
 
     @Test
@@ -180,5 +213,6 @@ class FornecedorTest {
 
     @Test
     void compareTo() {
+
     }
 }
