@@ -81,15 +81,15 @@ instance Arbitrary Divisao where
     arbitrary = genDivisoes
 
 instance Show Divisao where
-    show (Divisao a dev1 dev2 dev3) = "Divisao:" ++ a ++ "\n" ++ aux dev1 ++ aux dev2 ++ aux dev3    
+    show (Divisao a dev1 dev2 dev3) = "Divisao:" ++ a ++ "\n" ++ aux dev1 ++ "\n" ++ aux dev2 ++ "\n" ++ aux dev3    
         where aux (h:[]) = show h
               aux (h:t) = show h ++ "\n" ++ aux t
 
 genDivisoes :: Gen Divisao
 genDivisoes = do d <- listOf1 $ choose('a','z')
-                 dev1 <- listOf1 $ genSmartCamera
-                 dev2 <- listOf1 $ genSmartBulb
-                 dev3 <- listOf1 $ genSmartSpeaker
+                 dev1 <- vectorOf 4 $ genSmartCamera
+                 dev2 <- vectorOf 3 $ genSmartBulb
+                 dev3 <- vectorOf 2 $ genSmartSpeaker
                  return (Divisao d dev1 dev3 dev2)
 
 data Casa = Casa String String String String String [Divisao]
@@ -103,16 +103,16 @@ instance Show Casa where
               aux (h:t) = show h ++ "\n" ++ aux t
 
 genCasa :: Gen Casa
-genCasa = do proprietario <- listOf1 $ choose('a','z')
+genCasa = do proprietario <- listOf1 $ choose('a' ,'z')
              nif <- vectorOf 9 $ elements "123456789"
              fornecedor <- elements fornecedores
              id <- listOf1 $ elements "123456789"
              morada <- listOf1 $ choose('a','z')
-             divs <- listOf1 $ arbitrary
+             divs <- vectorOf 3 $ arbitrary
              return (Casa proprietario nif fornecedor ("Casa"++id) morada divs)
 
 main = do
     fornecedor <- generate (vectorOf 10 genFornecedor)
-    houses <- generate (vectorOf 10 genCasa)
-    writeFile "smart_home_data.txt" (unlines (map show fornecedor))
-    appendFile "smart_home_data.txt" (unlines (map show houses))
+    houses <- generate (vectorOf 3 genCasa)
+    writeFile "log.txt" (unlines (map show fornecedor))
+    appendFile "log.txt" (unlines (map show houses))
