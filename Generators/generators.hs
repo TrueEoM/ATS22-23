@@ -10,7 +10,7 @@ instance Arbitrary Fornecedor where
     arbitrary = genFornecedor
 
 instance Show Fornecedor where
-    show (Fornecedor x y) = x ++ "," ++ show y ++ "\n"
+    show (Fornecedor x y) = x ++ "," ++ show y
 
 genFornecedor :: Gen Fornecedor
 genFornecedor =  do s <- elements fornecedores
@@ -111,10 +111,8 @@ genCasa = do proprietario <- listOf1 $ choose('a','z')
              divs <- listOf1 $ arbitrary
              return (Casa proprietario nif fornecedor ("Casa"++id) morada divs)
 
--- auxF 0 = show generate genFornecedor
--- auxF n = show generate genFornecedor ++ auxF (n-1)
-
-main = do x <- generate genFornecedor
-          y <- generate genCasa
-          let xstr = show x ++ show y
-          writeFile "a.txt" xstr
+main = do
+    fornecedor <- generate (vectorOf 10 genFornecedor)
+    houses <- generate (vectorOf 10 genCasa)
+    writeFile "smart_home_data.txt" (unlines (map show fornecedor))
+    appendFile "smart_home_data.txt" (unlines (map show houses))
