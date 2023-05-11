@@ -1,4 +1,4 @@
-package Model.Tests.HandMade;
+package main.java.Model.Tests.HandMade;
 
 import Model.Log;
 import org.junit.jupiter.api.Test;

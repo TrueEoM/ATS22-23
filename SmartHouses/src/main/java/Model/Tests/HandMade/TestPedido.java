@@ -1,11 +1,11 @@
-package Model.Tests.HandMade;
+package main.java.Model.Tests.HandMade;
 
 import Model.Pedido;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TestPedido {
 
