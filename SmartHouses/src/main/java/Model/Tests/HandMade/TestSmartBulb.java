@@ -1,6 +1,6 @@
 package main.java.Model.Tests.HandMade;
 
-import main.java.Model.SmartBulb;
+import Model.SmartBulb;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -33,7 +33,7 @@ class TestSmartBulb {
 
     @Test
     void setMode() {
-        SmartBulb smartBulb = new SmartBulb("bulb1", "COLD", 5, 10.0);
+        SmartBulb smartBulb = new SmartBulb("bulb1", "Cold", 5, 10.0);
         SmartBulb.Mode mode = smartBulb.getMode();
 
         assertEquals(SmartBulb.Mode.COLD, mode);
@@ -75,20 +75,20 @@ class TestSmartBulb {
     }
 
     @Test
-    void calculaCold() {
-        SmartBulb smartBulb = new SmartBulb("bulb1","COLD",false,3,10.0);
-        assertEquals(1.8,smartBulb.calculaCold());
+    void calculaWarm() {
+        SmartBulb smartBulb = new SmartBulb("bulb1","Cold",false,3,10.0);
+        assertEquals(8.8,smartBulb.calculaCold());
     }
 
     @Test
-    void calculaWarm() {
-        SmartBulb smartBulb = new SmartBulb("bulb1","COLD",false,3,10.0);
-        assertEquals(8.8,smartBulb.calculaWarm());
+    void calculaCold() {
+        SmartBulb smartBulb = new SmartBulb("bulb1","Warm",false,3,10.0);
+        assertEquals(1.8,smartBulb.calculaWarm());
     }
 
     @Test
     void calculaNeutral() {
-        SmartBulb smartBulb = new SmartBulb("bulb1","COLD",false,3,10.0);
+        SmartBulb smartBulb = new SmartBulb("bulb1","Neutral",false,3,10.0);
         assertEquals(3.4,smartBulb.calculaNeutral());
     }
 
@@ -104,11 +104,9 @@ class TestSmartBulb {
 
     @Test
     void parseSmartBulb() {
-        String input = "COLD,5,10.0,bulb1";
-
+        String input = "Cold,5,10.0,bulb1";
         // Call the parseSmartBulb() method
         SmartBulb parsedBulb = SmartBulb.parseSmartBulb(input);
-
         // Assert that the parsed bulb has the correct values
         assertEquals("bulb1", parsedBulb.getID());
         assertEquals(SmartBulb.Mode.COLD, parsedBulb.getMode());

@@ -196,25 +196,7 @@ public class TestCasaInteligente {
                 + "Proprietario: " + def.getProprietario() + "\n"
                 + "NIF: " + def.getNIF() + "\n"
                 + "----------------------Divisão/Dispositivos----------------------" + "\n"
-                + "{S3=ID: id3\n"
-                + "\tOn: false;\n"
-                + "\tConsumo Base: 0.2;\n"
-                + "\tVolume: 10;\n"
-                + "\tMarca: asd;\n"
-                + "\tCanal: abc\n"
-                + ", S=ID: id\n"
-                + "\tOn: false;\n"
-                + "\tConsumo Base: 0.2;\n"
-                + "\tVolume: 10;\n"
-                + "\tMarca: asd;\n"
-                + "\tCanal: abc\n"
-                + ", S2=ID: id2\n"
-                + "\tOn: true;\n"
-                + "\tConsumo Base: 0.2;\n"
-                + "\tVolume: 10;\n"
-                + "\tMarca: asd;\n"
-                + "\tCanal: abc\n"
-                + "}\n"
+                + "Divisão: A - Dispositos -> [S, S2]\n"
                 + "----------------------------------------------------------------";
 
         assertEquals(expected, def.toString());
@@ -223,15 +205,15 @@ public class TestCasaInteligente {
     @Test
     public void testParseCasa()
     {
-        String line = "Casa123,4,42,MoradaDEF,FornecedorXYZ";
+        String line = "Vicente de Carvalho Castro,365597405,Iberdrola,casa1,Yubetsu-tanko 564-000 nº 383";
 
         CasaInteligente casa = CasaInteligente.parseCasa(line);
 
-        assertEquals("Casa123", casa.getIdHome());
-        assertEquals("ProprietarioABC", casa.getProprietario());
-        assertEquals(42, casa.getNIF());
-        assertEquals("MoradaDEF", casa.getMorada());
-        assertEquals("FornecedorXYZ", casa.getIdFornecedor());
+        assertEquals("casa1", casa.getIdHome());
+        assertEquals("Vicente de Carvalho Castro", casa.getProprietario());
+        assertEquals(365597405, casa.getNIF());
+        assertEquals("Yubetsu-tanko 564-000 nº 383", casa.getMorada());
+        assertEquals("Iberdrola", casa.getIdFornecedor());
     }
 
     @Test

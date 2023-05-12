@@ -138,8 +138,8 @@ class TestFatura {
         String expected = "IdFatura: fatura\n" +
                 "IdFornecedor: MEO\n" +
                 "NIF: 123456789\n" +
-                "Consumo: 100.0\n" +
-                "Valor: 50.0\n" +
+                "Consumo: 100,0\n" +
+                "Valor: 50,0\n" +
                 "Inicio: 2023-05-01 00:00\n" +
                 "Fim: 2023-05-31 23:59;";
         String result = fatura.toString();
