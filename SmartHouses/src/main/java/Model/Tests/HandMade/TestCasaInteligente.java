@@ -1,4 +1,4 @@
-package Model.Tests.HandMade;
+package main.java.Model.Tests.HandMade;
 
 import Model.*;
 import Model.CasaInteligente;
@@ -8,6 +8,7 @@ import Model.Fatura;
 import Model.Log;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.testng.annotations.Test;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TestCasaInteligente {
     private CasaInteligente def;
+    private HashMap<String,Log> logs = new HashMap<>();
 
     @BeforeEach
     public void initTestCase(){
@@ -27,9 +29,9 @@ public class TestCasaInteligente {
         HashMap<String, List<String>> space = new HashMap<>();
         space.put("A", l);
 
-        HashMap<String, SmartDevice> dv = new HashMap<>();
+        HashMap<String, Model.SmartDevice> dv = new HashMap<>();
         HashMap<String, Fatura> faturas = new HashMap<>();
-        HashMap<String, Log> logs = new HashMap<>();
+        logs = new HashMap<>();
         dv.put("S", new SmartSpeaker("id", false, 10, "asd", "abc", 0.2));
         dv.put("S2", new SmartSpeaker("id2", true, 10, "asd", "abc", 0.2));
         dv.put("S3", new SmartSpeaker("id3", false, 10, "asd", "abc", 0.2));
@@ -384,6 +386,21 @@ public class TestCasaInteligente {
     @Test
     public void testNumberDevicesOn()
     {
+        LocalDateTime dia = LocalDateTime.now();
+        Log log1 = new Log(dia,true);
+        Log log2 = new Log(dia,true);
+        Log log3 = new Log(dia,false);
+
+        log1.setDia(dia);
+        log2.setDia(dia);
+        log3.setDia(dia);
+
+        int count = def.numberDevicesOn(dia);
+        assertEquals(2, count);
+
+        LocalDateTime nonExistingDia = LocalDateTime.of(2023, 5, 1, 0, 0);
+        int nonExistingCount = def.numberDevicesOn(nonExistingDia);
+        assertEquals(0, nonExistingCount);
     }
 
     @Test
