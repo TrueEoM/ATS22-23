@@ -1,8 +1,10 @@
 package Model.Tests.HandMade;
 
 import Model.*;
+import Model.CasaInteligente;
 import Model.Exceptions.SmartDeviceAlreadyExistsException;
 import Model.Exceptions.SmartDeviceNotExistsException;
+import Model.Fatura;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -25,9 +27,12 @@ public class TestCasaInteligente {
         space.put("A", l);
 
         HashMap<String, SmartDevice> dv = new HashMap<>();
+        HashMap<String, Fatura> faturas = new HashMap<>();
         dv.put("S", new SmartSpeaker("id", false, 10, "asd", "abc", 0.2));
         dv.put("S2", new SmartSpeaker("id2", true, 10, "asd", "abc", 0.2));
         dv.put("S3", new SmartSpeaker("id3", false, 10, "asd", "abc", 0.2));
+        faturas.put("123", new Fatura());
+        faturas.put("456", new Fatura());
 
         def = new CasaInteligente("123", "abc", 123456789, "Rua A", "ID");
         def.setDevices(dv);
@@ -311,6 +316,9 @@ public class TestCasaInteligente {
     public void testHasFatura()
     {
 
+        assertTrue(def.hasFatura("123"));
+
+        assertFalse(def.hasFatura("789"));
     }
 
 

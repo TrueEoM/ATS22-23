@@ -10,6 +10,12 @@ class TestSmartBulb {
 
     @Test
     void fromString() {
+        assertEquals(SmartBulb.Mode.COLD, SmartBulb.fromString("Cold"));
+        assertEquals(SmartBulb.Mode.WARM, SmartBulb.fromString("Warm"));
+        assertEquals(SmartBulb.Mode.NEUTRAL, SmartBulb.fromString("Neutral"));
+
+        // Test with invalid mode string
+        assertNull(SmartBulb.fromString("InvalidMode"));
     }
 
     @Test
