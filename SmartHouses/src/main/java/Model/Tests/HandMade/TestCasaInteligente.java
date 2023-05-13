@@ -5,6 +5,7 @@ import Model.CasaInteligente;
 import Model.Exceptions.SmartDeviceAlreadyExistsException;
 import Model.Exceptions.SmartDeviceNotExistsException;
 import Model.Fatura;
+import Model.Log;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -28,11 +29,14 @@ public class TestCasaInteligente {
 
         HashMap<String, SmartDevice> dv = new HashMap<>();
         HashMap<String, Fatura> faturas = new HashMap<>();
+        HashMap<String, Log> logs = new HashMap<>();
         dv.put("S", new SmartSpeaker("id", false, 10, "asd", "abc", 0.2));
         dv.put("S2", new SmartSpeaker("id2", true, 10, "asd", "abc", 0.2));
         dv.put("S3", new SmartSpeaker("id3", false, 10, "asd", "abc", 0.2));
         faturas.put("123", new Fatura());
         faturas.put("456", new Fatura());
+        logs.put("log1", new Log());
+        logs.put("log2", new Log());
 
         def = new CasaInteligente("123", "abc", 123456789, "Rua A", "ID");
         def.setDevices(dv);
@@ -307,22 +311,35 @@ public class TestCasaInteligente {
     @Test
     public void testRemoveFatura()
     {
-    }
+        try {
+            def.removeFatura("123");
+            assertFalse(def.hasFatura("123"));
+        } catch (FaturaNotExistsException e) {
+            fail("Unexpected exception: " + e.getMessage());
+        }
 
-    @Test
-    public void testLigadoPeriodoTempo()
-    {
+        // Test removing a non-existing fatura
+        try {
+            def.removeFatura("789");
+            fail("Expected FaturaNotExistsException was not thrown.");
+        } catch (FaturaNotExistsException e) {
+            assertEquals("A fatura com o id 789 não existe", e.getMessage());
+        }
     }
 
     @Test
     public void testHasLog()
     {
 
+        assertTrue(def.hasLog("log1"));
+
+        assertFalse(def.hasLog("log3"));
     }
 
     @Test
-    public void testHasLogByDay()
+    public void testHasLogByDevice()
     {
+
     }
 
     @Test
@@ -333,6 +350,20 @@ public class TestCasaInteligente {
     @Test
     public void testRemoveLog()
     {
+        try {
+            def.removeLog("log1");
+            assertFalse(def.hasLog("log1"));
+        } catch (LogNotExistsException e) {
+            fail("LogNotExistsException should not be thrown");
+        }
+
+
+        try {
+            def.removeLog("log4");
+            fail("LogNotExistsException should be thrown");
+        } catch (LogNotExistsException e) {
+            assertEquals("Não existem logs no device device2", e.getMessage());
+        }
     }
 
     @Test
