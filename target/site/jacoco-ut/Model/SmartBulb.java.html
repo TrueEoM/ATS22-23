@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SmartBulb.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">teste</a> &gt; <a href="index.source.html" class="el_package">Model</a> &gt; <span class="el_source">SmartBulb.java</span></div><h1>SmartBulb.java</h1><pre class="source lang-java linenums">package Model;
+
+public class SmartBulb extends SmartDevice{
+<span class="nc" id="L4">    public enum Mode</span>
+    {
+<span class="nc" id="L6">        COLD,</span>
+<span class="nc" id="L7">        WARM,</span>
+<span class="nc" id="L8">        NEUTRAL,</span>
+    }
+    public static Mode fromString(String x) {
+<span class="nc bnc" id="L11" title="All 4 branches missed.">        switch(x) {</span>
+            case &quot;Cold&quot;:
+<span class="nc" id="L13">                return Mode.COLD;</span>
+            case &quot;Warm&quot;:
+<span class="nc" id="L15">                return Mode.WARM;</span>
+            case &quot;Neutral&quot;:
+<span class="nc" id="L17">                return Mode.NEUTRAL;</span>
+        }
+<span class="nc" id="L19">        return null;</span>
+    }
+    private Mode mode;
+
+    private int dimensao;
+
+
+    private static final double vfixo = 0.70;
+    private static final double factorWarm = 1.5 ;
+    private static final double factorCold = 1.1;
+    private static final double factorNeutral = 1.0;
+
+    private static final double cneutral = vfixo + factorNeutral; //consumo neutral
+    private static final double cwarm = vfixo + factorWarm;
+    private static final double ccold = vfixo + factorCold;
+
+
+    //public SmartBulb(String id)
+    //{
+    //    super(id);
+    //    this.dimensao = 5;
+    //}
+    public SmartBulb(String id,String intensidade,boolean modo, int dim,double consumoBase){
+<span class="nc" id="L42">        super(id,modo,consumoBase);</span>
+<span class="nc" id="L43">        this.mode = fromString(intensidade);</span>
+<span class="nc" id="L44">        this.dimensao = dim;</span>
+<span class="nc" id="L45">    }</span>
+    public SmartBulb(String id,String intensidade, int dim,double consumoBase){
+<span class="nc" id="L47">        super(id,consumoBase);</span>
+<span class="nc" id="L48">        this.mode = fromString(intensidade);</span>
+<span class="nc" id="L49">        this.dimensao = dim;</span>
+<span class="nc" id="L50">    }</span>
+
+    public SmartBulb(SmartBulb smartBulb){
+<span class="nc" id="L53">        super(smartBulb);</span>
+<span class="nc" id="L54">        this.mode = smartBulb.getMode();</span>
+<span class="nc" id="L55">        this.dimensao = smartBulb.getDimensao();</span>
+<span class="nc" id="L56">    }</span>
+
+    public int getDimensao() {
+<span class="nc" id="L59">        return this.dimensao;</span>
+    }
+
+    public void setDimensao(int dimensao) {
+<span class="nc" id="L63">        this.dimensao = dimensao;</span>
+<span class="nc" id="L64">    }</span>
+
+    public Mode getMode() {
+<span class="nc" id="L67">        return this.mode;</span>
+    }
+
+    public void setMode(Mode mode) {
+<span class="nc" id="L71">        this.mode = mode;</span>
+<span class="nc" id="L72">    }</span>
+
+    public void turnOFFlamp(){
+<span class="nc" id="L75">        turnOff();</span>
+<span class="nc bnc" id="L76" title="All 2 branches missed.">        if(this.getModo()) {</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">            if (this.mode == Mode.COLD) {</span>
+<span class="nc" id="L78">                calculaCold();</span>
+            }
+<span class="nc bnc" id="L80" title="All 2 branches missed.">            if (this.mode == Mode.WARM) {</span>
+<span class="nc" id="L81">                calculaWarm();</span>
+            }
+<span class="nc bnc" id="L83" title="All 2 branches missed.">            if (this.mode == Mode.NEUTRAL) {</span>
+<span class="nc" id="L84">                calculaNeutral();</span>
+            }
+        }
+<span class="nc" id="L87">    }</span>
+
+    public void turnOnLamp(){
+<span class="nc" id="L90">        turnOn();</span>
+<span class="nc" id="L91">    }</span>
+
+    public void changetoCold(){
+<span class="nc bnc" id="L94" title="All 2 branches missed.">        if(!getModo()) turnOn();</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">        if (this.mode == Mode.WARM) {</span>
+<span class="nc" id="L96">            calculaWarm();</span>
+        }
+<span class="nc bnc" id="L98" title="All 2 branches missed.">        if (this.mode == Mode.NEUTRAL) {</span>
+<span class="nc" id="L99">            calculaNeutral();</span>
+        }
+<span class="nc" id="L101">        this.mode = Mode.COLD;</span>
+<span class="nc" id="L102">    }</span>
+
+    public void changetoWarm(){
+<span class="nc bnc" id="L105" title="All 2 branches missed.">        if (this.mode == Mode.COLD) {</span>
+<span class="nc" id="L106">            calculaCold();</span>
+        }
+<span class="nc bnc" id="L108" title="All 2 branches missed.">        if (this.mode == Mode.NEUTRAL) {</span>
+<span class="nc" id="L109">            calculaNeutral();</span>
+        }
+<span class="nc" id="L111">        this.mode = Mode.WARM;</span>
+<span class="nc" id="L112">    }</span>
+
+    public void changetoNeutral(){
+<span class="nc bnc" id="L115" title="All 2 branches missed.">        if (this.mode == Mode.WARM) {</span>
+<span class="nc" id="L116">            calculaWarm();</span>
+        }
+<span class="nc bnc" id="L118" title="All 2 branches missed.">        if (this.mode == Mode.COLD) {</span>
+<span class="nc" id="L119">            calculaCold();</span>
+        }
+<span class="nc" id="L121">        this.mode = Mode.NEUTRAL;</span>
+<span class="nc" id="L122">    }</span>
+
+    //consumo total acumulado
+    public double calculaCold(){
+<span class="nc" id="L126">        return 4 * cwarm;</span>
+    }
+    //consumo total acumulado
+    public double calculaWarm(){
+<span class="nc" id="L130">        return 1 * ccold;</span>
+    }
+    //consumo total acumulado
+    public double calculaNeutral(){
+<span class="nc" id="L134">        return 2 * cneutral;</span>
+    }
+    /*
+        //consumo desde a última vez que se desligou a lampada
+        public double consumoAtual() {
+            double atual = 0;
+            if (this.tonalidade == 2) atual = getPeriodoConsumo() * this.cwarm;
+            else if (this.tonalidade == 0) atual =  getPeriodoConsumo() * this.ccold;
+            else if (this.tonalidade == 1) atual = getPeriodoConsumo() * this.cneutral;
+            return atual;
+        }
+    */
+    public double consumoDiario(){
+        // consumo total : mede os consumos anteriores
+        // consumoAtual : mede o consumo atual
+<span class="nc" id="L149">        double total=0;</span>
+<span class="nc bnc" id="L150" title="All 2 branches missed.">        if(this.mode==Mode.WARM) {</span>
+<span class="nc" id="L151">            calculaWarm();</span>
+<span class="nc" id="L152">            total = calculaWarm();</span>
+        }
+<span class="nc bnc" id="L154" title="All 2 branches missed.">        else if(this.mode==Mode.COLD) {</span>
+<span class="nc" id="L155">            total = calculaCold();</span>
+        }
+        else{
+<span class="nc" id="L158">                total = calculaNeutral();</span>
+        }
+<span class="nc" id="L160">        return total;</span>
+    }
+
+    public static SmartBulb parseSmartBulb(String line){
+<span class="nc" id="L164">        String[] parte = line.split(&quot;,&quot;);</span>
+<span class="nc" id="L165">        return new SmartBulb(parte[3],parte[0],Integer.parseInt(parte[1]),Double.parseDouble(parte[2]));</span>
+    }
+//logs: Model.SmartBulb:Neutral,7,9.35,bulb3,2022-03-29 07:38:27,2022-05-31 20:23:44,false
+    //    public Model.SmartBulb(String id,String intensidade, boolean modo , int dim,LocalDateTime timeon ,LocalDateTime timeoff){
+
+
+    public String toString() {
+<span class="nc" id="L172">        StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L173">        sb.append(super.toString());</span>
+<span class="nc" id="L174">        sb.append(&quot;\tModo: &quot;).append(this.mode).append(&quot;; &quot;)</span>
+<span class="nc" id="L175">                .append(&quot;\tDimensao: &quot;).append(this.dimensao).append(&quot;; &quot;);</span>
+<span class="nc" id="L176">        return sb.toString();</span>
+    }
+
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L180" title="All 2 branches missed.">        if (this==o) return true;</span>
+<span class="nc bnc" id="L181" title="All 4 branches missed.">        if ((o == null) || (this.getClass() != o.getClass())) return false;</span>
+<span class="nc bnc" id="L182" title="All 2 branches missed.">        if (!super.equals(o)) return false;</span>
+<span class="nc" id="L183">        SmartBulb s = (SmartBulb) o;</span>
+<span class="nc bnc" id="L184" title="All 2 branches missed.">        return  s.getMode() == this.mode &amp;&amp;</span>
+<span class="nc bnc" id="L185" title="All 2 branches missed.">                s.getDimensao() == this.dimensao;</span>
+    }
+
+    public SmartDevice clone(){
+<span class="nc" id="L189">        return new SmartBulb(this);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SmartDevice.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">teste</a> &gt; <a href="index.source.html" class="el_package">Model</a> &gt; <span class="el_source">SmartDevice.java</span></div><h1>SmartDevice.java</h1><pre class="source lang-java linenums">package Model;
+
+public abstract class SmartDevice {
+
+    private String id;
+    private boolean modo;//ON: TRUE | OFF: FALSE
+    private double consumoBase;
+
+    // usado no parser
+    public SmartDevice(String id, double consumoBase)
+<span class="nc" id="L11">    {</span>
+<span class="nc" id="L12">        this.id = id;</span>
+<span class="nc" id="L13">        this.modo=false;</span>
+<span class="nc" id="L14">        this.consumoBase = consumoBase;</span>
+<span class="nc" id="L15">    }</span>
+
+    public SmartDevice(String id, boolean modo, double consumoBase)
+<span class="nc" id="L18">    {</span>
+<span class="nc" id="L19">        this.id = id;</span>
+<span class="nc" id="L20">        this.modo=modo;</span>
+<span class="nc" id="L21">        this.consumoBase = consumoBase;</span>
+<span class="nc" id="L22">    }</span>
+
+<span class="nc" id="L24">    public SmartDevice(SmartDevice s) {</span>
+<span class="nc" id="L25">        this.id = s.getID();</span>
+<span class="nc" id="L26">        this.modo = s.getModo();</span>
+<span class="nc" id="L27">        setConsumoBase(s.getConsumoBase());</span>
+<span class="nc" id="L28">    }</span>
+
+    public void turnOn(){
+<span class="nc" id="L31">        this.modo = true;</span>
+<span class="nc" id="L32">    }</span>
+
+    public void turnOff() {
+<span class="nc" id="L35">        this.modo = false;</span>
+<span class="nc" id="L36">    }</span>
+
+    public double getConsumoBase() {
+<span class="nc" id="L39">        return consumoBase;</span>
+    }
+
+    public void setConsumoBase(double consumoBase) {
+<span class="nc" id="L43">        this.consumoBase = consumoBase;</span>
+<span class="nc" id="L44">    }</span>
+
+    public boolean getModo() {
+<span class="nc" id="L47">        return this.modo;</span>
+    }
+
+    public void setModo(boolean b) {
+<span class="nc" id="L51">        this.modo = b;</span>
+<span class="nc" id="L52">    }</span>
+
+    public String getID() {
+<span class="nc" id="L55">        return this.id;</span>
+    }
+
+    public String toString(){
+<span class="nc" id="L59">        StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L60">        sb.append(&quot;ID: &quot;).append(this.id).append(&quot;\n&quot;)</span>
+<span class="nc" id="L61">                .append(&quot;\tOn: &quot;).append(this.modo).append(&quot;;\n&quot;)</span>
+<span class="nc" id="L62">                .append(&quot;\tConsumo Base: &quot;).append(this.consumoBase).append(&quot;;\n&quot;);</span>
+<span class="nc" id="L63">        return sb.toString();</span>
+    }
+
+    public boolean equals(Object o){
+<span class="nc bnc" id="L67" title="All 2 branches missed.">        if(o==this) return true;</span>
+<span class="nc bnc" id="L68" title="All 4 branches missed.">        else if(o==null || o.getClass()!=this.getClass()) return false;</span>
+<span class="nc" id="L69">        SmartDevice sd = (SmartDevice) o;</span>
+<span class="nc" id="L70">        return this.id.equals(sd.getID());</span>
+    }
+
+    public abstract SmartDevice clone();
+
+    public abstract double consumoDiario();
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

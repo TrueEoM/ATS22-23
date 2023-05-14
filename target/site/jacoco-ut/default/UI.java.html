@@ -1,0 +1,917 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UI.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">teste</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">UI.java</span></div><h1>UI.java</h1><pre class="source lang-java linenums">import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.DecimalFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import Model.Exceptions.*;
+import Model.*;
+import Model.Pedido;
+import Model.SmartHouses;
+
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+
+public class UI{
+
+    private SmartHouses smarthouses;
+
+    private List&lt;Pedido&gt; pedidos;
+    private List &lt;Pedido&gt; pedidosMudancaFornecedor;
+
+<span class="nc" id="L24">    public UI(SmartHouses newSmarthouses) {</span>
+
+<span class="nc" id="L26">        this.smarthouses = new SmartHouses(newSmarthouses);</span>
+<span class="nc" id="L27">        this.pedidos = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L28">        this.pedidosMudancaFornecedor = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L29">    }</span>
+
+    public void executaListPedidos(int i)
+    {
+<span class="nc bnc" id="L33" title="All 4 branches missed.">        if(i==0 &amp;&amp; this.pedidos!=null)</span>
+        {
+<span class="nc bnc" id="L35" title="All 2 branches missed.">            for(Pedido pedido: this.pedidos)</span>
+            {
+<span class="nc" id="L37">                executaPedido(pedido);</span>
+<span class="nc" id="L38">            }</span>
+<span class="nc" id="L39">            this.pedidos.clear();</span>
+        }
+<span class="nc bnc" id="L41" title="All 4 branches missed.">        if(i==1 &amp;&amp; this.pedidosMudancaFornecedor!=null)</span>
+        {
+<span class="nc bnc" id="L43" title="All 2 branches missed.">            for(Pedido pedido: this.pedidosMudancaFornecedor)</span>
+            {
+<span class="nc" id="L45">                executaPedido(pedido);</span>
+<span class="nc" id="L46">            }</span>
+<span class="nc" id="L47">            this.pedidosMudancaFornecedor.clear();</span>
+        }
+
+<span class="nc" id="L50">    }</span>
+
+    public void addDeviceExecute(String idHome, String idDevice, String room, SmartDevice sd, LocalDateTime date, boolean mode)
+    {
+        try {
+<span class="nc" id="L55">            this.smarthouses.adicionaDevice(idDevice, sd);</span>
+<span class="nc" id="L56">            this.smarthouses.addDeviceToRoom(idHome,room,sd);</span>
+            //System.out.println(&quot;IDHome:&quot; + idHome + &quot;, IDDecvice:&quot;+ idDevice+&quot;\n&quot;);
+<span class="nc" id="L58">            this.smarthouses.addLogExecute(idHome,idDevice,new Log(date,mode));</span>
+        }
+<span class="nc" id="L60">        catch (SmartDeviceAlreadyExistsException | LogAlreadyExistsException | CasaInteligenteNotExistsException | RoomNotExistsException e) {</span>
+<span class="nc" id="L61">            System.out.println(e.getMessage());</span>
+<span class="nc" id="L62">        }</span>
+<span class="nc" id="L63">    }</span>
+
+    public void executaPedido(Pedido pedido)
+    {
+        String[] linha;
+        boolean on;
+<span class="nc bnc" id="L69" title="All 2 branches missed.">        if(pedido.getTipo().compareTo(&quot;casa&quot;)==0)</span>
+        {
+<span class="nc bnc" id="L71" title="All 10 branches missed.">            switch (pedido.getFuncao())</span>
+            {
+                case &quot;adicionaBulb&quot;:
+<span class="nc" id="L74">                    linha = pedido.getEspecificacoes().split(&quot;,&quot;);</span>
+                    //linha = id+&quot;,&quot;+tonalidade+&quot;,&quot;+dimensao+&quot;,&quot;+consumo+&quot;,&quot;+room
+<span class="nc" id="L76">                    SmartDevice sdB = new SmartBulb(linha[0], linha[1],pedido.getMode(), Integer.parseInt(linha[2]),Double.parseDouble(linha[3]));</span>
+<span class="nc" id="L77">                    addDeviceExecute(pedido.getId(),linha[0],linha[4],sdB,pedido.getDate(),pedido.getMode());</span>
+<span class="nc" id="L78">                    break;</span>
+                case &quot;adicionaCamera&quot;:
+                    // id+&quot;,&quot;+tamanho+&quot;,&quot;+res+&quot;,&quot;+consumo+&quot;,&quot;+room
+<span class="nc" id="L81">                    linha = pedido.getEspecificacoes().split(&quot;,&quot;);</span>
+<span class="nc" id="L82">                    SmartDevice sdC = new SmartCamera(linha[0], pedido.getMode(), linha[2], Double.parseDouble(linha[1]),Double.parseDouble(linha[3]));</span>
+<span class="nc" id="L83">                    addDeviceExecute(pedido.getId(),linha[0],linha[4],sdC,pedido.getDate(),pedido.getMode());</span>
+<span class="nc" id="L84">                    break;</span>
+                case &quot;adicionaSpeaker&quot;:
+                    // id + &quot;,&quot; + volume + &quot;,&quot; + marca + &quot;,&quot; + channel + &quot;,&quot; + consumo + &quot;,&quot; + room
+<span class="nc" id="L87">                    linha = pedido.getEspecificacoes().split(&quot;,&quot;);</span>
+<span class="nc" id="L88">                    SmartDevice sdS = new SmartSpeaker(linha[0],pedido.getMode(), Integer.parseInt(linha[1]), linha[2], linha[3],Double.parseDouble(linha[4]));</span>
+<span class="nc" id="L89">                    addDeviceExecute(pedido.getId(),linha[0],linha[5],sdS,pedido.getDate(),pedido.getMode());</span>
+<span class="nc" id="L90">                    break;</span>
+                case &quot;removeDispositivo&quot;:
+                    try{
+<span class="nc" id="L93">                        linha = pedido.getEspecificacoes().split(&quot;,&quot;);</span>
+<span class="nc bnc" id="L94" title="All 2 branches missed.">                        if(pedido.getMode())</span>
+                        {
+<span class="nc" id="L96">                            this.smarthouses.removeDevice(linha[0],pedido.getId());</span>
+<span class="nc" id="L97">                            this.smarthouses.removePermanenteDevice(linha[0],pedido.getId());</span>
+                        }
+                        else
+                        {
+<span class="nc" id="L101">                            this.smarthouses.removeDevice(linha[0],pedido.getId());</span>
+<span class="nc" id="L102">                            this.smarthouses.addDeviceToRoomSameHouse(linha[0],pedido.getId(),linha[1]);</span>
+                        }
+                    }
+<span class="nc" id="L105">                    catch (LogNotExistsException | RoomNotExistsException e)</span>
+                    {
+<span class="nc" id="L107">                        System.out.println(e.getMessage());</span>
+<span class="nc" id="L108">                    }</span>
+<span class="nc" id="L109">                    break;</span>
+                case &quot;ligaDesliga&quot;:
+<span class="nc" id="L111">                    linha = pedido.getEspecificacoes().split(&quot;,&quot;);</span>
+                    try {
+<span class="nc" id="L113">                        this.smarthouses.gestaoDevices(pedido.getId(),linha[0],pedido.getMode());</span>
+<span class="nc" id="L114">                        this.smarthouses.addLogChangeMode(pedido.getId(), pedido.getDate(), pedido.getMode());</span>
+                    }
+<span class="nc" id="L116">                    catch (LogAlreadyExistsException | SmartDeviceNotExistsException | CasaInteligenteNotExistsException e)</span>
+                    {
+<span class="nc" id="L118">                        System.out.println(e.getMessage());</span>
+<span class="nc" id="L119">                    }</span>
+<span class="nc" id="L120">                    break;</span>
+                case &quot;tonBulb&quot;:
+<span class="nc" id="L122">                    linha = pedido.getEspecificacoes().split(&quot;,&quot;);</span>
+                    try{
+<span class="nc" id="L124">                        this.smarthouses.colocaTon(pedido.getId(),linha[0],Integer.parseInt(linha[1]));</span>
+                    }
+<span class="nc" id="L126">                    catch (SmartDeviceNotExistsException e)</span>
+                    {
+<span class="nc" id="L128">                        System.out.println(e.getMessage());</span>
+<span class="nc" id="L129">                    }</span>
+<span class="nc" id="L130">                    break;</span>
+                case &quot;volSpk&quot;:
+<span class="nc" id="L132">                    linha = pedido.getEspecificacoes().split(&quot;,&quot;);</span>
+                    try{
+<span class="nc" id="L134">                        this.smarthouses.colocaVol(pedido.getId(),linha[0],Integer.parseInt(linha[1]));</span>
+                    }
+<span class="nc" id="L136">                    catch (SmartDeviceNotExistsException e)</span>
+                    {
+<span class="nc" id="L138">                        System.out.println(e.getMessage());</span>
+<span class="nc" id="L139">                    }</span>
+<span class="nc" id="L140">                    break;</span>
+                case &quot;alteraFornecedor&quot;:
+                    try {
+<span class="nc" id="L143">                        this.smarthouses.alteraFornecedor(pedido.getId(),pedido.getEspecificacoes());</span>
+<span class="nc" id="L144">                    } catch (CasaInteligenteNotExistsException e) {</span>
+<span class="nc" id="L145">                        e.printStackTrace();</span>
+<span class="nc" id="L146">                    }</span>
+<span class="nc" id="L147">                    break;</span>
+                case &quot;setAllDevicesHome&quot;:
+                    try{
+<span class="nc bnc" id="L150" title="All 2 branches missed.">                        if(pedido.getEspecificacoes().compareTo(&quot;&quot;)==0)</span>
+                        {// ligar/desligar em todas as divisões
+<span class="nc" id="L152">                            this.smarthouses.setAllDevicesHome(pedido.getId(), pedido.getMode());</span>
+<span class="nc" id="L153">                            this.smarthouses.addLogChangeMode(pedido.getId(), this.smarthouses.getDate(), pedido.getMode());</span>
+                        }
+                        else
+                        {// ligar/desligar numa divisão especifica
+<span class="nc" id="L157">                            this.smarthouses.setAlldivision(pedido.getId(),pedido.getEspecificacoes(),pedido.getMode());</span>
+<span class="nc" id="L158">                            this.smarthouses.addLogChangeMode(pedido.getId(), this.smarthouses.getDate(), pedido.getMode(),pedido.getEspecificacoes());</span>
+                        }
+                    }
+<span class="nc" id="L161">                    catch (LogAlreadyExistsException | CasaInteligenteNotExistsException | SmartDeviceNotExistsException | RoomNotExistsException e)</span>
+                    {
+<span class="nc" id="L163">                        System.out.println(e.getMessage());</span>
+<span class="nc" id="L164">                    }</span>
+<span class="nc" id="L165">                    break;</span>
+                default:
+<span class="nc" id="L167">                    break;</span>
+            }
+        }
+<span class="nc bnc" id="L170" title="All 2 branches missed.">        else if(pedido.getTipo().compareTo(&quot;fornecedor&quot;)==0)</span>
+        {
+<span class="nc bnc" id="L172" title="All 5 branches missed.">            switch (pedido.getFuncao()) {</span>
+                case &quot;removeCasas&quot;:
+                    try {
+<span class="nc" id="L175">                        this.smarthouses.removeHome(pedido.getId(),pedido.getEspecificacoes());</span>
+<span class="nc" id="L176">                    } catch (CasaInteligenteNotExistsException e) {</span>
+<span class="nc" id="L177">                        System.out.println(e.getMessage());</span>
+<span class="nc" id="L178">                    } catch (FornecedorNotExistsException f) {</span>
+<span class="nc" id="L179">                        System.out.println(&quot;erro fornecedor nao existe&quot;);</span>
+<span class="nc" id="L180">                    }</span>
+<span class="nc" id="L181">                    break;</span>
+                case &quot;removeFornecedores&quot;:
+                    try{
+<span class="nc" id="L184">                        this.smarthouses.removeFornecedor(pedido.getId());</span>
+                    }
+<span class="nc" id="L186">                    catch(FornecedorNotExistsException e )</span>
+                    {
+<span class="nc" id="L188">                        System.out.println(e.getMessage());</span>
+<span class="nc" id="L189">                    }</span>
+<span class="nc" id="L190">                    break;</span>
+                case &quot;adicionaCasas&quot;:
+<span class="nc" id="L192">                    linha = pedido.getEspecificacoes().split(&quot;,&quot;);</span>
+<span class="nc" id="L193">                    this.smarthouses.adicionaHome(pedido.getId(),new CasaInteligente(linha[0],linha[1],Integer.parseInt(linha[2]),linha[3],pedido.getId()));</span>
+<span class="nc" id="L194">                    this.smarthouses.addRoom(linha[4],linha[0]);</span>
+<span class="nc" id="L195">                    break;</span>
+                case &quot;adicionaFornecedores&quot;:
+<span class="nc" id="L197">                    this.smarthouses.adicionaFornecedor(pedido.getId(),new Fornecedor(pedido.getId(),Double.parseDouble(pedido.getEspecificacoes())));</span>
+                default:
+                    break;
+            }
+        }
+<span class="nc" id="L202">    }</span>
+
+    public void executeMenu(){
+
+<span class="nc" id="L206">        List&lt;String&gt; opcoes = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L207">        opcoes.add(&quot;Casa que mais gastou num período de tempo\n&quot;);</span>
+<span class="nc" id="L208">        opcoes.add(&quot;Comercializador com maior volume de facturação\n&quot;);</span>
+<span class="nc" id="L209">        opcoes.add(&quot;Listagem de facturas emitidas por um comercializador\n&quot;);</span>
+<span class="nc" id="L210">        opcoes.add(&quot;Ordenação dos maiores consumidores de energia durante um período de tempo\n&quot;);</span>
+<span class="nc" id="L211">        opcoes.add(&quot;Casas\n&quot;);</span>
+<span class="nc" id="L212">        opcoes.add(&quot;Fornecedores\n&quot;);</span>
+<span class="nc" id="L213">        opcoes.add(&quot;Salvar estado\n&quot;);</span>
+<span class="nc" id="L214">        opcoes.add(&quot;Carregar estado\n&quot;);</span>
+<span class="nc" id="L215">        opcoes.add(&quot;Carregar do ficheiro logs.txt\n&quot;);</span>
+<span class="nc" id="L216">        opcoes.add(&quot;Alterar data\n&quot;);</span>
+<span class="nc" id="L217">        opcoes.add(&quot;Automatizar\n&quot;);</span>
+<span class="nc" id="L218">        opcoes.add(&quot;Sair da aplicação&quot;);</span>
+<span class="nc" id="L219">        Scanner scanner = new Scanner(System.in);</span>
+<span class="nc" id="L220">        int i=0;</span>
+<span class="nc" id="L221">        Menu menu = new Menu(opcoes);</span>
+        do {
+<span class="nc" id="L223">            menu.executa();</span>
+<span class="nc bnc" id="L224" title="All 13 branches missed.">            switch (menu.getOpcao()) {</span>
+                case 1:
+<span class="nc" id="L226">                    executaDados(1);</span>
+<span class="nc" id="L227">                    break;</span>
+                case 2:
+<span class="nc" id="L229">                    executaDados(2);</span>
+<span class="nc" id="L230">                    break;</span>
+                case 3:
+
+<span class="nc" id="L233">                    System.out.println(&quot;Id/Nome do Fornecedor: &quot;);</span>
+<span class="nc" id="L234">                    String id = scanner.nextLine();</span>
+<span class="nc" id="L235">                    Fornecedor f = new Fornecedor(this.smarthouses.getFornecedores().get(id));</span>
+<span class="nc bnc" id="L236" title="All 2 branches missed.">                    if(f.faturasEmitidas().size()==0) System.out.print(&quot;Não há faturas registadas\n\n&quot;);</span>
+<span class="nc" id="L237">                    else f.faturasEmitidas().forEach(a-&gt;System.out.println(a.toString()));</span>
+<span class="nc" id="L238">                    break;</span>
+                case 4:
+<span class="nc" id="L240">                    executaDados(4);</span>
+<span class="nc" id="L241">                    break;</span>
+                case 5:
+<span class="nc" id="L243">                    consultaCasas();</span>
+<span class="nc" id="L244">                    break;</span>
+                case 6:
+<span class="nc" id="L246">                    Fornecedores();</span>
+<span class="nc" id="L247">                    break;</span>
+                case 7:
+                    try {
+<span class="nc" id="L250">                        this.smarthouses.guardarEstado();</span>
+<span class="nc" id="L251">                    } catch (IOException e) {</span>
+<span class="nc" id="L252">                        e.printStackTrace();</span>
+<span class="nc" id="L253">                        System.out.println(&quot;Não foi possível guardar o estado da aplicação.&quot;);</span>
+<span class="nc" id="L254">                    }</span>
+<span class="nc" id="L255">                    break;</span>
+                case 8:
+                    try {
+<span class="nc" id="L258">                        this.smarthouses.carregarEstado(&quot;estado.obj&quot;);</span>
+<span class="nc" id="L259">                    }catch (FileNotFoundException fnf){</span>
+<span class="nc" id="L260">                        System.out.println(&quot;Não foi possível carregar o estado da aplicação.&quot;);</span>
+<span class="nc" id="L261">                    } catch (IOException | ClassNotFoundException e) {</span>
+<span class="nc" id="L262">                        e.printStackTrace();</span>
+<span class="nc" id="L263">                        System.out.println(&quot;Não foi possível carregar o estado da aplicação.&quot;);</span>
+<span class="nc" id="L264">                    }</span>
+<span class="nc" id="L265">                    break;</span>
+                case 9:
+<span class="nc" id="L267">                    System.out.println(&quot;Digite o nome do ficheiro:&quot;);</span>
+<span class="nc" id="L268">                    Scanner sc = new Scanner(System.in);</span>
+<span class="nc" id="L269">                    String nome=sc.nextLine();</span>
+                    try{
+<span class="nc" id="L271">                        this.smarthouses.parser(System.getProperty(&quot;user.dir&quot;)+&quot;\\&quot;+nome);</span>
+<span class="nc" id="L272">                    }catch (LinhaException msg) {</span>
+<span class="nc" id="L273">                        System.out.println(&quot;Nao foi possivel carregar a aplicação - Erro linha.&quot;);</span>
+<span class="nc" id="L274">                    }catch (SmartDeviceAlreadyExistsException msg) {</span>
+<span class="nc" id="L275">                        System.out.println(&quot;Nao foi possivel carregar a aplicação- Erro device já existe.&quot;);</span>
+<span class="nc" id="L276">                    }catch (CasaInteligenteAlreadyExistsException msg) {</span>
+<span class="nc" id="L277">                        System.out.println(&quot;Nao foi possivel carregar a aplicação- Erro casa já existe.&quot;);</span>
+                    }
+<span class="nc" id="L279">                    catch (CasaInteligenteNotExistsException msg) {</span>
+<span class="nc" id="L280">                        System.out.println(&quot;Nao foi possivel carregar a aplicação- Erro casa não existe.&quot;);</span>
+<span class="nc" id="L281">                    }</span>
+<span class="nc" id="L282">                    break;</span>
+                case 10:
+                    try {
+<span class="nc" id="L285">                        System.out.println(&quot;Nova data(YYYY-MM-DD HH:MM): &quot;);</span>
+<span class="nc" id="L286">                        String date = scanner.nextLine();</span>
+<span class="nc" id="L287">                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm&quot;);</span>
+<span class="nc" id="L288">                        LocalDateTime newDate = LocalDateTime.parse(date, formatter);</span>
+<span class="nc bnc" id="L289" title="All 2 branches missed.">                        if(this.smarthouses.getDate().compareTo(newDate)&gt;=0)</span>
+<span class="nc" id="L290">                            System.out.println(&quot;Não pode colocar uma data anterior a &quot; + this.smarthouses.getDate().format(formatter));</span>
+                        else
+                        {
+<span class="nc" id="L293">                            executaListPedidos(0); // executa os pedidos normais</span>
+<span class="nc" id="L294">                            this.smarthouses.atualiza(newDate); // cria faturas</span>
+<span class="nc" id="L295">                            executaListPedidos(1); // executa as mudanças de fornecedores</span>
+<span class="nc" id="L296">                            this.smarthouses.setDate(newDate);</span>
+<span class="nc" id="L297">                            System.out.println(&quot;Data atualizada\n&quot;);</span>
+                        }
+                    }
+<span class="nc" id="L300">                    catch (DateTimeParseException e)</span>
+                    {
+<span class="nc" id="L302">                        System.out.println(&quot;Formato data errado&quot;);</span>
+                    }
+<span class="nc" id="L304">                    catch (LogNotExistsException e)</span>
+                    {
+<span class="nc" id="L306">                        System.out.println(&quot;Erro ao criar os logs&quot;);</span>
+<span class="nc" id="L307">                    }</span>
+<span class="nc" id="L308">                    break;</span>
+                case 11:
+<span class="nc" id="L310">                    System.out.println(&quot;Caminho para o ficheiro: &quot;);</span>
+<span class="nc" id="L311">                    String path = scanner.nextLine();</span>
+<span class="nc" id="L312">                    automatizar(&quot;SmartHouses/src/&quot;+path);</span>
+<span class="nc" id="L313">                    break;</span>
+                case 12:
+<span class="nc" id="L315">                    i=12;</span>
+<span class="nc" id="L316">                    menu.setOpcao(12);</span>
+<span class="nc" id="L317">                    System.exit(0);</span>
+                default:
+                    break;
+            }
+<span class="nc bnc" id="L321" title="All 2 branches missed.">        } while (menu.getOpcao() != 0);</span>
+<span class="nc" id="L322">    }</span>
+
+    public void Dispositivos(String idHome){
+<span class="nc" id="L325">        List&lt;String&gt; opcoes = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L326">        opcoes.add(&quot;SmartBulb\n&quot;);</span>
+<span class="nc" id="L327">        opcoes.add(&quot;SmartSpeaker\n&quot;);</span>
+<span class="nc" id="L328">        opcoes.add(&quot;SmartCamera\n&quot;);</span>
+<span class="nc" id="L329">        opcoes.add(&quot;Configurações\n&quot;);</span>
+<span class="nc" id="L330">        opcoes.add(&quot;SmartBulb - Tonalidade\n&quot;);</span>
+<span class="nc" id="L331">        opcoes.add(&quot;SmartSpeaker - Volume\n&quot;);</span>
+<span class="nc" id="L332">        opcoes.add(&quot;Ligar/Desligar todos os dispositivos\n&quot;);</span>
+<span class="nc" id="L333">        opcoes.add(&quot;Ligar/Desligar todos os dispositivos de uma divisão\n&quot;);</span>
+<span class="nc" id="L334">        opcoes.add(&quot;Consultar dispositivos\n&quot;);</span>
+<span class="nc" id="L335">        opcoes.add(&quot;Voltar&quot;);</span>
+
+<span class="nc" id="L337">        Menu menu = new Menu(opcoes);</span>
+        do {
+<span class="nc" id="L339">            menu.executa();</span>
+<span class="nc bnc" id="L340" title="All 11 branches missed.">            switch (menu.getOpcao()) {</span>
+                case 1:
+<span class="nc" id="L342">                    geraDispositivos(1,idHome);</span>
+<span class="nc" id="L343">                    break;</span>
+                case 2:
+<span class="nc" id="L345">                    geraDispositivos(2,idHome);</span>
+<span class="nc" id="L346">                    break;</span>
+                case 3:
+<span class="nc" id="L348">                    geraDispositivos(3,idHome);</span>
+<span class="nc" id="L349">                    break;</span>
+                case 4:
+<span class="nc" id="L351">                    ligaDesliga(idHome);</span>
+<span class="nc" id="L352">                    break;</span>
+                case 5:
+<span class="nc" id="L354">                    tonBulb(idHome);</span>
+<span class="nc" id="L355">                    break;</span>
+                case 6:
+<span class="nc" id="L357">                    volSpk(idHome);</span>
+<span class="nc" id="L358">                    break;</span>
+                case 7:
+<span class="nc" id="L360">                    setAllDevicesHome(idHome,true);</span>
+<span class="nc" id="L361">                    break;</span>
+                case 8:
+<span class="nc" id="L363">                    setAllDevicesHome(idHome,false);</span>
+<span class="nc" id="L364">                    break;</span>
+                case 9:
+<span class="nc" id="L366">                    consultaDispositivos(idHome);</span>
+<span class="nc" id="L367">                    break;</span>
+                case 10:
+<span class="nc" id="L369">                    executeMenu();</span>
+<span class="nc" id="L370">                    break;</span>
+                default:
+                    break;
+            }
+<span class="nc bnc" id="L374" title="All 2 branches missed.">        } while (menu.getOpcao() != 0);</span>
+<span class="nc" id="L375">    }</span>
+
+    public void geraDispositivos(int x, String idHome) {
+<span class="nc" id="L378">        List&lt;String&gt; opcoes = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L379">        opcoes.add(&quot;Adicionar dispositivo\n&quot;);</span>
+<span class="nc" id="L380">        opcoes.add(&quot;Remover dispositivo\n&quot;);</span>
+<span class="nc" id="L381">        opcoes.add(&quot;Voltar&quot;);</span>
+
+<span class="nc" id="L383">        Menu menu = new Menu(opcoes);</span>
+        do {
+<span class="nc" id="L385">            menu.executa();</span>
+<span class="nc bnc" id="L386" title="All 4 branches missed.">            switch (menu.getOpcao()) {</span>
+                case 1:
+<span class="nc bnc" id="L388" title="All 2 branches missed.">                    if(x==1) adicionaBulb(idHome);</span>
+<span class="nc bnc" id="L389" title="All 2 branches missed.">                    if(x==3) adicionaCamera(idHome);</span>
+<span class="nc bnc" id="L390" title="All 2 branches missed.">                    if(x==2) adicionaSpeaker(idHome);</span>
+                    break;
+                case 2:
+<span class="nc" id="L393">                    removeDispositivo(idHome);</span>
+<span class="nc" id="L394">                    break;</span>
+                case 3:
+<span class="nc" id="L396">                    Dispositivos(idHome);</span>
+<span class="nc" id="L397">                    break;</span>
+                default:
+                    break;
+            }
+<span class="nc bnc" id="L401" title="All 2 branches missed.">        } while (menu.getOpcao() != 0);</span>
+
+<span class="nc" id="L403">    }</span>
+
+    public void geraCasas(String idFornecedor) {
+<span class="nc" id="L406">        List&lt;String&gt; opcoes = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L407">        opcoes.add(&quot;Adicionar casa\n&quot;);</span>
+<span class="nc" id="L408">        opcoes.add(&quot;Remover casa\n&quot;);</span>
+<span class="nc" id="L409">        opcoes.add(&quot;Voltar&quot;);</span>
+
+<span class="nc" id="L411">        Menu menu = new Menu(opcoes);</span>
+        do {
+<span class="nc" id="L413">            menu.executa();</span>
+<span class="nc bnc" id="L414" title="All 4 branches missed.">            switch (menu.getOpcao()) {</span>
+                case 1:
+<span class="nc" id="L416">                    adicionaCasas(idFornecedor);</span>
+<span class="nc" id="L417">                    break;</span>
+                case 2:
+<span class="nc" id="L419">                    removeCasas(idFornecedor);</span>
+<span class="nc" id="L420">                    break;</span>
+                case 3:
+<span class="nc" id="L422">                    executeMenu();</span>
+<span class="nc" id="L423">                    break;</span>
+                default:
+                    break;
+            }
+<span class="nc bnc" id="L427" title="All 2 branches missed.">        } while (menu.getOpcao() != 0);</span>
+
+<span class="nc" id="L429">    }</span>
+
+
+    public void adicionaBulb(String idHome){
+
+<span class="nc" id="L434">        System.out.println(&quot;Digite o ID do dispositivo: &quot;);</span>
+<span class="nc" id="L435">        Scanner scanner = new Scanner(System.in);</span>
+<span class="nc" id="L436">        String id = scanner.nextLine();</span>
+<span class="nc bnc" id="L437" title="All 2 branches missed.">        if(!this.smarthouses.existeDeviceInHome(id,idHome)) {</span>
+            boolean on;
+<span class="nc" id="L439">            CasaInteligente ci = this.smarthouses.getCasas().get(idHome);</span>
+<span class="nc" id="L440">            System.out.println(&quot;Em que divisão pretende adicionar o dispositivo? &quot;);</span>
+<span class="nc" id="L441">            String room = scanner.nextLine();</span>
+<span class="nc bnc" id="L442" title="All 2 branches missed.">            if (!ci.hasRoom(room)) {</span>
+<span class="nc" id="L443">                System.out.println(&quot;Divisão não existe\n&quot;);</span>
+            }
+            else {
+<span class="nc" id="L446">                System.out.println(&quot;(On/OFF): &quot;);</span>
+<span class="nc" id="L447">                String modo = scanner.nextLine();</span>
+<span class="nc bnc" id="L448" title="All 8 branches missed.">                on = modo.equals(&quot;on&quot;) || modo.equals(&quot;On&quot;) || modo.equals(&quot;ON&quot;) || modo.equals(&quot;oN&quot;);</span>
+<span class="nc" id="L449">                System.out.println(&quot;Tonalidade: &quot;);</span>
+<span class="nc" id="L450">                String tonalidade = scanner.nextLine();</span>
+<span class="nc" id="L451">                System.out.println(&quot;Dimensão: &quot;);</span>
+<span class="nc" id="L452">                String dimensao = scanner.nextLine();</span>
+<span class="nc" id="L453">                System.out.println(&quot;Consumo base: &quot;);</span>
+<span class="nc" id="L454">                String consumo = scanner.nextLine();</span>
+<span class="nc" id="L455">                this.pedidos.add(new Pedido(smarthouses.getDate(), &quot;casa&quot;, idHome, &quot;adicionaBulb&quot;, id + &quot;,&quot; + tonalidade + &quot;,&quot; + dimensao + &quot;,&quot; + consumo + &quot;,&quot; + room, on));</span>
+<span class="nc" id="L456">                executaListPedidos(0);</span>
+            }
+        }
+        //scanner.close();
+<span class="nc" id="L460">    }</span>
+
+
+    public void adicionaCamera(String idHome){
+
+<span class="nc" id="L465">        System.out.println(&quot;Digite o ID do dispositivo: &quot;);</span>
+<span class="nc" id="L466">        Scanner scanner = new Scanner(System.in);</span>
+<span class="nc" id="L467">        String id = scanner.nextLine();</span>
+<span class="nc bnc" id="L468" title="All 2 branches missed.">        if(!this.smarthouses.existeDeviceInHome(id,idHome)) {</span>
+            boolean on;
+<span class="nc" id="L470">            CasaInteligente ci = this.smarthouses.getCasas().get(idHome);</span>
+<span class="nc" id="L471">            System.out.println(&quot;Em que divisão pretende adicionar o dispositivo? &quot;);</span>
+<span class="nc" id="L472">            String room = scanner.nextLine();</span>
+<span class="nc bnc" id="L473" title="All 2 branches missed.">            if (!ci.hasRoom(room)) {</span>
+<span class="nc" id="L474">                System.out.println(&quot;Divisão não existe\n&quot;);</span>
+            } else {
+<span class="nc" id="L476">                System.out.println(&quot;(On/OFF): &quot;);</span>
+<span class="nc" id="L477">                String modo = scanner.nextLine();</span>
+<span class="nc bnc" id="L478" title="All 8 branches missed.">                on = modo.equals(&quot;on&quot;) || modo.equals(&quot;On&quot;) || modo.equals(&quot;ON&quot;) || modo.equals(&quot;oN&quot;);</span>
+<span class="nc" id="L479">                System.out.println(&quot;Tamanho: &quot;);</span>
+<span class="nc" id="L480">                String tamanho = scanner.nextLine();</span>
+<span class="nc" id="L481">                System.out.println(&quot;Resolução (axb): &quot;);</span>
+<span class="nc" id="L482">                String res = scanner.nextLine();</span>
+<span class="nc" id="L483">                System.out.println(&quot;Consumo base: &quot;);</span>
+<span class="nc" id="L484">                String consumo = scanner.nextLine();</span>
+<span class="nc" id="L485">                this.pedidos.add(new Pedido(smarthouses.getDate(), &quot;casa&quot;, idHome, &quot;adicionaCamera&quot;, id + &quot;,&quot; + tamanho + &quot;,&quot; + res + &quot;,&quot; + consumo + &quot;,&quot; + room, on));</span>
+<span class="nc" id="L486">                executaListPedidos(0);</span>
+            }
+        }
+        //scanner.close();
+<span class="nc" id="L490">    }</span>
+
+    public void adicionaSpeaker(String idHome){
+
+<span class="nc" id="L494">        System.out.println(&quot;Digite o ID do dispositivo: &quot;);</span>
+<span class="nc" id="L495">        Scanner scanner = new Scanner(System.in);</span>
+<span class="nc" id="L496">        String id = scanner.nextLine();</span>
+<span class="nc bnc" id="L497" title="All 2 branches missed.">        if(!this.smarthouses.existeDeviceInHome(id,idHome)) {</span>
+
+            boolean on;
+<span class="nc" id="L500">            CasaInteligente ci = this.smarthouses.getCasas().get(idHome);</span>
+<span class="nc" id="L501">            System.out.println(&quot;Em que divisão pretende adicionar o dispositivo? &quot;);</span>
+<span class="nc" id="L502">            String room = scanner.nextLine();</span>
+<span class="nc bnc" id="L503" title="All 2 branches missed.">            if (!ci.hasRoom(room)) {</span>
+<span class="nc" id="L504">                System.out.println(&quot;Divisão não existe\n&quot;);</span>
+            }
+            else {
+<span class="nc" id="L507">                System.out.println(&quot;(On/OFF): &quot;);</span>
+<span class="nc" id="L508">                String modo = scanner.nextLine();</span>
+<span class="nc bnc" id="L509" title="All 8 branches missed.">                on = modo.equals(&quot;on&quot;) || modo.equals(&quot;On&quot;) || modo.equals(&quot;ON&quot;) || modo.equals(&quot;oN&quot;);</span>
+<span class="nc" id="L510">                System.out.println(&quot;Volume: &quot;);</span>
+<span class="nc" id="L511">                String volume = scanner.nextLine();</span>
+<span class="nc" id="L512">                scanner.nextLine();</span>
+<span class="nc" id="L513">                System.out.println(&quot;Marca: &quot;);</span>
+<span class="nc" id="L514">                String marca = scanner.nextLine();</span>
+<span class="nc" id="L515">                System.out.println(&quot;Channel: &quot;);</span>
+<span class="nc" id="L516">                String channel = scanner.nextLine();</span>
+<span class="nc" id="L517">                System.out.println(&quot;Consumo base: &quot;);</span>
+<span class="nc" id="L518">                String consumo = scanner.nextLine();</span>
+<span class="nc" id="L519">                this.pedidos.add(new Pedido(smarthouses.getDate(), &quot;casa&quot;, idHome, &quot;adicionaSpeaker&quot;, id + &quot;,&quot; + volume + &quot;,&quot; + marca + &quot;,&quot; + channel + &quot;,&quot; + consumo + &quot;,&quot; + room, on));</span>
+<span class="nc" id="L520">                executaListPedidos(0);</span>
+            }
+        }
+        //scanner.close();
+<span class="nc" id="L524">    }</span>
+
+    public void removeDispositivo(String idHome) {
+<span class="nc" id="L527">        Scanner scanner = new Scanner(System.in);</span>
+<span class="nc" id="L528">        System.out.println(&quot;Digite o ID do dispositivo a remover: &quot;);</span>
+<span class="nc" id="L529">        String idDevice = scanner.nextLine();</span>
+<span class="nc" id="L530">        System.out.println(&quot;Remover permanentemente da casa? &quot;);</span>
+<span class="nc" id="L531">        System.out.println(&quot;(Sim/Nao)&quot;);</span>
+<span class="nc" id="L532">        String modo = scanner.nextLine();</span>
+<span class="nc bnc" id="L533" title="All 8 branches missed.">        boolean on = modo.equals(&quot;sim&quot;) || modo.equals(&quot;SIM&quot;) || modo.equals(&quot;Sim&quot;) || modo.equals(&quot;s&quot;);</span>
+<span class="nc" id="L534">        String divisao = &quot;&quot;;</span>
+<span class="nc bnc" id="L535" title="All 2 branches missed.">        if(this.smarthouses.existeDeviceInHome(idDevice,idHome))</span>
+        {
+<span class="nc bnc" id="L537" title="All 2 branches missed.">            if(!on)</span>
+            {
+<span class="nc" id="L539">                System.out.println(&quot;Qual a divisão da casa que irá adicionar: &quot;);</span>
+<span class="nc" id="L540">                divisao = scanner.nextLine();</span>
+            }
+<span class="nc" id="L542">            this.pedidos.add(new Pedido(smarthouses.getDate(),&quot;casa&quot;,idHome,&quot;removeDispositivo&quot;,idDevice+&quot;,&quot;+divisao,on));</span>
+<span class="nc" id="L543">            executaListPedidos(0);</span>
+        }
+<span class="nc" id="L545">        else System.out.println(&quot;O device não existe nesta casa.&quot;);</span>
+        //scanner.close();
+<span class="nc" id="L547">    }</span>
+
+    public void removeCasas(String idFornecedor) {
+<span class="nc" id="L550">        System.out.println(&quot;Digite o ID da casa a remover: &quot;);</span>
+<span class="nc" id="L551">        Scanner scanner = new Scanner(System.in);</span>
+<span class="nc" id="L552">        String idHome = scanner.nextLine();</span>
+
+<span class="nc bnc" id="L554" title="All 2 branches missed.">        if(this.smarthouses.existsHomeInFornecedor(idHome,idFornecedor))</span>
+        {
+<span class="nc" id="L556">            this.pedidos.add(new Pedido(smarthouses.getDate(),&quot;fornecedor&quot;,idFornecedor,&quot;removeCasas&quot;,idHome, false));</span>
+<span class="nc" id="L557">            executaListPedidos(0);</span>
+        }
+<span class="nc" id="L559">        else System.out.println(&quot;A casa que digitou nao existe.&quot;);</span>
+        //scanner.close();
+<span class="nc" id="L561">    }</span>
+
+    public void removeFornecedores() {
+<span class="nc" id="L564">        System.out.println(&quot;Digite o ID do fornecedor a remover: &quot;);</span>
+<span class="nc" id="L565">        Scanner scanner = new Scanner(System.in);</span>
+<span class="nc" id="L566">        String id = scanner.nextLine();</span>
+
+<span class="nc bnc" id="L568" title="All 2 branches missed.">        if(this.smarthouses.existsFornecedor(id)) {</span>
+<span class="nc" id="L569">            this.pedidos.add(new Pedido(smarthouses.getDate(), &quot;fornecedor&quot;, id, &quot;removeFornecedores&quot;, &quot;&quot;,false));</span>
+<span class="nc" id="L570">            executaListPedidos(0);</span>
+        }
+<span class="nc" id="L572">        else System.out.println(&quot;O fornecedor que digitou nao existe.&quot;);</span>
+        //scanner.close();
+<span class="nc" id="L574">    }</span>
+
+    public void consultaCasas(){
+<span class="nc" id="L577">        Scanner scanner = new Scanner(System.in);</span>
+<span class="nc" id="L578">        System.out.println(&quot;Digite o ID da casa: &quot;);</span>
+<span class="nc" id="L579">        String idHome = scanner.nextLine();</span>
+<span class="nc bnc" id="L580" title="All 2 branches missed.">        if(this.smarthouses.existsHome(idHome))</span>
+        {
+
+<span class="nc" id="L583">            List&lt;String&gt; opcoes = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L584">            opcoes.add(&quot;Informações gerais da Casa\n&quot;);</span>
+<span class="nc" id="L585">            opcoes.add(&quot;Dispositivos\n&quot;);</span>
+<span class="nc" id="L586">            opcoes.add(&quot;Mudar de Fornecedor\n&quot;);</span>
+<span class="nc" id="L587">            opcoes.add(&quot;Mostrar faturas\n&quot;);</span>
+<span class="nc" id="L588">            opcoes.add(&quot;Voltar&quot;);</span>
+
+<span class="nc" id="L590">            Menu menu = new Menu(opcoes);</span>
+            do
+            {
+<span class="nc" id="L593">                menu.executa();</span>
+<span class="nc bnc" id="L594" title="All 6 branches missed.">                switch (menu.getOpcao()) {</span>
+                    case 1:
+<span class="nc" id="L596">                        System.out.println(this.smarthouses.getCasas().get(idHome));</span>
+<span class="nc" id="L597">                        break;</span>
+                    case 2:
+<span class="nc" id="L599">                        Dispositivos(idHome);</span>
+<span class="nc" id="L600">                        break;</span>
+                    case 3:
+<span class="nc" id="L602">                        System.out.println(&quot;Digite o id do Fornecedor: &quot;);</span>
+<span class="nc" id="L603">                        String idFornecedor = scanner.nextLine();</span>
+<span class="nc" id="L604">                        this.pedidosMudancaFornecedor.add(new Pedido(smarthouses.getDate(),&quot;casa&quot;,idHome,&quot;alteraFornecedor&quot;,idFornecedor, false));</span>
+<span class="nc" id="L605">                        break;</span>
+                    case 4:
+<span class="nc bnc" id="L607" title="All 2 branches missed.">                        if(this.smarthouses.getCasas().get(idHome).getFaturas(idHome)==null) System.out.println(&quot;Não há faturas\n&quot;);</span>
+<span class="nc" id="L608">                        this.smarthouses.getFaturas(idHome).forEach((a,b)-&gt;System.out.println(b.toString()));</span>
+<span class="nc" id="L609">                        break;</span>
+                    case 5:
+<span class="nc" id="L611">                        executeMenu();</span>
+                        break;
+
+                }
+<span class="nc bnc" id="L615" title="All 2 branches missed.">            } while (menu.getOpcao() != 0);</span>
+<span class="nc" id="L616">        }</span>
+<span class="nc" id="L617">        else System.out.println(&quot;A casa que digitou não existe.&quot;);</span>
+        //scanner.close();
+<span class="nc" id="L619">    }</span>
+
+    public void ligaDesliga(String idHome){
+<span class="nc" id="L622">        Scanner scanner = new Scanner(System.in);</span>
+<span class="nc" id="L623">        System.out.println(&quot;Digite o ID do dispositivo: &quot;);</span>
+<span class="nc" id="L624">        String idDevice = scanner.nextLine();</span>
+<span class="nc bnc" id="L625" title="All 2 branches missed.">        if(this.smarthouses.existeDeviceInHome(idDevice,idHome))</span>
+        {
+<span class="nc" id="L627">            System.out.println(&quot;(On/OFF): &quot;);</span>
+<span class="nc" id="L628">            String modo = scanner.nextLine();</span>
+<span class="nc bnc" id="L629" title="All 8 branches missed.">            boolean on = modo.equals(&quot;on&quot;) || modo.equals(&quot;ON&quot;) || modo.equals(&quot;On&quot;) || modo.equals(&quot;oN&quot;);</span>
+<span class="nc" id="L630">            this.pedidos.add(new Pedido(smarthouses.getDate(),&quot;casa&quot;,idHome,&quot;ligaDesliga&quot;,idDevice,on));</span>
+<span class="nc" id="L631">            executaListPedidos(0);</span>
+<span class="nc" id="L632">        }</span>
+<span class="nc" id="L633">        else System.out.println(&quot;O dispositivo que digitou não existe nesta casa.&quot;);</span>
+        //scanner.close();
+<span class="nc" id="L635">    }</span>
+    public void tonBulb(String idHome){
+<span class="nc" id="L637">        Scanner scanner = new Scanner(System.in);</span>
+<span class="nc" id="L638">        System.out.println(&quot;Digite o ID do dispositivo: &quot;);</span>
+<span class="nc" id="L639">        String idDevice = scanner.nextLine();</span>
+<span class="nc bnc" id="L640" title="All 2 branches missed.">        if(this.smarthouses.existeDeviceInHome(idDevice,idHome))</span>
+        {
+<span class="nc" id="L642">            System.out.print(&quot;1-WARM\n2-COLD\n3-NEUTRAL\nTonalidade-&gt;&quot;);</span>
+<span class="nc" id="L643">            String ton = scanner.nextLine();</span>
+<span class="nc" id="L644">            this.pedidos.add(new Pedido(smarthouses.getDate(),&quot;casa&quot;,idHome,&quot;tonBulb&quot;,idDevice+&quot;,&quot;+ton, false));</span>
+<span class="nc" id="L645">            executaListPedidos(0);</span>
+<span class="nc" id="L646">        }</span>
+<span class="nc" id="L647">        else System.out.println(&quot;O dispositivo que digitou não existe nesta casa.&quot;);</span>
+        //scanner.close();
+<span class="nc" id="L649">    }</span>
+
+    public void volSpk(String idHome){
+<span class="nc" id="L652">        System.out.println(&quot;Digite o ID do dispositivo: &quot;);</span>
+<span class="nc" id="L653">        Scanner scanner = new Scanner(System.in);</span>
+<span class="nc" id="L654">        String idDevice = scanner.nextLine();</span>
+<span class="nc bnc" id="L655" title="All 2 branches missed.">        if(this.smarthouses.existeDeviceInHome(idDevice,idHome)) {</span>
+<span class="nc" id="L656">            System.out.println(&quot;Volume: &quot;);</span>
+<span class="nc" id="L657">            String vol = scanner.nextLine();</span>
+<span class="nc" id="L658">            this.pedidos.add(new Pedido(smarthouses.getDate(),&quot;casa&quot;,idHome,&quot;volSpk&quot;,idDevice+&quot;,&quot;+vol,false));</span>
+<span class="nc" id="L659">            executaListPedidos(0);</span>
+<span class="nc" id="L660">        }</span>
+<span class="nc" id="L661">        else System.out.println(&quot;O dispositivo que digitou não existe nesta casa.&quot;);</span>
+        //scanner.close();
+<span class="nc" id="L663">    }</span>
+
+    public void consultaDispositivos(String idHome){
+<span class="nc" id="L666">        System.out.println(&quot;Digite o ID do dispositivo: &quot;);</span>
+<span class="nc" id="L667">        Scanner scanner = new Scanner(System.in);</span>
+<span class="nc" id="L668">        String idDevice = scanner.nextLine();</span>
+<span class="nc bnc" id="L669" title="All 2 branches missed.">        if(this.smarthouses.existeDeviceInHome(idDevice,idHome)) {</span>
+<span class="nc" id="L670">            System.out.println(this.smarthouses.getDispositivos().get(idDevice));</span>
+<span class="nc bnc" id="L671" title="All 2 branches missed.">            if(this.smarthouses.getLogsDevice(idDevice,idHome)!=null)</span>
+<span class="nc" id="L672">                this.smarthouses.getLogsDevice(idDevice,idHome).forEach((a)-&gt;System.out.println(a.toString()));</span>
+<span class="nc" id="L673">            else System.out.println(&quot;Não existem logs neste dispositivo.\n&quot;);</span>
+        }
+<span class="nc" id="L675">        else System.out.println(&quot;O dispositivo que digitou não existe nesta casa.&quot;);</span>
+<span class="nc" id="L676">    }</span>
+
+    public void adicionaCasas(String idFornecedor) {
+<span class="nc" id="L679">        Scanner scanner = new Scanner(System.in);</span>
+
+<span class="nc" id="L681">        System.out.println(&quot;Digite o ID da casa: &quot;);</span>
+<span class="nc" id="L682">        String idHome = scanner.nextLine();</span>
+<span class="nc bnc" id="L683" title="All 2 branches missed.">        if(!this.smarthouses.existsHome(idHome)) {</span>
+<span class="nc" id="L684">            System.out.println(&quot;Digite a morada da casa : &quot;);</span>
+<span class="nc" id="L685">            String morada = scanner.nextLine();</span>
+
+<span class="nc" id="L687">            System.out.println(&quot;NIF do proprietário: &quot;);</span>
+<span class="nc" id="L688">            String nif = scanner.nextLine();</span>
+<span class="nc" id="L689">            System.out.println(&quot;Nome do proprietário : &quot;);</span>
+<span class="nc" id="L690">            String proprietario = scanner.nextLine();</span>
+<span class="nc" id="L691">            System.out.println(&quot;Quantas divisões terá a casa?&quot;);</span>
+<span class="nc" id="L692">            int n = scanner.nextInt();</span>
+<span class="nc" id="L693">            scanner.nextLine();</span>
+<span class="nc" id="L694">            System.out.println(&quot;Divisões:&quot;);</span>
+<span class="nc" id="L695">            String divisoes = &quot;&quot;;</span>
+<span class="nc bnc" id="L696" title="All 2 branches missed.">            while (n &gt;= 0) {</span>
+<span class="nc" id="L697">                String divisao = scanner.nextLine();</span>
+<span class="nc" id="L698">                System.out.println(divisao);</span>
+<span class="nc" id="L699">                divisoes = divisoes+&quot;;&quot;+divisao;</span>
+<span class="nc" id="L700">                n--;</span>
+<span class="nc" id="L701">            }</span>
+<span class="nc" id="L702">            String divisao = scanner.nextLine();</span>
+<span class="nc" id="L703">            divisoes = divisoes+divisao;</span>
+<span class="nc" id="L704">            System.out.println(divisoes);</span>
+<span class="nc" id="L705">            this.pedidos.add(new Pedido(smarthouses.getDate(),&quot;fornecedor&quot;,idFornecedor,&quot;adicionaCasas&quot;,idHome+&quot;,&quot;+morada+&quot;,&quot;+nif+&quot;,&quot;+proprietario+&quot;,&quot;+divisoes,false));</span>
+<span class="nc" id="L706">            executaListPedidos(0);</span>
+<span class="nc" id="L707">        }</span>
+<span class="nc" id="L708">        else System.out.println(&quot;Casa com esse id já existe&quot;);</span>
+        //scanner.close();
+<span class="nc" id="L710">    }</span>
+
+    public void adicionaFornecedores(){
+<span class="nc" id="L713">        System.out.println(&quot;Digite o fornecedor de energia: &quot;);</span>
+<span class="nc" id="L714">        Scanner scanner = new Scanner(System.in);</span>
+<span class="nc" id="L715">        String idFornecedor = scanner.nextLine();</span>
+<span class="nc bnc" id="L716" title="All 2 branches missed.">        if(!this.smarthouses.existsFornecedor(idFornecedor)){</span>
+<span class="nc" id="L717">            System.out.println(&quot;Digite o imposto base: &quot;);</span>
+            //double imposto = scanner.nextDouble();
+<span class="nc" id="L719">            String imposto = scanner.nextLine();</span>
+            //Fornecedor f = new Fornecedor(idFornecedor,imposto);
+<span class="nc" id="L721">            this.pedidos.add(new Pedido(smarthouses.getDate(),&quot;fornecedor&quot;,idFornecedor,&quot;adicionaFornecedores&quot;,imposto,false));</span>
+<span class="nc" id="L722">            executaListPedidos(0);</span>
+<span class="nc" id="L723">            System.out.println(&quot;Digite o número  de casas: &quot;);</span>
+<span class="nc" id="L724">            int n = scanner.nextInt();</span>
+<span class="nc bnc" id="L725" title="All 2 branches missed.">            while(n&gt;0){</span>
+<span class="nc" id="L726">                adicionaCasas(idFornecedor);</span>
+<span class="nc" id="L727">                n--;</span>
+            }
+<span class="nc" id="L729">        }else System.out.println(&quot;Fornecedor já existe&quot;);</span>
+<span class="nc" id="L730">    }</span>
+
+    public void Fornecedores(){
+<span class="nc" id="L733">        List&lt;String&gt; opcoes = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L734">        opcoes.add(&quot;Consultar fornecedor\n&quot;);</span>
+<span class="nc" id="L735">        opcoes.add(&quot;Adicionar fornecedor\n&quot;);</span>
+<span class="nc" id="L736">        opcoes.add(&quot;Remover fornecedor\n&quot;);</span>
+<span class="nc" id="L737">        opcoes.add(&quot;Voltar&quot;);</span>
+
+<span class="nc" id="L739">        Menu menu = new Menu(opcoes);</span>
+        do {
+<span class="nc" id="L741">            menu.executa();</span>
+<span class="nc bnc" id="L742" title="All 5 branches missed.">            switch (menu.getOpcao()) {</span>
+                case 1:
+<span class="nc" id="L744">                    System.out.println(&quot;Digite o id do fornecedor:&quot;);</span>
+<span class="nc" id="L745">                    Scanner scanner = new Scanner(System.in);</span>
+<span class="nc" id="L746">                    String id =scanner.nextLine();</span>
+<span class="nc bnc" id="L747" title="All 2 branches missed.">                    if(this.smarthouses.getFornecedores().get(id)!=null) {</span>
+<span class="nc" id="L748">                        List&lt;String&gt; opcoes2 = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L749">                        opcoes2.add(&quot;Informações gerais do Fornecedor\n&quot;);</span>
+<span class="nc" id="L750">                        opcoes2.add(&quot;Casas\n&quot;);</span>
+<span class="nc" id="L751">                        opcoes2.add(&quot;Muda formula\n&quot;);</span>
+<span class="nc" id="L752">                        opcoes2.add(&quot;Voltar&quot;);</span>
+
+<span class="nc" id="L754">                        Menu menu2 = new Menu(opcoes2);</span>
+                        do
+                        {
+<span class="nc" id="L757">                            menu2.executa();</span>
+<span class="nc bnc" id="L758" title="All 5 branches missed.">                            switch (menu2.getOpcao()) {</span>
+                                case 1:
+<span class="nc" id="L760">                                    System.out.println(this.smarthouses.getFornecedores().get(id));</span>
+<span class="nc" id="L761">                                    break;</span>
+                                case 2:
+<span class="nc" id="L763">                                    geraCasas(id);</span>
+<span class="nc" id="L764">                                    break;</span>
+                                case 3:
+<span class="nc" id="L766">                                    System.out.println(&quot;Para que formula pretende alterar?&quot;);</span>
+<span class="nc" id="L767">                                    String f = scanner.nextLine();</span>
+<span class="nc" id="L768">                                    this.smarthouses.changeFormula(id,f);</span>
+<span class="nc" id="L769">                                    break;</span>
+                                case 4:
+<span class="nc" id="L771">                                    Fornecedores();</span>
+                                    break;
+                            }
+<span class="nc bnc" id="L774" title="All 2 branches missed.">                        } while (menu2.getOpcao() != 0);</span>
+
+<span class="nc" id="L776">                    }</span>
+<span class="nc" id="L777">                    else System.out.println(&quot;O fornecedor que digitou não existe.&quot;);</span>
+<span class="nc" id="L778">                    break;</span>
+                case 2:
+<span class="nc" id="L780">                    adicionaFornecedores();</span>
+<span class="nc" id="L781">                    break;</span>
+                case 3:
+<span class="nc" id="L783">                    removeFornecedores();</span>
+<span class="nc" id="L784">                    break;</span>
+                case 4:
+<span class="nc" id="L786">                    executeMenu();</span>
+<span class="nc" id="L787">                    break;</span>
+                default:
+                    break;
+            }
+<span class="nc bnc" id="L791" title="All 2 branches missed.">        } while (menu.getOpcao() != 0);</span>
+
+<span class="nc" id="L793">    }</span>
+
+    public void executaDados(int n){
+<span class="nc" id="L796">        Scanner scanner = new Scanner(System.in);</span>
+        String inicio, fim;
+
+        try
+        {
+<span class="nc" id="L801">            System.out.println(&quot;Data de início(YYYY-MM-DD HH:MM): &quot;);</span>
+<span class="nc" id="L802">            inicio = scanner.nextLine();</span>
+
+<span class="nc" id="L804">            System.out.println(&quot;Data de fim(YYYY-MM-DD HH:MM): &quot;);</span>
+<span class="nc" id="L805">            fim = scanner.nextLine();</span>
+
+<span class="nc" id="L807">            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm&quot;);</span>
+<span class="nc" id="L808">            LocalDateTime datai = LocalDateTime.parse(inicio, formatter);</span>
+<span class="nc" id="L809">            LocalDateTime dataf = LocalDateTime.parse(fim, formatter);</span>
+
+<span class="nc bnc" id="L811" title="All 2 branches missed.">           if(n==1) System.out.println(this.smarthouses.casaGastouMaisPeriodoVariosFornecedores(datai, dataf));</span>
+<span class="nc bnc" id="L812" title="All 2 branches missed.">           if(n==2) System.out.println(this.smarthouses.fornecedorComMaisFaturacao(datai, dataf));</span>
+<span class="nc bnc" id="L813" title="All 2 branches missed.">           if(n==4)</span>
+           {
+<span class="nc" id="L815">               DecimalFormat d = new DecimalFormat(&quot;#0.00&quot;);</span>
+<span class="nc bnc" id="L816" title="All 2 branches missed.">               for(Fornecedor f: this.smarthouses.ordenarFornecedores(datai,dataf))</span>
+<span class="nc" id="L817">                   System.out.println(f.getId() + &quot;: &quot; + d.format(f.faturaçaoFornecedor(datai, dataf)) + &quot;€&quot;);</span>
+           }
+        }
+<span class="nc" id="L820">        catch (DateTimeParseException e)</span>
+        {
+<span class="nc" id="L822">            System.out.println(&quot;Formato data errado&quot;);</span>
+        }
+<span class="nc" id="L824">        catch(LogNotExistsException c){</span>
+<span class="nc" id="L825">            System.out.println(c.getMessage());</span>
+<span class="nc" id="L826">        }</span>
+
+<span class="nc" id="L828">    }</span>
+
+    public void setAllDevicesHome(String idHome, boolean all)
+    {
+<span class="nc" id="L832">        Scanner scanner = new Scanner(System.in);</span>
+<span class="nc" id="L833">        System.out.println(&quot;Modo(on/off): &quot;);</span>
+<span class="nc" id="L834">        String modo = scanner.nextLine();</span>
+<span class="nc bnc" id="L835" title="All 8 branches missed.">        boolean on = modo.equals(&quot;on&quot;) || modo.equals(&quot;ON&quot;) || modo.equals(&quot;On&quot;) || modo.equals(&quot;oN&quot;);</span>
+<span class="nc bnc" id="L836" title="All 2 branches missed.">        if(all) this.pedidos.add(new Pedido(smarthouses.getDate(),&quot;casa&quot;,idHome,&quot;setAllDevicesHome&quot;,&quot;&quot;,on));</span>
+        else {
+<span class="nc" id="L838">            System.out.println(&quot;Divisao: &quot;);</span>
+<span class="nc" id="L839">            String divisao = scanner.nextLine();</span>
+<span class="nc" id="L840">            this.pedidos.add(new Pedido(smarthouses.getDate(),&quot;casa&quot;,idHome,&quot;setAllDevicesHome&quot;,divisao,on));</span>
+        }
+<span class="nc" id="L842">        executaListPedidos(0);</span>
+<span class="nc" id="L843">    }</span>
+
+    public void automatizar(String filename)
+    {
+        String[] parte;
+        String especificacoes;
+        try {
+<span class="nc" id="L850">            List&lt;String&gt; linhas = this.smarthouses.lerFicheiro(filename);</span>
+
+<span class="nc" id="L852">            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm&quot;);</span>
+            LocalDateTime date;
+<span class="nc" id="L854">            LocalDateTime init = java.time.LocalDateTime.now();</span>
+            boolean on;
+
+<span class="nc bnc" id="L857" title="All 2 branches missed.">            for (String linha : linhas) {</span>
+<span class="nc" id="L858">                parte = linha.split(&quot;,&quot;);</span>
+<span class="nc" id="L859">                System.out.println(linha);</span>
+                try {
+<span class="nc" id="L861">                    date = LocalDateTime.parse(parte[0], formatter);</span>
+
+<span class="nc bnc" id="L863" title="All 2 branches missed.">                    if (!this.smarthouses.getDate().isBefore(date))</span>
+<span class="nc" id="L864">                        System.out.println(&quot;Não pode colocar uma data anterior a &quot; + init.format(formatter));</span>
+<span class="nc bnc" id="L865" title="All 2 branches missed.">                    else if (this.smarthouses.getDate().compareTo(date) &lt; 0) {</span>
+<span class="nc" id="L866">                        executaListPedidos(0); // executa os pedidos normais</span>
+<span class="nc" id="L867">                        this.smarthouses.atualiza(date); // cria faturas</span>
+<span class="nc" id="L868">                        executaListPedidos(1); // executa as mudanças de fornecedores</span>
+<span class="nc" id="L869">                        this.smarthouses.setDate(date);</span>
+
+<span class="nc bnc" id="L871" title="All 2 branches missed.">                        if (parte[2].compareTo(&quot;alteraFornecedor&quot;) == 0) {</span>
+<span class="nc" id="L872">                            this.pedidosMudancaFornecedor.add(new Pedido(date, parte[1], parte[2], parte[3], parte[4], false));</span>
+<span class="nc bnc" id="L873" title="All 2 branches missed.">                        } else if (parte[4].compareTo(&quot;&quot;) == 0) {</span>
+<span class="nc" id="L874">                            this.pedidos.add(new Pedido(date, parte[1], parte[2], parte[3], parte[4], false));</span>
+                        } else {
+<span class="nc bnc" id="L876" title="All 8 branches missed.">                            on = parte[5].equals(&quot;on&quot;) || parte[5].equals(&quot;On&quot;) || parte[5].equals(&quot;ON&quot;) || parte[5].equals(&quot;oN&quot;);</span>
+<span class="nc" id="L877">                            System.out.println(parte[5] + &quot;.&quot; + on);</span>
+<span class="nc bnc" id="L878" title="All 4 branches missed.">                            if (parte[3].compareTo(&quot;adicionaBulb&quot;) == 0 || parte[3].compareTo(&quot;adicionaCamera&quot;) == 0) {</span>
+                                //id+&quot;,&quot;+tonalidade+&quot;,&quot;+dimensao+&quot;,&quot;+consumo+&quot;,&quot;+room
+<span class="nc bnc" id="L880" title="All 8 branches missed.">                                on = parte[9].equals(&quot;on&quot;) || parte[9].equals(&quot;On&quot;) || parte[9].equals(&quot;ON&quot;) || parte[9].equals(&quot;oN&quot;);</span>
+<span class="nc" id="L881">                                especificacoes = parte[4] + &quot;,&quot; + parte[5] + &quot;,&quot; + parte[6] + &quot;,&quot; + parte[7] + &quot;,&quot; + parte[8];</span>
+<span class="nc" id="L882">                                this.pedidos.add(new Pedido(date, parte[1], parte[2], parte[3], especificacoes, on));</span>
+                            }
+<span class="nc bnc" id="L884" title="All 2 branches missed.">                            else if (parte[3].compareTo(&quot;adicionaSpeaker&quot;) == 0) {</span>
+                                //id+&quot;,&quot;+volume+&quot;,&quot;+marca+&quot;,&quot;+calnal+&quot;,&quot;+consumo+&quot;,&quot;+room
+<span class="nc bnc" id="L886" title="All 8 branches missed.">                                on = parte[10].equals(&quot;on&quot;) || parte[10].equals(&quot;On&quot;) || parte[10].equals(&quot;ON&quot;) || parte[10].equals(&quot;oN&quot;);</span>
+<span class="nc" id="L887">                                especificacoes = parte[4] + &quot;,&quot; + parte[5] + &quot;,&quot; + parte[6] + &quot;,&quot; + parte[7] + &quot;,&quot; + parte[8] + &quot;,&quot; + parte[9];</span>
+<span class="nc" id="L888">                                this.pedidos.add(new Pedido(date, parte[1], parte[2], parte[3], especificacoes, on));</span>
+                            }
+<span class="nc bnc" id="L890" title="All 6 branches missed.">                            else if(parte[3].compareTo(&quot;removeDispositivo&quot;) == 0 || parte[3].compareTo(&quot;tonBulb&quot;) == 0 || parte[3].compareTo(&quot;volSpk&quot;) == 0 )</span>
+                            {
+<span class="nc bnc" id="L892" title="All 6 branches missed.">                                on = parte[6].equals(&quot;Sim&quot;) || parte[6].equals(&quot;sim&quot;) || parte[6].equals(&quot;SIM&quot;);</span>
+<span class="nc" id="L893">                                especificacoes = parte[4] + &quot;,&quot; + parte[5];</span>
+<span class="nc" id="L894">                                this.pedidos.add(new Pedido(date, parte[1], parte[2], parte[3], especificacoes, on));</span>
+                            }
+<span class="nc" id="L896">                            else this.pedidos.add(new Pedido(date, parte[1], parte[2], parte[3], parte[4], on));</span>
+                        }
+                    }
+<span class="nc" id="L899">                    executaListPedidos(0); // executa os pedidos normais</span>
+<span class="nc bnc" id="L900" title="All 2 branches missed.">                    if(this.smarthouses.getDate().compareTo(date) &gt; 0)</span>
+                    {
+<span class="nc" id="L902">                        this.smarthouses.atualiza(this.smarthouses.getDate().plusDays(1)); // cria faturas</span>
+<span class="nc" id="L903">                        executaListPedidos(1); // executa as mudanças de fornecedores</span>
+                    }
+<span class="nc" id="L905">                } catch (DateTimeParseException e) {</span>
+<span class="nc" id="L906">                    System.out.println(&quot;Formato data errado&quot;);</span>
+<span class="nc" id="L907">                } catch (Model.Exceptions.LogNotExistsException l) {</span>
+<span class="nc" id="L908">                    System.out.println(&quot;Não existem dados em memória de logs&quot;);</span>
+<span class="nc" id="L909">                }</span>
+<span class="nc" id="L910">            }</span>
+        }
+<span class="nc" id="L912">        catch (java.io.FileNotFoundException e) {</span>
+<span class="nc" id="L913">            System.out.println(e.getMessage());</span>
+<span class="nc" id="L914">        }</span>
+<span class="nc" id="L915">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

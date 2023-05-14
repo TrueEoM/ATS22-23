@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SmartHouses.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">teste</a> &gt; <a href="index.source.html" class="el_package">Model</a> &gt; <span class="el_source">SmartHouses.java</span></div><h1>SmartHouses.java</h1><pre class="source lang-java linenums">package Model;
+
+import Model.Formulas.*;
+import Model.Exceptions.*;
+
+
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toMap;
+
+
+public class SmartHouses implements Serializable {
+    private Map&lt;String, CasaInteligente&gt; casas; // id casa -&gt; CASA
+    private Map&lt;String,SmartDevice&gt; dispositivos; // ID Device -&gt; DEVICE
+    private Map&lt;String,Fornecedor&gt; fornecedores; // ID Model.Fornecedor -&gt; FORNECEDOR
+    private Map&lt;String,FormulaEnergia&gt; formulas;
+    private LocalDateTime Now;
+
+<span class="nc" id="L25">    public SmartHouses(){</span>
+<span class="nc" id="L26">        this.casas = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L27">        this.dispositivos = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L28">        this.fornecedores = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L29">        this.formulas = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L30">        this.Now = java.time.LocalDateTime.now();</span>
+<span class="nc" id="L31">        formulas.put(&quot;EDP Comercial&quot;, new FormulaEDP());</span>
+<span class="nc" id="L32">        formulas.put(&quot;Galp Energia&quot;, new FormulaGalp());</span>
+<span class="nc" id="L33">        formulas.put(&quot;Iberdrola&quot;, new FormulaIberdrola());</span>
+<span class="nc" id="L34">        formulas.put(&quot;Endesa&quot;, new FormulaEndesa());</span>
+<span class="nc" id="L35">        formulas.put(&quot;Gold Energy&quot;, new FormulaGoldEnergy());</span>
+<span class="nc" id="L36">        formulas.put(&quot;Coopernico&quot;, new FormulaCoopernico());</span>
+<span class="nc" id="L37">        formulas.put(&quot;Enat&quot;, new FormulaEnat());</span>
+<span class="nc" id="L38">        formulas.put(&quot;YIce&quot;, new FormulaYIce());</span>
+<span class="nc" id="L39">        formulas.put(&quot;MEO Energia&quot;, new FormulaMEO());</span>
+<span class="nc" id="L40">        formulas.put(&quot;Muon&quot;, new FormulaMuon());</span>
+<span class="nc" id="L41">        formulas.put(&quot;Luzboa&quot;, new FormulaLuzboa());</span>
+<span class="nc" id="L42">        formulas.put(&quot;Energia Simples&quot;, new FormulaEnergiaSimples());</span>
+<span class="nc" id="L43">        formulas.put(&quot;SU Electricidade&quot;, new FormulaSUElectricidade());</span>
+<span class="nc" id="L44">        formulas.put(&quot;EDA&quot;, new FormulaEDA());</span>
+<span class="nc" id="L45">    }</span>
+
+<span class="nc" id="L47">    public SmartHouses(Map&lt;String,CasaInteligente&gt; casas, Map&lt;String,SmartDevice&gt; dispositivos,Map&lt;String,Fornecedor&gt; fornecedores, LocalDateTime date){</span>
+<span class="nc" id="L48">        setCasas(casas);</span>
+<span class="nc" id="L49">        setDispositivos(dispositivos);</span>
+<span class="nc" id="L50">        setFornecedores(fornecedores);</span>
+<span class="nc" id="L51">        this.formulas = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L52">        this.Now = date;</span>
+<span class="nc" id="L53">        formulas.put(&quot;EDP Comercial&quot;, new FormulaEDP());</span>
+<span class="nc" id="L54">        formulas.put(&quot;Galp Energia&quot;, new FormulaGalp());</span>
+<span class="nc" id="L55">        formulas.put(&quot;Iberdrola&quot;, new FormulaIberdrola());</span>
+<span class="nc" id="L56">        formulas.put(&quot;Endesa&quot;, new FormulaEndesa());</span>
+<span class="nc" id="L57">        formulas.put(&quot;Gold Energy&quot;, new FormulaGoldEnergy());</span>
+<span class="nc" id="L58">        formulas.put(&quot;Coopernico&quot;, new FormulaCoopernico());</span>
+<span class="nc" id="L59">        formulas.put(&quot;Enat&quot;, new FormulaEnat());</span>
+<span class="nc" id="L60">        formulas.put(&quot;YIce&quot;, new FormulaYIce());</span>
+<span class="nc" id="L61">        formulas.put(&quot;MEO Energia&quot;, new FormulaMEO());</span>
+<span class="nc" id="L62">        formulas.put(&quot;Muon&quot;, new FormulaMuon());</span>
+<span class="nc" id="L63">        formulas.put(&quot;Luzboa&quot;, new FormulaLuzboa());</span>
+<span class="nc" id="L64">        formulas.put(&quot;Energia Simples&quot;, new FormulaEnergiaSimples());</span>
+<span class="nc" id="L65">        formulas.put(&quot;SU Electricidade&quot;, new FormulaSUElectricidade());</span>
+<span class="nc" id="L66">        formulas.put(&quot;EDA&quot;, new FormulaEDA());</span>
+<span class="nc" id="L67">    }</span>
+
+<span class="nc" id="L69">    public SmartHouses(SmartHouses sh){</span>
+<span class="nc" id="L70">        setCasas(sh.getCasas());</span>
+<span class="nc" id="L71">        setDispositivos(sh.getDispositivos());</span>
+<span class="nc" id="L72">        setFornecedores(sh.getFornecedores());</span>
+<span class="nc" id="L73">        this.formulas = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L74">        formulas.put(&quot;EDP Comercial&quot;, new FormulaEDP());</span>
+<span class="nc" id="L75">        formulas.put(&quot;Galp Energia&quot;, new FormulaGalp());</span>
+<span class="nc" id="L76">        formulas.put(&quot;Iberdrola&quot;, new FormulaIberdrola());</span>
+<span class="nc" id="L77">        formulas.put(&quot;Endesa&quot;, new FormulaEndesa());</span>
+<span class="nc" id="L78">        formulas.put(&quot;Gold Energy&quot;, new FormulaGoldEnergy());</span>
+<span class="nc" id="L79">        formulas.put(&quot;Coopernico&quot;, new FormulaCoopernico());</span>
+<span class="nc" id="L80">        formulas.put(&quot;Enat&quot;, new FormulaEnat());</span>
+<span class="nc" id="L81">        formulas.put(&quot;YIce&quot;, new FormulaYIce());</span>
+<span class="nc" id="L82">        formulas.put(&quot;MEO Energia&quot;, new FormulaMEO());</span>
+<span class="nc" id="L83">        formulas.put(&quot;Muon&quot;, new FormulaMuon());</span>
+<span class="nc" id="L84">        formulas.put(&quot;Luzboa&quot;, new FormulaLuzboa());</span>
+<span class="nc" id="L85">        formulas.put(&quot;Energia Simples&quot;, new FormulaEnergiaSimples());</span>
+<span class="nc" id="L86">        formulas.put(&quot;SU Electricidade&quot;, new FormulaSUElectricidade());</span>
+<span class="nc" id="L87">        formulas.put(&quot;EDA&quot;, new FormulaEDA());</span>
+<span class="nc" id="L88">        this.Now = sh.getDate();</span>
+<span class="nc" id="L89">    }</span>
+
+    public void parser(String filename) throws LinhaException, SmartDeviceAlreadyExistsException, CasaInteligenteAlreadyExistsException, CasaInteligenteNotExistsException {
+<span class="nc" id="L92">        Map&lt;String, CasaInteligente&gt; casas = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L93">        Map&lt;String, SmartDevice&gt; dispositivos = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L94">        Map&lt;String,Fornecedor&gt; fornecedores = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L95">        Map&lt;String,FormulaEnergia&gt; formulas = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L96">        formulas.put(&quot;EDP Comercial&quot;, new FormulaEDP());</span>
+<span class="nc" id="L97">        formulas.put(&quot;Galp Energia&quot;, new FormulaGalp());</span>
+<span class="nc" id="L98">        formulas.put(&quot;Iberdrola&quot;, new FormulaIberdrola());</span>
+<span class="nc" id="L99">        formulas.put(&quot;Endesa&quot;, new FormulaEndesa());</span>
+<span class="nc" id="L100">        formulas.put(&quot;Gold Energy&quot;, new FormulaGoldEnergy());</span>
+<span class="nc" id="L101">        formulas.put(&quot;Coopernico&quot;, new FormulaCoopernico());</span>
+<span class="nc" id="L102">        formulas.put(&quot;Enat&quot;, new FormulaEnat());</span>
+<span class="nc" id="L103">        formulas.put(&quot;YIce&quot;, new FormulaYIce());</span>
+<span class="nc" id="L104">        formulas.put(&quot;MEO Energia&quot;, new FormulaMEO());</span>
+<span class="nc" id="L105">        formulas.put(&quot;Muon&quot;, new FormulaMuon());</span>
+<span class="nc" id="L106">        formulas.put(&quot;Luzboa&quot;, new FormulaLuzboa());</span>
+<span class="nc" id="L107">        formulas.put(&quot;Energia Simples&quot;, new FormulaEnergiaSimples());</span>
+<span class="nc" id="L108">        formulas.put(&quot;SU Electricidade&quot;, new FormulaSUElectricidade());</span>
+<span class="nc" id="L109">        formulas.put(&quot;EDA&quot;, new FormulaEDA());</span>
+
+        String[] linhaPartida;
+        try {
+<span class="nc" id="L113">            List&lt;String&gt; linhas = lerFicheiro(filename);</span>
+<span class="nc" id="L114">            String divisao = null;</span>
+            SmartDevice sd;
+<span class="nc" id="L116">            int i = 0;</span>
+<span class="nc" id="L117">            CasaInteligente casaMaisRecente = null;</span>
+<span class="nc bnc" id="L118" title="All 2 branches missed.">            for (String linha : linhas) {</span>
+<span class="nc" id="L119">                linhaPartida = linha.split(&quot;:&quot;, 2);</span>
+                //divide a linha em 2
+<span class="nc bnc" id="L121" title="All 7 branches missed.">                switch (linhaPartida[0]) {</span>
+                    case &quot;Casa&quot;:
+<span class="nc bnc" id="L123" title="All 2 branches missed.">                        if (i &gt;= 1) casas.put(casaMaisRecente.getIdHome(), casaMaisRecente);</span>
+<span class="nc" id="L124">                        CasaInteligente ci = CasaInteligente.parseCasa(linhaPartida[1]);</span>
+<span class="nc" id="L125">                        casas.put(ci.getIdHome(), ci.clone());</span>
+<span class="nc bnc" id="L126" title="All 2 branches missed.">                        if ((fornecedores.get(ci.getIdFornecedor()) != null))</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">                            if ((fornecedores.get(ci.getIdFornecedor())).addCasa(ci) == 1)</span>
+<span class="nc" id="L128">                                throw new CasaInteligenteAlreadyExistsException(&quot;Fornecedor já tem essa casa&quot;);</span>
+<span class="nc" id="L129">                        casaMaisRecente = ci;</span>
+<span class="nc" id="L130">                        i++;</span>
+<span class="nc" id="L131">                        break;</span>
+                    case &quot;Divisao&quot;:
+<span class="nc bnc" id="L133" title="All 2 branches missed.">                        if (casaMaisRecente == null) throw new LinhaException(&quot;Linha Inválida!&quot;);</span>
+<span class="nc" id="L134">                        divisao = linhaPartida[1];</span>
+<span class="nc" id="L135">                        casaMaisRecente.addRoom(divisao);</span>
+<span class="nc" id="L136">                        break;</span>
+                    case &quot;SmartBulb&quot;:
+<span class="nc bnc" id="L138" title="All 2 branches missed.">                        if (divisao == null) throw new LinhaException(&quot;Linha Inválida!&quot;);</span>
+<span class="nc" id="L139">                        sd = SmartBulb.parseSmartBulb(linhaPartida[1]);</span>
+<span class="nc bnc" id="L140" title="All 2 branches missed.">                        if (casaMaisRecente.addDevice(sd) == 1)</span>
+<span class="nc" id="L141">                            throw new SmartDeviceAlreadyExistsException(&quot;O SmartDevice com id &quot; + sd.getID() + &quot;já existe&quot;);</span>
+<span class="nc" id="L142">                        casaMaisRecente.addToRoom(divisao, sd.getID());</span>
+<span class="nc" id="L143">                        dispositivos.put(sd.getID(), sd);</span>
+<span class="nc" id="L144">                        break;</span>
+                    case &quot;SmartCamera&quot;:
+<span class="nc bnc" id="L146" title="All 2 branches missed.">                        if (divisao == null) throw new LinhaException(&quot;Linha Inválida!&quot;);</span>
+<span class="nc" id="L147">                        sd = SmartCamera.parseSmartCamera(linhaPartida[1]);</span>
+<span class="nc bnc" id="L148" title="All 2 branches missed.">                        if (casaMaisRecente.addDevice(sd) == 1)</span>
+<span class="nc" id="L149">                            throw new SmartDeviceAlreadyExistsException(&quot;O SmartDevice com id &quot; + sd.getID() + &quot;já existe&quot;);</span>
+<span class="nc" id="L150">                        casaMaisRecente.addToRoom(divisao, sd.getID());</span>
+<span class="nc" id="L151">                        dispositivos.put(sd.getID(), sd);</span>
+<span class="nc" id="L152">                        break;</span>
+                    case &quot;SmartSpeaker&quot;:
+<span class="nc bnc" id="L154" title="All 2 branches missed.">                        if (divisao == null) throw new LinhaException(&quot;Linha Inválida!&quot;);</span>
+<span class="nc" id="L155">                        sd = SmartSpeaker.parseSmartSpeaker(linhaPartida[1]);</span>
+<span class="nc bnc" id="L156" title="All 2 branches missed.">                        if (casaMaisRecente.addDevice(sd) == 1)</span>
+<span class="nc" id="L157">                            throw new SmartDeviceAlreadyExistsException(&quot;O SmartDevice com id &quot; + sd.getID() + &quot;já existe&quot;);</span>
+<span class="nc" id="L158">                        casaMaisRecente.addToRoom(divisao, sd.getID());</span>
+<span class="nc" id="L159">                        dispositivos.put(sd.getID(), sd);</span>
+<span class="nc" id="L160">                        break;</span>
+                    case &quot;Fornecedor&quot;:
+<span class="nc" id="L162">                        Fornecedor f = Fornecedor.parseFornecedor(linhaPartida[1], formulas);</span>
+<span class="nc" id="L163">                        fornecedores.put(f.getId(), f.clone());</span>
+<span class="nc" id="L164">                        break;</span>
+                    default:
+<span class="nc" id="L166">                        throw new LinhaException(&quot;Linha Inválida!&quot;);</span>
+                }
+<span class="nc bnc" id="L168" title="All 2 branches missed.">                if (linha.equals(linhas.get(linhas.size() - 1)))</span>
+<span class="nc" id="L169">                    casas.put(casaMaisRecente.getIdHome(), casaMaisRecente);</span>
+<span class="nc" id="L170">            }</span>
+<span class="nc" id="L171">            setDispositivos(dispositivos);</span>
+<span class="nc" id="L172">            setCasas(casas);</span>
+<span class="nc" id="L173">            setFornecedores(fornecedores);</span>
+        }
+<span class="nc" id="L175">        catch (FileNotFoundException e){</span>
+<span class="nc" id="L176">            System.out.println(e.getMessage());</span>
+<span class="nc" id="L177">        }</span>
+<span class="nc" id="L178">    }</span>
+
+    public void guardarEstado() throws IOException {
+<span class="nc" id="L181">        FileOutputStream file = new FileOutputStream(&quot;estado.obj&quot;);</span>
+<span class="nc" id="L182">        ObjectOutputStream out = new ObjectOutputStream(file);</span>
+<span class="nc" id="L183">        out.writeObject(this);</span>
+<span class="nc" id="L184">        out.flush();</span>
+<span class="nc" id="L185">        out.close();</span>
+<span class="nc" id="L186">    }</span>
+
+    public void carregarEstado(String ficheiro) throws IOException, ClassNotFoundException {
+<span class="nc" id="L189">        FileInputStream f = new FileInputStream(ficheiro);</span>
+<span class="nc" id="L190">        ObjectInputStream in = new ObjectInputStream(f);</span>
+<span class="nc" id="L191">        SmartHouses smartHouses = (SmartHouses) in.readObject();</span>
+<span class="nc" id="L192">        in.close();</span>
+<span class="nc" id="L193">        setDispositivos(smartHouses.getDispositivos());</span>
+<span class="nc" id="L194">        setCasas(smartHouses.getCasas());</span>
+<span class="nc" id="L195">        setFornecedores(smartHouses.getFornecedores());</span>
+<span class="nc" id="L196">    }</span>
+
+    public boolean existsDevice(String id){
+<span class="nc" id="L199">        return this.dispositivos.containsKey(id);</span>
+    }
+
+    public boolean existsFornecedor(String id){
+<span class="nc" id="L203">        return this.fornecedores.containsKey(id);</span>
+    }
+
+    public void adicionaDevice(String idDevice,SmartDevice sd) throws SmartDeviceAlreadyExistsException {
+<span class="nc bnc" id="L207" title="All 2 branches missed.">        if(this.dispositivos.get(idDevice)!=null) throw new SmartDeviceAlreadyExistsException(&quot;Device com esse id já existe&quot;);</span>
+<span class="nc" id="L208">        this.dispositivos.put(idDevice,sd.clone());</span>
+<span class="nc" id="L209">    }</span>
+
+    public void adicionaFornecedor(String id ,Fornecedor f)  {
+<span class="nc" id="L212">        this.fornecedores.put(id,f.clone());</span>
+<span class="nc" id="L213">    }</span>
+
+    public void removeDevice(String idDevice,String idHome) throws LogNotExistsException {
+<span class="nc" id="L216">        this.casas.get(idHome).removeDevicesFromRoom(idDevice);</span>
+<span class="nc" id="L217">    }</span>
+
+    public void removePermanenteDevice(String idDevice,String idHome)
+    {
+<span class="nc" id="L221">        this.dispositivos.remove(idDevice);</span>
+<span class="nc" id="L222">        this.casas.get(idHome).removeDeviceFromHome(idDevice);</span>
+<span class="nc" id="L223">    }</span>
+
+    public void addDeviceToRoomSameHouse(String idDevice,String idHome, String room) throws RoomNotExistsException
+    {
+<span class="nc bnc" id="L227" title="All 2 branches missed.">        if(this.casas.get(idHome).hasRoom(room))</span>
+<span class="nc" id="L228">            this.casas.get(idHome).addDeviceToRoom(idDevice,room);</span>
+<span class="nc" id="L229">        else throw  new RoomNotExistsException(&quot;A localização não existe&quot;);</span>
+<span class="nc" id="L230">    }</span>
+
+    public void gestaoDevices(String idHome, String idDevice,boolean modo) throws SmartDeviceNotExistsException{ //id device
+<span class="nc" id="L233">        this.dispositivos.get(idDevice).setModo(modo);</span>
+<span class="nc" id="L234">        this.casas.get(idHome).getDevice(idDevice).setModo(modo);</span>
+<span class="nc" id="L235">    }</span>
+
+    public void colocaTon(String idHome,String idDevice,int ton) throws SmartDeviceNotExistsException { //id device
+<span class="nc bnc" id="L238" title="All 2 branches missed.">        if(ton==1)</span>
+<span class="nc bnc" id="L239" title="All 2 branches missed.">            if(this.dispositivos.get(idDevice) instanceof SmartBulb)</span>
+            {
+<span class="nc" id="L241">                ((SmartBulb) this.dispositivos.get(idDevice)).setMode(SmartBulb.Mode.WARM);</span>
+<span class="nc" id="L242">                ((SmartBulb) this.casas.get(idHome).getDevice(idDevice)).setMode(SmartBulb.Mode.WARM);</span>
+            }
+<span class="nc bnc" id="L244" title="All 2 branches missed.">        if(ton==2)</span>
+<span class="nc bnc" id="L245" title="All 2 branches missed.">            if(this.dispositivos.get(idDevice) instanceof SmartBulb)</span>
+            {
+<span class="nc" id="L247">                ((SmartBulb) this.dispositivos.get(idDevice)).setMode(SmartBulb.Mode.COLD);</span>
+<span class="nc" id="L248">                ((SmartBulb) this.casas.get(idHome).getDevice(idDevice)).setMode(SmartBulb.Mode.COLD);</span>
+            }
+<span class="nc bnc" id="L250" title="All 2 branches missed.">        if(ton==3)</span>
+<span class="nc bnc" id="L251" title="All 2 branches missed.">            if(this.dispositivos.get(idDevice) instanceof SmartBulb)</span>
+            {
+<span class="nc" id="L253">                ((SmartBulb) this.dispositivos.get(idDevice)).setMode(SmartBulb.Mode.NEUTRAL);</span>
+<span class="nc" id="L254">                ((SmartBulb) this.casas.get(idHome).getDevice(idDevice)).setMode(SmartBulb.Mode.NEUTRAL);</span>
+            }
+<span class="nc" id="L256">    }</span>
+
+    public void colocaVol(String idHome, String idDevice,int vol)  throws SmartDeviceNotExistsException{ //id device
+<span class="nc bnc" id="L259" title="All 2 branches missed.">            if (this.dispositivos.get(idDevice) instanceof SmartSpeaker)</span>
+            {
+<span class="nc" id="L261">                ((SmartSpeaker) this.dispositivos.get(idDevice)).setVolume(vol);</span>
+<span class="nc" id="L262">                ((SmartSpeaker) this.casas.get(idHome).getDevice(idDevice)).setVolume(vol);</span>
+            }
+<span class="nc" id="L264">    }</span>
+
+
+    public boolean existsHome(String idHome){
+<span class="nc" id="L268">        return this.casas.containsKey(idHome);</span>
+    }
+
+    public boolean existsHomeInFornecedor(String idHome, String idFornecedor){
+<span class="nc" id="L272">        return this.fornecedores.get(idFornecedor).hasCasa(idHome);</span>
+    }
+
+    public boolean existeDeviceHomes(String deviceId){
+<span class="nc" id="L276">        boolean exists = false;</span>
+<span class="nc" id="L277">        long r = this.casas.values().stream().filter((e)-&gt;e.existsDeviceHome(deviceId)).count();</span>
+<span class="nc bnc" id="L278" title="All 2 branches missed.">        if(r&gt;0) exists=true;</span>
+<span class="nc" id="L279">        return exists;</span>
+    }
+
+    public boolean existeDeviceInHome(String deviceId, String idHome){
+<span class="nc" id="L283">        return this.casas.get(idHome).hasDevice(deviceId);</span>
+    }
+
+    public void adicionaHome(String fornecedor,CasaInteligente ci){
+<span class="nc" id="L287">        this.casas.put(ci.getIdHome(),ci.clone());</span>
+<span class="nc" id="L288">        this.fornecedores.get(fornecedor).addCasa(ci.clone());</span>
+<span class="nc" id="L289">    }</span>
+
+    public void removeHome(String idFornecedor,String idHome) throws CasaInteligenteNotExistsException,FornecedorNotExistsException{
+<span class="nc bnc" id="L292" title="All 2 branches missed.">        if(this.fornecedores.get(idFornecedor)==null) throw new FornecedorNotExistsException(&quot;O fornecedor &quot;+idFornecedor+&quot; não existe.&quot;);</span>
+<span class="nc bnc" id="L293" title="All 2 branches missed.">        if(this.fornecedores.get(idFornecedor).removeCasa(idHome)==1) throw new CasaInteligenteNotExistsException(&quot;O fornecedor &quot;+idFornecedor+&quot; não tem a casa &quot;+idHome);</span>
+<span class="nc" id="L294">    }</span>
+
+    public String dispositovosTostring(){
+<span class="nc" id="L297">        StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L298">        this.dispositivos.forEach((key, value) -&gt; sb.append(&quot;*ID DEVICE -&gt; &quot;).append(key).append(&quot; * &quot;).append(&quot;\n&quot;).append(&quot; - INFO -&gt; &quot;).append(value.toString()).append(&quot;\n\n&quot;));</span>
+<span class="nc" id="L299">        return sb.toString();</span>
+    }
+
+    public String casasTostring(){
+<span class="nc" id="L303">        StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L304">        this.casas.forEach((key, value) -&gt; sb.append(&quot;* ID HOUSE -&gt; &quot;).append(key).append(&quot; * &quot;).append(&quot;\n&quot;).append(&quot; - INFO -&gt; &quot;).append(value.toString()).append(&quot;\n\n&quot;));</span>
+<span class="nc" id="L305">        return sb.toString();</span>
+    }
+
+    public Map&lt;String,CasaInteligente&gt; getCasas() {
+<span class="nc" id="L309">        return casas.entrySet().stream().collect(toMap(Map.Entry::getKey, v-&gt;v.getValue().clone()));</span>
+    }
+
+    public void setCasas(Map&lt;String,CasaInteligente&gt; casas){
+<span class="nc" id="L313">        this.casas = new HashMap&lt;&gt;(casas.values().stream().collect(toMap(CasaInteligente::getIdHome, CasaInteligente::clone)));</span>
+<span class="nc" id="L314">    }</span>
+
+    public Map&lt;String,SmartDevice&gt; getDispositivos(){
+<span class="nc" id="L317">        return dispositivos.entrySet().stream().collect(toMap(Map.Entry::getKey, v-&gt;v.getValue().clone()));</span>
+    }
+
+    public void setDispositivos(Map&lt;String,SmartDevice&gt; dispositivos) {
+<span class="nc" id="L321">        this.dispositivos = new HashMap&lt;&gt;(dispositivos.values().stream().collect(toMap(SmartDevice::getID, SmartDevice::clone)));</span>
+<span class="nc" id="L322">    }</span>
+
+    public Map&lt;String, Fornecedor&gt; getFornecedores() {
+<span class="nc" id="L325">        return fornecedores.entrySet().stream().collect(toMap(Map.Entry::getKey, v-&gt;v.getValue().clone()));</span>
+    }
+
+    public Map&lt;String, FormulaEnergia&gt; getFormulas() {
+<span class="nc" id="L329">        return formulas.entrySet().stream().collect(toMap(Map.Entry::getKey, v-&gt;v.getValue().clone()));</span>
+    }
+
+    public void setFornecedores(Map&lt;String,Fornecedor&gt; fornecedores){
+<span class="nc" id="L333">        this.fornecedores = new HashMap&lt;&gt;(fornecedores.values().stream().collect(toMap(Fornecedor::getId, Fornecedor::clone)));</span>
+<span class="nc" id="L334">    }</span>
+
+    public void setFormulas(Map&lt;String,FormulaEnergia&gt; fornecedores){
+<span class="nc" id="L337">        this.formulas = new HashMap&lt;&gt;(formulas.values().stream().collect(toMap(FormulaEnergia::getId, FormulaEnergia::clone)));</span>
+<span class="nc" id="L338">    }</span>
+
+    public LocalDateTime getDate()
+    {
+<span class="nc" id="L342">        return this.Now;</span>
+    }
+
+    public void setDate(LocalDateTime date)
+    {
+<span class="nc" id="L347">        this.Now = date;</span>
+<span class="nc" id="L348">    }</span>
+
+    public List&lt;String&gt; lerFicheiro(String nomeFich) throws FileNotFoundException {
+        List&lt;String&gt; lines;
+<span class="nc" id="L352">        try { lines = Files.readAllLines(Paths.get(nomeFich), StandardCharsets.UTF_8); }</span>
+<span class="nc" id="L353">        catch(IOException exc) { lines = new ArrayList&lt;&gt;(); }</span>
+<span class="nc bnc" id="L354" title="All 2 branches missed.">        if(lines.isEmpty()) throw new FileNotFoundException(&quot;Ficheiro não encontrado&quot;);</span>
+<span class="nc" id="L355">        return lines;</span>
+    }
+
+    public void atualiza(LocalDateTime newDate) throws Model.Exceptions.LogNotExistsException
+    {
+<span class="nc bnc" id="L360" title="All 2 branches missed.">        for(Fornecedor f: this.fornecedores.values())</span>
+<span class="nc" id="L361">            f.addFatura(this.Now, newDate);</span>
+
+<span class="nc bnc" id="L363" title="All 2 branches missed.">        for(CasaInteligente c: this.casas.values())</span>
+        {
+<span class="nc bnc" id="L365" title="All 2 branches missed.">            if(this.fornecedores.get(c.getIdFornecedor())!=null)</span>
+<span class="nc" id="L366">                c.addFatura(c.getIdFornecedor(), this.Now, newDate, this.fornecedores.get(c.getIdFornecedor()).getValorFornecedor(c.getIdHome(),this.Now,newDate,c.calculaConsumo(this.Now,newDate)));</span>
+<span class="nc" id="L367">        }</span>
+<span class="nc" id="L368">    }</span>
+
+    public Map&lt;String,Fatura&gt; getFaturas(String idHome)
+    {
+<span class="nc" id="L372">        return this.casas.get(idHome).getFaturas();</span>
+    }
+
+    public List&lt;Log&gt; getLogsDevice(String idDevice, String idHome)
+    {
+<span class="nc" id="L377">        return this.casas.get(idHome).getLogs().get(idDevice);</span>
+    }
+
+
+    public void alteraFornecedor(String idHome, String idFornecedor) throws CasaInteligenteNotExistsException{
+<span class="nc bnc" id="L382" title="All 2 branches missed.">        if (this.fornecedores.get(this.casas.get(idHome).getIdFornecedor()).removeCasa(idHome) == 1) throw new CasaInteligenteNotExistsException(&quot;O fornecedor nao possui a casa&quot;);</span>
+<span class="nc" id="L383">        this.casas.get(idHome).setIdFornecedor(idFornecedor);</span>
+<span class="nc" id="L384">        this.fornecedores.get(idFornecedor).addCasa(this.casas.get(idHome).clone());</span>
+<span class="nc" id="L385">    }</span>
+
+    public void setAllDevicesHome(String idHome, boolean modo)
+    {
+<span class="nc" id="L389">        this.casas.get(idHome).setallDevices(modo);</span>
+<span class="nc" id="L390">        this.dispositivos.values().forEach(a-&gt;a.setModo(modo));</span>
+<span class="nc" id="L391">    }</span>
+
+    public void setAlldivision(String idHome, String room, boolean modo)  throws RoomNotExistsException,SmartDeviceNotExistsException
+    {
+<span class="nc bnc" id="L395" title="All 2 branches missed.">        if(this.casas.get(idHome).hasRoom(room))</span>
+        {
+<span class="nc" id="L397">            this.casas.get(idHome).setAlldivision(modo,room);</span>
+<span class="nc bnc" id="L398" title="All 2 branches missed.">            for(SmartDevice s:this.dispositivos.values())</span>
+            {
+<span class="nc bnc" id="L400" title="All 2 branches missed.">                if(this.casas.get(idHome).getLocations().get(room).contains(s.getID()))</span>
+<span class="nc" id="L401">                    s.setModo(modo);</span>
+<span class="nc" id="L402">            }</span>
+<span class="nc" id="L403">            this.dispositivos.values().forEach(a-&gt;a.setModo(modo));</span>
+        }
+
+<span class="nc" id="L406">        else throw  new RoomNotExistsException(&quot;A localização não existe&quot;);</span>
+<span class="nc" id="L407">    }</span>
+
+    public void addLogExecute(String idHome, String idDevice, Log g) throws LogAlreadyExistsException,CasaInteligenteNotExistsException
+    {
+<span class="nc" id="L411">        this.casas.get(idHome).addLog(idDevice,g.clone());</span>
+<span class="nc" id="L412">        this.fornecedores.get(this.casas.get(idHome).getIdFornecedor()).getCasa(idHome).addLog(idDevice,g.clone());</span>
+<span class="nc" id="L413">    }</span>
+
+    public void addLogChangeMode(String idHome, LocalDateTime date, Boolean mode) throws LogAlreadyExistsException, CasaInteligenteNotExistsException
+    {
+<span class="nc" id="L417">        CasaInteligente ci = this.casas.get(idHome);</span>
+<span class="nc" id="L418">        CasaInteligente ci2 = this.fornecedores.get(this.casas.get(idHome).getIdFornecedor()).getCasa(idHome);</span>
+<span class="nc bnc" id="L419" title="All 2 branches missed.">        for(SmartDevice s: ci.getDevices().values())</span>
+        {
+<span class="nc" id="L421">            ci.addLog(s.getID(),new Log(date,mode));</span>
+<span class="nc" id="L422">            ci2.addLog(s.getID(),new Log(date,mode));</span>
+<span class="nc" id="L423">        }</span>
+<span class="nc" id="L424">    }</span>
+
+    public void addLogChangeMode(String idHome, LocalDateTime date, Boolean mode, String room) throws LogAlreadyExistsException, CasaInteligenteNotExistsException
+    {
+<span class="nc" id="L428">        CasaInteligente ci = this.casas.get(idHome);</span>
+<span class="nc" id="L429">        CasaInteligente ci2 = this.fornecedores.get(this.casas.get(idHome).getIdFornecedor()).getCasa(idHome);</span>
+<span class="nc bnc" id="L430" title="All 2 branches missed.">        for(String s: ci.getLocations().get(room))</span>
+        {
+<span class="nc" id="L432">            ci.addLog(s,new Log(date,mode));</span>
+<span class="nc" id="L433">            ci2.addLog(s,new Log(date,mode));</span>
+<span class="nc" id="L434">        }</span>
+<span class="nc" id="L435">    }</span>
+
+    public void addDeviceToRoom(String idHouse, String room, SmartDevice sd) throws SmartDeviceAlreadyExistsException,RoomNotExistsException
+    {
+<span class="nc" id="L439">        this.casas.get(idHouse).addToRoom(room,sd);</span>
+<span class="nc" id="L440">    }</span>
+
+    public void setFornecedor(Map&lt;String,Fornecedor&gt; fornecedores)
+    {
+<span class="nc" id="L444">        this.fornecedores = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L445">        fornecedores.forEach((id,value)-&gt;{this.fornecedores.put(id,value.clone());});</span>
+<span class="nc" id="L446">    }</span>
+
+    public Fornecedor getFornecedor(String id) throws FornecedorNotExistsException
+    {
+<span class="nc bnc" id="L450" title="All 2 branches missed.">        if(!this.containsFornecedor(id)) throw new FornecedorNotExistsException (&quot;O Model.Fornecedor com id &quot; + id + &quot; não existe&quot;);</span>
+<span class="nc" id="L451">        else return this.fornecedores.get(id).clone();</span>
+    }
+
+    public boolean containsFornecedor(String f)
+    {
+<span class="nc" id="L456">        return this.fornecedores.containsKey(f);</span>
+    }
+
+    public void addFornecedor (Fornecedor f) throws FornecedorAlreadyExistsException
+    {
+<span class="nc bnc" id="L461" title="All 2 branches missed.">        if(this.containsFornecedor(f.getId())) throw new FornecedorAlreadyExistsException (&quot;O Model.Fornecedor com id &quot; + f.getId() + &quot; já existe&quot;);</span>
+<span class="nc" id="L462">        this.fornecedores.put(f.getId(),f.clone());</span>
+<span class="nc" id="L463">    }</span>
+
+    public void removeFornecedor (String id) throws FornecedorNotExistsException
+    {
+<span class="nc bnc" id="L467" title="All 2 branches missed.">        if(this.containsFornecedor(id)) throw new FornecedorNotExistsException (&quot;O Model.Fornecedor com id &quot; + id + &quot; não existe&quot;);</span>
+<span class="nc" id="L468">        this.fornecedores.remove(id);</span>
+<span class="nc" id="L469">    }</span>
+
+    public SmartHouses clone(){
+<span class="nc" id="L472">        return new SmartHouses(this);</span>
+    }
+
+
+    public String casaGastouMaisPeriodoVariosFornecedores(LocalDateTime init, LocalDateTime finit) throws LogNotExistsException
+    {
+<span class="nc" id="L478">        String r = &quot;&quot;;</span>
+<span class="nc" id="L479">        double max = 0, gasto = 0;</span>
+<span class="nc bnc" id="L480" title="All 2 branches missed.">        for(CasaInteligente c: this.casas.values())</span>
+        {
+<span class="nc" id="L482">            gasto = c.calculaConsumo(init,finit);</span>
+<span class="nc bnc" id="L483" title="All 2 branches missed.">            if(gasto&gt;max)</span>
+            {
+<span class="nc" id="L485">                max=gasto;</span>
+<span class="nc" id="L486">                r = c.getIdHome();</span>
+            }
+
+<span class="nc" id="L489">        }</span>
+<span class="nc bnc" id="L490" title="All 2 branches missed.">        if(r.compareTo(&quot;&quot;)==0) return &quot;Nenhuma casa tem valor superior a 0€&quot;;</span>
+<span class="nc" id="L491">        return &quot;A casa que consumiu mais foi a &quot; + r;</span>
+    }
+
+    //retorna o id (String) do fornecedor que tem mais faturação
+    public String fornecedorComMaisFaturacao(LocalDateTime init, LocalDateTime finit)
+    {
+<span class="nc" id="L497">        String id = &quot;&quot;;</span>
+<span class="nc" id="L498">        double total, max = 0;</span>
+<span class="nc bnc" id="L499" title="All 2 branches missed.">        for(Fornecedor f: this.fornecedores.values())</span>
+        {
+<span class="nc" id="L501">            total = f.faturaçaoFornecedor(init,finit);</span>
+
+<span class="nc bnc" id="L503" title="All 2 branches missed.">            if(total&gt;max) {</span>
+<span class="nc" id="L504">                max = total;</span>
+<span class="nc" id="L505">                id = f.getId();</span>
+            }
+<span class="nc" id="L507">        }</span>
+<span class="nc bnc" id="L508" title="All 2 branches missed.">        if(id.compareTo(&quot;&quot;)==0) id = &quot;Não há faturas registadas.&quot;;</span>
+<span class="nc" id="L509">        return &quot;O fornecedor com mais faturação é o &quot; + id;</span>
+    }
+    public List&lt;Fornecedor&gt; ordenarFornecedores(LocalDateTime init, LocalDateTime finit)
+    {
+<span class="nc" id="L513">        Comparator&lt;Fornecedor&gt; c = (Fornecedor a, Fornecedor b)-&gt;</span>
+<span class="nc" id="L514">        {return Double.compare(a.faturaçaoFornecedor(init,finit),b.faturaçaoFornecedor(init,finit));};</span>
+
+<span class="nc" id="L516">        return this.fornecedores.values().stream().map(Fornecedor::clone).sorted(c).collect(Collectors.toList());</span>
+    }
+
+    public void addRoom(String s, String idHome)
+    {
+<span class="nc" id="L521">        System.out.println(s);</span>
+<span class="nc" id="L522">        String[] div = s.split(&quot;;&quot;);</span>
+<span class="nc" id="L523">        int i = 1;</span>
+<span class="nc bnc" id="L524" title="All 2 branches missed.">        while(i&lt;div.length)</span>
+        {
+<span class="nc" id="L526">            this.casas.get(idHome).addRoom(div[i]);</span>
+<span class="nc" id="L527">            i++;</span>
+        }
+<span class="nc" id="L529">    }</span>
+
+    public void changeFormula(String idFornecedor, String f)
+    {
+<span class="nc" id="L533">        this.fornecedores.get(idFornecedor).setFormula(this. formulas.get(f));</span>
+<span class="nc" id="L534">    }</span>
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

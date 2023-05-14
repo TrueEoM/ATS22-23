@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Fatura.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">teste</a> &gt; <a href="index.source.html" class="el_package">Model</a> &gt; <span class="el_source">Fatura.java</span></div><h1>Fatura.java</h1><pre class="source lang-java linenums">package Model;
+
+import java.text.DecimalFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+public class Fatura {
+    private String idFatura;
+    private LocalDateTime inicio;
+    private LocalDateTime fim;
+    private double valor;
+    private int NIF;
+    private String morada;
+    private String idFornecedor;
+    private double consumo;
+
+
+    public Fatura()
+<span class="nc" id="L19">    {</span>
+<span class="nc" id="L20">        this.idFatura = &quot;&quot;;</span>
+<span class="nc" id="L21">        this.morada=&quot;&quot;;</span>
+<span class="nc" id="L22">        this.NIF= 0;</span>
+<span class="nc" id="L23">        this.idFornecedor = &quot;&quot;;</span>
+<span class="nc" id="L24">        this.valor=0;</span>
+<span class="nc" id="L25">        this.fim = null;</span>
+<span class="nc" id="L26">        this.inicio = null;</span>
+<span class="nc" id="L27">    }</span>
+
+    public Fatura(double consumo, String idFatura,LocalDateTime init, LocalDateTime finit, String morada, int NIF, String idFornecedor, double valor)
+<span class="nc" id="L30">    {</span>
+<span class="nc" id="L31">        this.idFatura = idFatura;</span>
+<span class="nc" id="L32">        this.morada = morada;</span>
+<span class="nc" id="L33">        this.idFornecedor = idFornecedor;</span>
+<span class="nc" id="L34">        this.inicio = init;</span>
+<span class="nc" id="L35">        this.fim = finit;</span>
+<span class="nc" id="L36">        this.valor = valor;</span>
+<span class="nc" id="L37">        this.NIF = NIF;</span>
+<span class="nc" id="L38">        this.consumo = consumo;</span>
+<span class="nc" id="L39">    }</span>
+
+    public Fatura(Fatura f)
+<span class="nc" id="L42">    {</span>
+<span class="nc" id="L43">        this.idFatura = f.getIdFatura();</span>
+<span class="nc" id="L44">        this.morada = f.getMorada();</span>
+<span class="nc" id="L45">        this.idFornecedor = f.getIdFornecedor();</span>
+<span class="nc" id="L46">        this.fim = f.getFim();</span>
+<span class="nc" id="L47">        this.inicio = f.getInicio();</span>
+<span class="nc" id="L48">        this.valor = f.getValor();</span>
+<span class="nc" id="L49">        this.NIF = f.getNIF();</span>
+<span class="nc" id="L50">        this.consumo = f.getConsumo();</span>
+<span class="nc" id="L51">    }</span>
+
+    public void setConsumo(double consumo)
+    {
+<span class="nc" id="L55">        this.consumo = consumo;</span>
+<span class="nc" id="L56">    }</span>
+
+    public void setIdFatura(String id)
+    {
+<span class="nc" id="L60">        this.idFatura = id;</span>
+<span class="nc" id="L61">    }</span>
+
+    public void setValor(double valor)
+    {
+<span class="nc" id="L65">        this.valor = valor;</span>
+<span class="nc" id="L66">    }</span>
+
+    public void setMorada(String morada)
+    {
+<span class="nc" id="L70">        this.morada = morada;</span>
+<span class="nc" id="L71">    }</span>
+
+    public void setIdFornecedor(String id)
+    {
+<span class="nc" id="L75">        this.idFornecedor = id;</span>
+<span class="nc" id="L76">    }</span>
+
+    public void setInicio(LocalDateTime init)
+    {
+<span class="nc" id="L80">        this.inicio = init;</span>
+<span class="nc" id="L81">    }</span>
+
+    public void setFim(LocalDateTime fim)
+    {
+<span class="nc" id="L85">        this.fim = fim;</span>
+<span class="nc" id="L86">    }</span>
+
+    public void setNIF(int NIF)
+    {
+<span class="nc" id="L90">        this.NIF = NIF;</span>
+<span class="nc" id="L91">    }</span>
+
+    public double getConsumo()
+    {
+<span class="nc" id="L95">        return this.consumo;</span>
+    }
+
+    public double getValor()
+    {
+<span class="nc" id="L100">        return this.valor;</span>
+    }
+
+    public int getNIF()
+    {
+<span class="nc" id="L105">        return this.NIF;</span>
+    }
+
+    public String getIdFatura()
+    {
+<span class="nc" id="L110">        return this.idFatura;</span>
+    }
+
+    public String getMorada()
+    {
+<span class="nc" id="L115">        return this.morada;</span>
+    }
+
+    public String getIdFornecedor()
+    {
+<span class="nc" id="L120">        return this.idFornecedor;</span>
+    }
+
+    public LocalDateTime getInicio()
+    {
+<span class="nc" id="L125">        return this.inicio;</span>
+    }
+
+    public LocalDateTime getFim()
+    {
+<span class="nc" id="L130">        return this.fim;</span>
+    }
+
+    public String toString(){
+<span class="nc" id="L134">        StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L135">        DecimalFormat formato = new DecimalFormat(&quot;#.0#&quot;);</span>
+<span class="nc" id="L136">        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm&quot;);</span>
+<span class="nc" id="L137">        sb.append(&quot;IdFatura: &quot; + this.getIdFatura())</span>
+<span class="nc" id="L138">                .append(&quot;\nIdFornecedor: &quot; + this.getIdFornecedor())</span>
+<span class="nc" id="L139">                .append(&quot;\nNIF: &quot; + this.getNIF())</span>
+<span class="nc" id="L140">                .append(&quot;\nConsumo: &quot; + formato.format(this.getConsumo()))</span>
+<span class="nc" id="L141">                .append(&quot;\nValor: &quot; + formato.format(this.getValor()))</span>
+<span class="nc" id="L142">                .append(&quot;\nInicio: &quot; + this.getInicio().format(formatter))</span>
+<span class="nc" id="L143">                .append(&quot;\nFim: &quot; + this.getFim().format(formatter) + &quot;;&quot;);</span>
+<span class="nc" id="L144">        return sb.toString();</span>
+    }
+
+    public boolean equals(Object o){
+<span class="nc bnc" id="L148" title="All 2 branches missed.">        if(o==this) return true;</span>
+<span class="nc bnc" id="L149" title="All 4 branches missed.">        else if(o==null || o.getClass()!=this.getClass()) return false;</span>
+<span class="nc" id="L150">        Fatura sd = (Fatura) o;</span>
+<span class="nc bnc" id="L151" title="All 2 branches missed.">        return this.idFatura.equals(sd.getIdFatura()) &amp;&amp;</span>
+<span class="nc bnc" id="L152" title="All 2 branches missed.">                this.idFornecedor.equals(sd.getIdFornecedor()) &amp;&amp;</span>
+<span class="nc bnc" id="L153" title="All 2 branches missed.">                this.fim.equals(sd.getFim()) &amp;&amp;</span>
+<span class="nc bnc" id="L154" title="All 2 branches missed.">                this.inicio.equals(sd.getInicio()) &amp;&amp;</span>
+<span class="nc bnc" id="L155" title="All 2 branches missed.">                this.valor==sd.getValor() &amp;&amp;</span>
+<span class="nc bnc" id="L156" title="All 6 branches missed.">                this.morada.equals(sd.morada) &amp;&amp;</span>
+                this.NIF==sd.NIF &amp;&amp;
+                this.consumo == sd.consumo;
+    }
+
+    public Fatura clone()
+    {
+<span class="nc" id="L163">        return new Fatura(this);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

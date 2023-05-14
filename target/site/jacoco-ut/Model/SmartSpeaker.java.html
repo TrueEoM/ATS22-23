@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SmartSpeaker.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">teste</a> &gt; <a href="index.source.html" class="el_package">Model</a> &gt; <span class="el_source">SmartSpeaker.java</span></div><h1>SmartSpeaker.java</h1><pre class="source lang-java linenums">package Model;
+
+public class SmartSpeaker extends SmartDevice {
+    public static final int MAX = 100; //volume máximo
+
+    private int volume;
+    private String marca;
+    private String channel;
+
+    public SmartSpeaker(String id, boolean modo, int vol, String marca, String canal, double consumoBase) {
+<span class="nc" id="L11">        super(id, modo, consumoBase);</span>
+<span class="nc" id="L12">        this.volume = vol;</span>
+<span class="nc" id="L13">        this.channel = canal;</span>
+<span class="nc" id="L14">        this.marca = marca;</span>
+<span class="nc" id="L15">    }</span>
+    public SmartSpeaker(String id, int vol, String marca, String canal, double consumoBase) {
+<span class="nc" id="L17">        super(id, consumoBase);</span>
+<span class="nc" id="L18">        this.volume = vol;</span>
+<span class="nc" id="L19">        this.channel = canal;</span>
+<span class="nc" id="L20">        this.marca = marca;</span>
+<span class="nc" id="L21">    }</span>
+
+    public SmartSpeaker(SmartSpeaker ss) {
+<span class="nc" id="L24">        super(ss);</span>
+<span class="nc" id="L25">        this.volume = ss.getVolume();</span>
+<span class="nc" id="L26">        this.channel = ss.getChannel();</span>
+<span class="nc" id="L27">        this.marca = ss.getMarca();</span>
+<span class="nc" id="L28">    }</span>
+
+    public void volumeUp() {
+<span class="nc bnc" id="L31" title="All 2 branches missed.">        if (this.volume &lt; MAX) this.volume++;</span>
+<span class="nc" id="L32">    }</span>
+
+    public void volumeDown() {
+<span class="nc bnc" id="L35" title="All 2 branches missed.">        if (this.volume &gt; 0) this.volume--;</span>
+<span class="nc" id="L36">    }</span>
+
+    public int getVolume(){
+<span class="nc" id="L39">        return this.volume;</span>
+    }
+
+    public String getMarca(){
+<span class="nc" id="L43">        return this.marca;</span>
+    }
+
+    public String getChannel(){
+<span class="nc" id="L47">        return this.channel;</span>
+    }
+
+    public void setChannel(String c){
+<span class="nc" id="L51">        this.channel = c;</span>
+<span class="nc" id="L52">    }</span>
+
+    public void setMarca(String m){
+<span class="nc" id="L55">        this.marca = m;</span>
+<span class="nc" id="L56">    }</span>
+
+    public void setVolume(int v){
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        if(v&gt;=MAX) this.volume= MAX;</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">        else if(v&lt;=0) this.volume =0;</span>
+<span class="nc" id="L61">        else this.volume=v;</span>
+<span class="nc" id="L62">    }</span>
+
+    public double consumoDiario() {
+<span class="nc" id="L65">        return (this.getConsumoBase()*this.getVolume())/100;</span>
+    }
+
+    public void turnSpeakerOn(){
+<span class="nc" id="L69">        turnOn();</span>
+<span class="nc" id="L70">    }</span>
+
+    public void turnSpeakerOff(){
+<span class="nc" id="L73">        turnOff();</span>
+<span class="nc" id="L74">    }</span>
+
+    public static SmartSpeaker parseSmartSpeaker(String line){
+<span class="nc" id="L77">        String[] parte = line.split(&quot;,&quot;);</span>
+<span class="nc" id="L78">        return new SmartSpeaker(parte[4],Integer.parseInt(parte[0]),parte[2],parte[1],Double.parseDouble(parte[3]));</span>
+    }
+    //Model.SmartSpeaker:2,Radio Renascenca,LG,5.54,speaker1,2022-04-11 09:23:48,2022-05-30 06:33:00,false
+    //    public Model.SmartSpeaker(String id, boolean modo, int vol, String marca, String canal, LocalDateTime timeon, LocalDateTime timeoff) {
+
+
+    public String toString(){
+<span class="nc" id="L85">        StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L86">        sb.append(super.toString());</span>
+<span class="nc" id="L87">        sb.append(&quot;\tVolume: &quot;).append(this.volume).append(&quot;; &quot;)</span>
+<span class="nc" id="L88">            .append(&quot;\tMarca: &quot;).append(this.marca).append(&quot;; &quot;)</span>
+<span class="nc" id="L89">            .append(&quot;\tCanal: &quot;).append(this.channel).append(&quot;\n&quot;);</span>
+<span class="nc" id="L90">        return sb.toString();</span>
+    }
+
+    public boolean equals(Object o) {
+<span class="nc bnc" id="L94" title="All 2 branches missed.">        if (this==o) return true;</span>
+<span class="nc bnc" id="L95" title="All 4 branches missed.">        if ((o == null) || (this.getClass() != o.getClass())) return false;</span>
+<span class="nc" id="L96">        SmartSpeaker s = (SmartSpeaker) o;</span>
+<span class="nc bnc" id="L97" title="All 4 branches missed.">        return super.equals(o) &amp;&amp; this.volume==s.getVolume()</span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">                &amp;&amp; this.channel.equals(s.getChannel())</span>
+<span class="nc bnc" id="L99" title="All 2 branches missed.">                &amp;&amp; this.marca.equals(s.getMarca());</span>
+    }
+
+    public SmartDevice clone(){
+<span class="nc" id="L103">        return new SmartSpeaker(this);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

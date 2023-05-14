@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Fornecedor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">teste</a> &gt; <a href="index.source.html" class="el_package">Model</a> &gt; <span class="el_source">Fornecedor.java</span></div><h1>Fornecedor.java</h1><pre class="source lang-java linenums">package Model;
+
+import Model.Formulas.FormulaEnergia;
+import Model.Exceptions.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.time.LocalDateTime;
+
+public class Fornecedor{
+    
+    private String id;
+<span class="nc" id="L15">    private final double base = 2;</span>
+<span class="nc" id="L16">    private final double multiplicador = 0.2;</span>
+    private double imposto;
+    private FormulaEnergia formula;
+    private Map&lt;String, CasaInteligente&gt; allCasas; // identificador -&gt; idCasa
+
+<span class="nc" id="L21">    public Fornecedor(String id,double imposto) {</span>
+<span class="nc" id="L22">        this.id = id;</span>
+<span class="nc" id="L23">        this.imposto = imposto;</span>
+<span class="nc" id="L24">        this.allCasas = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L25">    }</span>
+
+<span class="nc" id="L27">    public Fornecedor(double imposto, String id, FormulaEnergia f) {</span>
+<span class="nc" id="L28">        this.allCasas = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L29">        this.id = id;</span>
+<span class="nc" id="L30">        this.imposto = imposto;</span>
+<span class="nc" id="L31">        this.formula = f;</span>
+<span class="nc" id="L32">    }</span>
+
+<span class="nc" id="L34">    public Fornecedor(Fornecedor f) {</span>
+<span class="nc" id="L35">        setAllCasas(f.getAllCasas());</span>
+<span class="nc" id="L36">        this.id = f.getId();</span>
+<span class="nc" id="L37">        this.imposto = f.getImposto();</span>
+<span class="nc" id="L38">        this.formula = f.getFormula();</span>
+<span class="nc" id="L39">    }</span>
+
+    public CasaInteligente getCasa(String idCasa) throws CasaInteligenteNotExistsException {
+<span class="nc bnc" id="L42" title="All 2 branches missed.">        if(!this.hasCasa(idCasa)) throw new CasaInteligenteNotExistsException (&quot;A casa com id &quot; + idCasa + &quot; não existe&quot;);</span>
+<span class="nc" id="L43">        else return this.allCasas.get(idCasa).clone();</span>
+    }
+
+    public CasaInteligente getCasaWithoutExceptions(String idCasa)
+    {
+<span class="nc" id="L48">        return this.allCasas.get(idCasa).clone();</span>
+    }
+
+    public void setId(String id)
+    {
+<span class="nc" id="L53">        this.id = id;</span>
+<span class="nc" id="L54">    }</span>
+
+    public void setImposto(double imposto)
+    {
+<span class="nc" id="L58">        this.imposto = imposto;</span>
+<span class="nc" id="L59">    }</span>
+
+    public String getId()
+    {
+<span class="nc" id="L63">        return this.id;</span>
+    }
+
+    public double getImposto()
+    {
+<span class="nc" id="L68">        return this.imposto;</span>
+    }
+
+    public FormulaEnergia getFormula()
+    {
+<span class="nc" id="L73">        return this.formula;</span>
+    }
+
+    public void setFormula(FormulaEnergia f)
+    {
+<span class="nc" id="L78">        this.formula=f;</span>
+<span class="nc" id="L79">    }</span>
+
+    public int addCasa(CasaInteligente casa){
+<span class="nc" id="L82">        int r=0;</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">        if(this.hasCasa(casa.getIdHome())) r=1;</span>
+<span class="nc" id="L84">        else this.allCasas.put(casa.getIdHome(),casa.clone());</span>
+<span class="nc" id="L85">        return r;</span>
+    }
+
+    public boolean hasCasa(String idCasa)
+    {
+<span class="nc" id="L90">        return this.allCasas.containsKey(idCasa);</span>
+    }
+
+    public int removeCasa(String idCasa){
+<span class="nc" id="L94">        int r=0;</span>
+<span class="nc bnc" id="L95" title="All 2 branches missed.">        if(!this.hasCasa(idCasa)) r=1;</span>
+<span class="nc" id="L96">        else this.allCasas.remove(idCasa);</span>
+<span class="nc" id="L97">        return r;</span>
+    }
+
+    public Map&lt;String,CasaInteligente&gt; getAllCasas(){
+<span class="nc" id="L101">        return this.allCasas.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey,(e)-&gt;e.getValue().clone()));</span>
+    }
+
+    public void setAllCasas(Map&lt;String,CasaInteligente&gt; c){
+<span class="nc" id="L105">        this.allCasas = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L106">        c.forEach((String,SmartDevice)-&gt;this.allCasas.put(String,SmartDevice.clone()));</span>
+<span class="nc" id="L107">    }</span>
+
+    public static Fornecedor parseFornecedor(String line, Map&lt;String, FormulaEnergia&gt; formulas){
+<span class="nc" id="L110">        String[] parte = line.split(&quot;,&quot;);</span>
+<span class="nc" id="L111">        return new Fornecedor(Double.parseDouble(parte[1]), parte[0], formulas.get(parte[0]));</span>
+    }
+
+    public boolean equals(Object o)
+    {
+<span class="nc bnc" id="L116" title="All 2 branches missed.">        if(o==this) return true;</span>
+<span class="nc bnc" id="L117" title="All 4 branches missed.">        if(o==null || o.getClass()!=this.getClass()) return false;</span>
+<span class="nc" id="L118">        Fornecedor f = (Fornecedor) o;</span>
+<span class="nc bnc" id="L119" title="All 2 branches missed.">        return f.getId() == this.id &amp;&amp;</span>
+<span class="nc bnc" id="L120" title="All 2 branches missed.">                this.allCasas.equals(f.getAllCasas());</span>
+    }
+
+    public String toString()
+    {
+<span class="nc" id="L125">        StringBuilder sb = new StringBuilder();</span>
+<span class="nc" id="L126">        sb.append(&quot;Id: &quot;).append(this.id).append(&quot;; &quot;)</span>
+<span class="nc" id="L127">            .append(&quot;Imposto: &quot;).append(this.imposto).append(&quot;;\n&quot;);</span>
+<span class="nc" id="L128">        allCasas.forEach((id,casa)-&gt;{sb.append(casa.toString());});</span>
+        //sb.append(allCasas);
+<span class="nc" id="L130">        return sb.toString();</span>
+    }
+    
+    public Fornecedor clone()
+    {
+<span class="nc" id="L135">        return new Fornecedor(this);</span>
+    }
+
+    public String casaGastouMaisPeriodo(LocalDateTime init, LocalDateTime finit) throws LogNotExistsException
+    {
+<span class="nc" id="L140">        String id=&quot;&quot;;</span>
+<span class="nc" id="L141">        double max = 0, t = 0;</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">        for(CasaInteligente c: this.allCasas.values())</span>
+        {
+<span class="nc bnc" id="L144" title="All 2 branches missed.">            for(Fatura f: c.getFaturas(c.getIdHome()))</span>
+<span class="nc" id="L145">                t = f.getValor();</span>
+<span class="nc bnc" id="L146" title="All 2 branches missed.">            if(max &lt; t) </span>
+            {
+<span class="nc" id="L148">                max = t; </span>
+<span class="nc" id="L149">                id = c.getIdHome();</span>
+            }
+<span class="nc" id="L151">        }</span>
+<span class="nc" id="L152">        return id;</span>
+    }
+
+    public double getValorFornecedor(String idCasa, LocalDateTime init, LocalDateTime finit, double consumo)
+    {
+<span class="nc" id="L157">        CasaInteligente casa = this.getCasaWithoutExceptions(idCasa);</span>
+
+<span class="nc bnc" id="L159" title="All 2 branches missed.">        if(casa.numeroDispositivos()&lt;10)</span>
+<span class="nc" id="L160">            return formula.calculo(this.base, this.getImposto(), consumo, this.multiplicador);</span>
+        else
+<span class="nc" id="L162">            return this.formula.calculo(this.base, this.getImposto(), consumo, this.multiplicador-0.1);</span>
+    }
+
+    public void addFatura(LocalDateTime init, LocalDateTime finit) throws LogNotExistsException
+    {
+<span class="nc bnc" id="L167" title="All 2 branches missed.">        for(CasaInteligente c: this.allCasas.values())</span>
+        {
+<span class="nc" id="L169">            c.addFatura(this.id, init, finit, getValorFornecedor(c.getIdHome(),init,finit,c.calculaConsumo(init,finit)));</span>
+<span class="nc" id="L170">        }</span>
+<span class="nc" id="L171">    }</span>
+
+    public List&lt;Fatura&gt; faturasEmitidas()
+    {
+<span class="nc" id="L175">        List&lt;Fatura&gt; f = new ArrayList&lt;Fatura&gt;();</span>
+
+<span class="nc bnc" id="L177" title="All 2 branches missed.">        for(CasaInteligente c: this.allCasas.values())</span>
+        {
+<span class="nc" id="L179">            f.addAll(c.getFaturas(this.id));</span>
+<span class="nc" id="L180">        }</span>
+
+<span class="nc" id="L182">        return f;</span>
+    }
+
+    public double faturaçaoFornecedor(LocalDateTime init, LocalDateTime finit)
+    {
+<span class="nc" id="L187">        double t = 0;</span>
+<span class="nc bnc" id="L188" title="All 2 branches missed.">        for(CasaInteligente c: this.allCasas.values())</span>
+        {
+<span class="nc" id="L190">            t += getValorFornecedor(c.getIdHome(),init,finit,c.calculaConsumo(init,finit));</span>
+<span class="nc" id="L191">        }</span>
+<span class="nc" id="L192">        return t;</span>
+    }
+
+    public double compareTo(Fornecedor o,LocalDateTime init, LocalDateTime finit)
+    {
+<span class="nc" id="L197">        return Double.compare(this.faturaçaoFornecedor(init,finit),o.faturaçaoFornecedor(init,finit));</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>
