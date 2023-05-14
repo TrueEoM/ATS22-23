@@ -1,0 +1,164 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        MANUAL DA APLICAÇÃO DE CASAS INTELIGENTES - ANÁLISE DE PROJETOS 22-23
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ESTRUTURA PRINCIPAL:
+
+-> Geração de logs;
+
+-> Funcionalidades e uso de aplicação;
+
+
+%%%%%%%%
+%GERAÇÃO DE FICHEIROS DE LOGS
+%%%%%%%%
+
+
+%%%%%%%%
+%APP PRINCIPAL
+%%%%%%%%
+
+A aplicação é executada pelo Main.java. A versão mínima do Java necessária é o Java 8.
+
+O menu imprimido no ecrã quando a aplicação é executada é o seguinte:
+
+ ***********************************-SmartHouses-***************************************
+| * 1 -Casa que mais gastou num período de tempo
+| * 2 -Comercializador com maior volume de facturação
+| * 3 -Listagem de facturas emitidas por um comercializador
+| * 4 -Ordenação dos maiores consumidores de energia durante um período de tempo
+| * 5 -Casas
+| * 6 -Fornecedores
+| * 7 -Salvar estado
+| * 8 -Carregar estado
+| * 9 -Carregar do ficheiro logs.txt
+| * 10 -Alterar data
+| * 11 -Automatizar
+| * 12 -Sair da aplicação
+_______________________________________________________________________________________
+Digite a opção:
+
+As opções disponíveis para digitar são:
+
+%%%
+%1 -Casa que mais gastou num período de tempo
+%%%
+
+Digitar a data de início, e depois a data de fim (formato AAAA-MM-DD HH:HH).
+ Exemplo:
+  2000-01-01 00:00
+  2001-04-03 13:00
+
+%%%
+%2 -Comercializador com maior volume de facturação
+%%%
+
+Digitar a data de início, e depois a data de fim (formato AAAA-MM-DD HH:HH).
+ Exemplo:
+  2003-10-10 01:01
+  2003-12-12 02:02
+
+%%%
+%3 -Listagem de facturas emitidas por um comercializador
+%%%
+
+Digitar ID do fornecedor. Fornecedores disponiveis:
+
+EDP Comercial
+Galp Energia
+Iberdrola
+Endesa
+Gold Energy
+Coopernico
+Enat
+YIce"
+MEO Energia
+Muon
+Luzboa
+Energia Simples"
+SU Electricidade
+EDA
+
+%%%
+%4 -Ordenação dos maiores consumidores de energia durante um período de tempo
+%%%
+
+(mesmos parametros que opcao 1 e 2)
+
+%%%
+%5 -Casas
+%%%
+
+Digite o ID da casa. São disponibilizadas várias informações sobre a casa.
+ Exemplo:
+  casa1
+
+
+%%%
+%6 -Fornecedores
+%%%
+
+Digite o ID do fornecedor. São disponibilizadas várias informações sobre a casa.
+
+%%%
+%7 -Salvar estado
+%%%
+
+(indisponivel - nao foi implementado corretamente)
+
+%%%
+%8 -Carregar estado
+%%%
+
+(indisponivel - nao foi implementado corretamente)
+
+%%%
+%9 -Carregar a partir de logs.txt
+%%%
+
+Carregar dados a partir de um ficheiro. Terá de ser colocado na diretoria root do projeto(WORKING_DIRECTORY).
+
+Por exemplo:
+
+ATS22-23/logs.txt
+
+O formato dos ficheiros está no relatório, ou pode usar os geradores de logs para gerar os ficheiros (explicados na secção a seguir)
+
+%%%
+%10 - Alterar data
+%%%
+
+Alterar a data atual. Por defeito, a data atual será a data presente.
+
+%%%
+%11 - Automatizar
+%%%
+
+Carregar as instruções a partir de um ficheiro e o ficheiro irá tentar executá-las.Terá de ser colocado na diretoria root do projeto(WORKING_DIRECTORY).
+
+Por exemplo:
+
+ATS22-23/simulacao.txt
+
+Estrutura possível de um ficheiro de simulação:
+
+2022-07-18 11:08,casa,casa14,ligaDesliga,bulb284,on
+2022-07-19 12:23,casa,casa2,ligaDesliga,cam20,On
+2022-07-19 15:00,casa,casa13,setAllDevicesHome,,on
+2022-07-20 15:00,casa,casa2,setAllDevicesHome,Sala de Estar,on
+2022-07-21 15:00,casa,casa2,adicionaBulb,aaa,1,3,2.4,Sala de Estar,on
+2022-07-21 18:00,casa,casa2,removeDispositivo,aaa,,Sim
+2022-07-21 21:00,casa,casa2,adicionaCamera,aaa,1,(3x4),2.4,Quarto,on
+2022-07-21 22:00,casa,casa2,adicionaSpeaker,bbb,10,Goodis,Cidade FM,2.4,Quarto,on
+2022-07-22 18:00,casa,casa2,removeDispositivo,aaa,Sala de Estar 2,nao
+2022-07-23 22:00,casa,casa17,alteraFornecedor,EDP Comercial,false
+2022-08-19 12:23,casa,casa6,tonBulb,bulb128,1,false
+2022-08-21 12:23,casa,casa6,volSpk,speaker33,1,false
+
+%%%
+%12 -Sair da aplicação
+%%%
+
+Sair
+
