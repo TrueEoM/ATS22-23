@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Model.CasaInteligente_ESTest" time="0.216" tests="110" errors="0" skipped="0" failures="0">
+<testsuite name="Model.CasaInteligente_ESTest" time="0.434" tests="110" errors="0" skipped="0" failures="0">
   <properties>
     <property name="idea.version" value="2022.3.2"/>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
@@ -65,72 +65,72 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="test059" classname="Model.CasaInteligente_ESTest" time="0.006"/>
-  <testcase name="test058" classname="Model.CasaInteligente_ESTest" time="0.006"/>
-  <testcase name="test057" classname="Model.CasaInteligente_ESTest" time="0.005"/>
+  <testcase name="test059" classname="Model.CasaInteligente_ESTest" time="0.007"/>
+  <testcase name="test058" classname="Model.CasaInteligente_ESTest" time="0.005"/>
+  <testcase name="test057" classname="Model.CasaInteligente_ESTest" time="0.004"/>
   <testcase name="test067" classname="Model.CasaInteligente_ESTest" time="0.004"/>
-  <testcase name="test100" classname="Model.CasaInteligente_ESTest" time="0.008"/>
-  <testcase name="test066" classname="Model.CasaInteligente_ESTest" time="0.004"/>
-  <testcase name="test065" classname="Model.CasaInteligente_ESTest" time="0.004"/>
-  <testcase name="test064" classname="Model.CasaInteligente_ESTest" time="0.002"/>
-  <testcase name="test063" classname="Model.CasaInteligente_ESTest" time="0.002"/>
-  <testcase name="test062" classname="Model.CasaInteligente_ESTest" time="0.002"/>
-  <testcase name="test061" classname="Model.CasaInteligente_ESTest" time="0.007"/>
-  <testcase name="test060" classname="Model.CasaInteligente_ESTest" time="0.005"/>
-  <testcase name="test108" classname="Model.CasaInteligente_ESTest" time="0.002"/>
-  <testcase name="test107" classname="Model.CasaInteligente_ESTest" time="0.003"/>
-  <testcase name="test106" classname="Model.CasaInteligente_ESTest" time="0.004"/>
-  <testcase name="test105" classname="Model.CasaInteligente_ESTest" time="0.009"/>
-  <testcase name="test104" classname="Model.CasaInteligente_ESTest" time="0.002"/>
-  <testcase name="test103" classname="Model.CasaInteligente_ESTest" time="0.003"/>
-  <testcase name="test069" classname="Model.CasaInteligente_ESTest" time="0.003"/>
-  <testcase name="test102" classname="Model.CasaInteligente_ESTest" time="0.002"/>
+  <testcase name="test100" classname="Model.CasaInteligente_ESTest" time="0.01"/>
+  <testcase name="test066" classname="Model.CasaInteligente_ESTest" time="0.006"/>
+  <testcase name="test065" classname="Model.CasaInteligente_ESTest" time="0.003"/>
+  <testcase name="test064" classname="Model.CasaInteligente_ESTest" time="0.005"/>
+  <testcase name="test063" classname="Model.CasaInteligente_ESTest" time="0.004"/>
+  <testcase name="test062" classname="Model.CasaInteligente_ESTest" time="0.006"/>
+  <testcase name="test061" classname="Model.CasaInteligente_ESTest" time="0.005"/>
+  <testcase name="test060" classname="Model.CasaInteligente_ESTest" time="0.112"/>
+  <testcase name="test108" classname="Model.CasaInteligente_ESTest" time="0.039"/>
+  <testcase name="test107" classname="Model.CasaInteligente_ESTest" time="0.004"/>
+  <testcase name="test106" classname="Model.CasaInteligente_ESTest" time="0.006"/>
+  <testcase name="test105" classname="Model.CasaInteligente_ESTest" time="0.01"/>
+  <testcase name="test104" classname="Model.CasaInteligente_ESTest" time="0.006"/>
+  <testcase name="test103" classname="Model.CasaInteligente_ESTest" time="0.004"/>
+  <testcase name="test069" classname="Model.CasaInteligente_ESTest" time="0.006"/>
+  <testcase name="test102" classname="Model.CasaInteligente_ESTest" time="0.003"/>
   <testcase name="test068" classname="Model.CasaInteligente_ESTest" time="0.003"/>
   <testcase name="test101" classname="Model.CasaInteligente_ESTest" time="0.003"/>
-  <testcase name="test109" classname="Model.CasaInteligente_ESTest" time="0.004"/>
-  <testcase name="test070" classname="Model.CasaInteligente_ESTest" time="0.001"/>
-  <testcase name="test078" classname="Model.CasaInteligente_ESTest" time="0.003"/>
-  <testcase name="test077" classname="Model.CasaInteligente_ESTest" time="0.003"/>
-  <testcase name="test110" classname="Model.CasaInteligente_ESTest" time="0.002"/>
-  <testcase name="test076" classname="Model.CasaInteligente_ESTest" time="0.003"/>
-  <testcase name="test075" classname="Model.CasaInteligente_ESTest" time="0.002"/>
+  <testcase name="test109" classname="Model.CasaInteligente_ESTest" time="0.005"/>
+  <testcase name="test070" classname="Model.CasaInteligente_ESTest" time="0.003"/>
+  <testcase name="test078" classname="Model.CasaInteligente_ESTest" time="0.004"/>
+  <testcase name="test077" classname="Model.CasaInteligente_ESTest" time="0.004"/>
+  <testcase name="test110" classname="Model.CasaInteligente_ESTest" time="0.004"/>
+  <testcase name="test076" classname="Model.CasaInteligente_ESTest" time="0.004"/>
+  <testcase name="test075" classname="Model.CasaInteligente_ESTest" time="0.004"/>
   <testcase name="test074" classname="Model.CasaInteligente_ESTest" time="0.003"/>
   <testcase name="test073" classname="Model.CasaInteligente_ESTest" time="0.002"/>
-  <testcase name="test072" classname="Model.CasaInteligente_ESTest" time="0.002"/>
+  <testcase name="test072" classname="Model.CasaInteligente_ESTest" time="0.003"/>
   <testcase name="test071" classname="Model.CasaInteligente_ESTest" time="0.002"/>
-  <testcase name="test079" classname="Model.CasaInteligente_ESTest" time="0.001"/>
-  <testcase name="test081" classname="Model.CasaInteligente_ESTest" time="0.002"/>
-  <testcase name="test080" classname="Model.CasaInteligente_ESTest" time="0.001"/>
-  <testcase name="test001" classname="Model.CasaInteligente_ESTest" time="0.003"/>
-  <testcase name="test089" classname="Model.CasaInteligente_ESTest" time="0.001"/>
-  <testcase name="test000" classname="Model.CasaInteligente_ESTest" time="0.001"/>
-  <testcase name="test088" classname="Model.CasaInteligente_ESTest" time="0.002"/>
-  <testcase name="test087" classname="Model.CasaInteligente_ESTest" time="0.001"/>
-  <testcase name="test086" classname="Model.CasaInteligente_ESTest" time="0.002"/>
-  <testcase name="test085" classname="Model.CasaInteligente_ESTest" time="0.002"/>
-  <testcase name="test084" classname="Model.CasaInteligente_ESTest" time="0.002"/>
-  <testcase name="test083" classname="Model.CasaInteligente_ESTest" time="0.001"/>
+  <testcase name="test079" classname="Model.CasaInteligente_ESTest" time="0.004"/>
+  <testcase name="test081" classname="Model.CasaInteligente_ESTest" time="0.003"/>
+  <testcase name="test080" classname="Model.CasaInteligente_ESTest" time="0.003"/>
+  <testcase name="test001" classname="Model.CasaInteligente_ESTest" time="0.004"/>
+  <testcase name="test089" classname="Model.CasaInteligente_ESTest" time="0.003"/>
+  <testcase name="test000" classname="Model.CasaInteligente_ESTest" time="0.002"/>
+  <testcase name="test088" classname="Model.CasaInteligente_ESTest" time="0.003"/>
+  <testcase name="test087" classname="Model.CasaInteligente_ESTest" time="0.002"/>
+  <testcase name="test086" classname="Model.CasaInteligente_ESTest" time="0.003"/>
+  <testcase name="test085" classname="Model.CasaInteligente_ESTest" time="0.003"/>
+  <testcase name="test084" classname="Model.CasaInteligente_ESTest" time="0.003"/>
+  <testcase name="test083" classname="Model.CasaInteligente_ESTest" time="0.003"/>
   <testcase name="test082" classname="Model.CasaInteligente_ESTest" time="0.002"/>
-  <testcase name="test009" classname="Model.CasaInteligente_ESTest" time="0.001"/>
-  <testcase name="test008" classname="Model.CasaInteligente_ESTest" time="0.001"/>
-  <testcase name="test007" classname="Model.CasaInteligente_ESTest" time="0.001"/>
-  <testcase name="test006" classname="Model.CasaInteligente_ESTest" time="0.002"/>
-  <testcase name="test005" classname="Model.CasaInteligente_ESTest" time="0.001"/>
-  <testcase name="test004" classname="Model.CasaInteligente_ESTest" time="0.002"/>
-  <testcase name="test003" classname="Model.CasaInteligente_ESTest" time="0.001"/>
-  <testcase name="test002" classname="Model.CasaInteligente_ESTest" time="0.002"/>
-  <testcase name="test092" classname="Model.CasaInteligente_ESTest" time="0.004"/>
-  <testcase name="test091" classname="Model.CasaInteligente_ESTest" time="0.002"/>
+  <testcase name="test009" classname="Model.CasaInteligente_ESTest" time="0.003"/>
+  <testcase name="test008" classname="Model.CasaInteligente_ESTest" time="0.003"/>
+  <testcase name="test007" classname="Model.CasaInteligente_ESTest" time="0.003"/>
+  <testcase name="test006" classname="Model.CasaInteligente_ESTest" time="0.003"/>
+  <testcase name="test005" classname="Model.CasaInteligente_ESTest" time="0.004"/>
+  <testcase name="test004" classname="Model.CasaInteligente_ESTest" time="0.003"/>
+  <testcase name="test003" classname="Model.CasaInteligente_ESTest" time="0.003"/>
+  <testcase name="test002" classname="Model.CasaInteligente_ESTest" time="0.003"/>
+  <testcase name="test092" classname="Model.CasaInteligente_ESTest" time="0.006"/>
+  <testcase name="test091" classname="Model.CasaInteligente_ESTest" time="0.003"/>
   <testcase name="test090" classname="Model.CasaInteligente_ESTest" time="0.001"/>
   <testcase name="test012" classname="Model.CasaInteligente_ESTest" time="0.001"/>
   <testcase name="test011" classname="Model.CasaInteligente_ESTest" time="0.002"/>
-  <testcase name="test099" classname="Model.CasaInteligente_ESTest" time="0.002"/>
-  <testcase name="test010" classname="Model.CasaInteligente_ESTest" time="0.001"/>
+  <testcase name="test099" classname="Model.CasaInteligente_ESTest" time="0.001"/>
+  <testcase name="test010" classname="Model.CasaInteligente_ESTest" time="0.002"/>
   <testcase name="test098" classname="Model.CasaInteligente_ESTest" time="0.001"/>
   <testcase name="test097" classname="Model.CasaInteligente_ESTest" time="0.002"/>
-  <testcase name="test096" classname="Model.CasaInteligente_ESTest" time="0.001"/>
+  <testcase name="test096" classname="Model.CasaInteligente_ESTest" time="0.003"/>
   <testcase name="test095" classname="Model.CasaInteligente_ESTest" time="0.002"/>
-  <testcase name="test094" classname="Model.CasaInteligente_ESTest" time="0.003"/>
+  <testcase name="test094" classname="Model.CasaInteligente_ESTest" time="0.001"/>
   <testcase name="test093" classname="Model.CasaInteligente_ESTest" time="0.002"/>
   <testcase name="test019" classname="Model.CasaInteligente_ESTest" time="0.001"/>
   <testcase name="test018" classname="Model.CasaInteligente_ESTest" time="0.001"/>
@@ -138,41 +138,41 @@
   <testcase name="test016" classname="Model.CasaInteligente_ESTest" time="0.002"/>
   <testcase name="test015" classname="Model.CasaInteligente_ESTest" time="0.001"/>
   <testcase name="test014" classname="Model.CasaInteligente_ESTest" time="0.001"/>
-  <testcase name="test013" classname="Model.CasaInteligente_ESTest" time="0.001"/>
+  <testcase name="test013" classname="Model.CasaInteligente_ESTest" time="0.002"/>
   <testcase name="test023" classname="Model.CasaInteligente_ESTest" time="0.001"/>
   <testcase name="test022" classname="Model.CasaInteligente_ESTest" time="0.001"/>
   <testcase name="test021" classname="Model.CasaInteligente_ESTest" time="0.001"/>
-  <testcase name="test020" classname="Model.CasaInteligente_ESTest" time="0.001"/>
+  <testcase name="test020" classname="Model.CasaInteligente_ESTest" time="0.002"/>
   <testcase name="test029" classname="Model.CasaInteligente_ESTest" time="0.001"/>
   <testcase name="test028" classname="Model.CasaInteligente_ESTest" time="0.001"/>
   <testcase name="test027" classname="Model.CasaInteligente_ESTest" time="0.001"/>
   <testcase name="test026" classname="Model.CasaInteligente_ESTest" time="0.001"/>
   <testcase name="test025" classname="Model.CasaInteligente_ESTest" time="0.001"/>
-  <testcase name="test024" classname="Model.CasaInteligente_ESTest" time="0"/>
+  <testcase name="test024" classname="Model.CasaInteligente_ESTest" time="0.001"/>
   <testcase name="test034" classname="Model.CasaInteligente_ESTest" time="0.001"/>
   <testcase name="test032" classname="Model.CasaInteligente_ESTest" time="0.001"/>
-  <testcase name="test031" classname="Model.CasaInteligente_ESTest" time="0.002"/>
-  <testcase name="test030" classname="Model.CasaInteligente_ESTest" time="0"/>
-  <testcase name="test039" classname="Model.CasaInteligente_ESTest" time="0.002"/>
-  <testcase name="test038" classname="Model.CasaInteligente_ESTest" time="0.001"/>
+  <testcase name="test031" classname="Model.CasaInteligente_ESTest" time="0.001"/>
+  <testcase name="test030" classname="Model.CasaInteligente_ESTest" time="0.001"/>
+  <testcase name="test039" classname="Model.CasaInteligente_ESTest" time="0.001"/>
+  <testcase name="test038" classname="Model.CasaInteligente_ESTest" time="0.002"/>
   <testcase name="test037" classname="Model.CasaInteligente_ESTest" time="0.001"/>
   <testcase name="test036" classname="Model.CasaInteligente_ESTest" time="0.001"/>
   <testcase name="test035" classname="Model.CasaInteligente_ESTest" time="0.001"/>
   <testcase name="test045" classname="Model.CasaInteligente_ESTest" time="0.001"/>
   <testcase name="test044" classname="Model.CasaInteligente_ESTest" time="0.001"/>
   <testcase name="test043" classname="Model.CasaInteligente_ESTest" time="0.001"/>
-  <testcase name="test042" classname="Model.CasaInteligente_ESTest" time="0.001"/>
+  <testcase name="test042" classname="Model.CasaInteligente_ESTest" time="0.002"/>
   <testcase name="test041" classname="Model.CasaInteligente_ESTest" time="0.001"/>
   <testcase name="test040" classname="Model.CasaInteligente_ESTest" time="0.001"/>
   <testcase name="test049" classname="Model.CasaInteligente_ESTest" time="0.001"/>
-  <testcase name="test048" classname="Model.CasaInteligente_ESTest" time="0.001"/>
+  <testcase name="test048" classname="Model.CasaInteligente_ESTest" time="0.002"/>
   <testcase name="test047" classname="Model.CasaInteligente_ESTest" time="0.001"/>
   <testcase name="test046" classname="Model.CasaInteligente_ESTest" time="0.001"/>
   <testcase name="test056" classname="Model.CasaInteligente_ESTest" time="0.001"/>
-  <testcase name="test055" classname="Model.CasaInteligente_ESTest" time="0.001"/>
+  <testcase name="test055" classname="Model.CasaInteligente_ESTest" time="0.002"/>
   <testcase name="test054" classname="Model.CasaInteligente_ESTest" time="0.001"/>
   <testcase name="test053" classname="Model.CasaInteligente_ESTest" time="0.001"/>
-  <testcase name="test052" classname="Model.CasaInteligente_ESTest" time="0.001"/>
+  <testcase name="test052" classname="Model.CasaInteligente_ESTest" time="0.002"/>
   <testcase name="test051" classname="Model.CasaInteligente_ESTest" time="0.001"/>
   <testcase name="test050" classname="Model.CasaInteligente_ESTest" time="0.001"/>
 </testsuite>

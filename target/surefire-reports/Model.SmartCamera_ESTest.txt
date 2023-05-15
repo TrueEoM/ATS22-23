@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: Model.SmartCamera_ESTest
 -------------------------------------------------------------------------------
-Tests run: 30, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.033 sec - in Model.SmartCamera_ESTest
+Tests run: 30, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.036 sec - in Model.SmartCamera_ESTest

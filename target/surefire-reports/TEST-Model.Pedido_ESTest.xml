@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Model.Pedido_ESTest" time="0.021" tests="21" errors="0" skipped="0" failures="0">
+<testsuite name="Model.Pedido_ESTest" time="0.019" tests="21" errors="0" skipped="0" failures="0">
   <properties>
     <property name="idea.version" value="2022.3.2"/>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
@@ -71,14 +71,14 @@
   <testcase name="test15" classname="Model.Pedido_ESTest" time="0.001"/>
   <testcase name="test03" classname="Model.Pedido_ESTest" time="0.001"/>
   <testcase name="test14" classname="Model.Pedido_ESTest" time="0.001"/>
-  <testcase name="test02" classname="Model.Pedido_ESTest" time="0.001"/>
-  <testcase name="test13" classname="Model.Pedido_ESTest" time="0.001"/>
+  <testcase name="test02" classname="Model.Pedido_ESTest" time="0"/>
+  <testcase name="test13" classname="Model.Pedido_ESTest" time="0"/>
   <testcase name="test01" classname="Model.Pedido_ESTest" time="0.001"/>
   <testcase name="test12" classname="Model.Pedido_ESTest" time="0.001"/>
   <testcase name="test00" classname="Model.Pedido_ESTest" time="0.001"/>
-  <testcase name="test11" classname="Model.Pedido_ESTest" time="0"/>
+  <testcase name="test11" classname="Model.Pedido_ESTest" time="0.001"/>
   <testcase name="test10" classname="Model.Pedido_ESTest" time="0.001"/>
-  <testcase name="test20" classname="Model.Pedido_ESTest" time="0.001"/>
+  <testcase name="test20" classname="Model.Pedido_ESTest" time="0"/>
   <testcase name="test09" classname="Model.Pedido_ESTest" time="0"/>
   <testcase name="test08" classname="Model.Pedido_ESTest" time="0.002"/>
   <testcase name="test19" classname="Model.Pedido_ESTest" time="0.001"/>
