@@ -24,7 +24,7 @@ O ficheiro de logs contém a lista de fornecedores existentes nas primeiras X li
 2.2)[Python - Hypothesis]
         2.2.1) Carregar o ficheiro "generator.py" no python3(terminal), ou no Pycharm/Vscode. O ficheiro vai ter de aceder ás classes dentro
         da diretoria \hypothesisClasses
-        2.2.2) Executar main. O ficheiro de logs será gerado na diretoria /Generators com o nome "logs.txt"
+        2.2.2) Executar main. O ficheiro de logs será gerado na diretoria /Generators com o nome "py_logs.txt"
            
 
 
