@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+
+
+<h1>SmartDevice.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_1'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package Model;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_2'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_3'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>public abstract class SmartDevice {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_4'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_5'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private String id;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_6'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private boolean modo;//ON: TRUE | OFF: FALSE</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_7'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private double consumoBase;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_8'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_9'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    // usado no parser</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_10'/>
+10
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_10'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public SmartDevice(String id, double consumoBase)</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_11'/>
+11
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_11'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_12'/>
+12
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_12'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.id = id;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_13'/>
+13
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_13'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.modo=false;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_14'/>
+14
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_14'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.consumoBase = consumoBase;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_15'/>
+15
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_15'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_16'/>
+16
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_16'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_17'/>
+17
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_17'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public SmartDevice(String id, boolean modo, double consumoBase)</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_18'/>
+18
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_18'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_19'/>
+19
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_19'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.id = id;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_20'/>
+20
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_20'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.modo=modo;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_21'/>
+21
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_21'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.consumoBase = consumoBase;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_22'/>
+22
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_22'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_23'/>
+23
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_23'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_24'/>
+24
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_24'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    public SmartDevice(SmartDevice s) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_25'/>
+25
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_25'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.id = s.getID();</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_26'/>
+26
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_26'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.modo = s.getModo();</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_27'/>
+27
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_27'>1</a>
+<span>
+
+1. &#60;init&#62; : removed call to Model/SmartDevice::setConsumoBase &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        setConsumoBase(s.getConsumoBase());</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_28'/>
+28
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_28'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_29'/>
+29
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_29'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_30'/>
+30
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_30'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public void turnOn(){</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_31'/>
+31
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_31'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.modo = true;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_32'/>
+32
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_32'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_33'/>
+33
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_33'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_34'/>
+34
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_34'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public void turnOff() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_35'/>
+35
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_35'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.modo = false;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_36'/>
+36
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_36'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_37'/>
+37
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_37'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_38'/>
+38
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_38'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public double getConsumoBase() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_39'/>
+39
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_39'>1</a>
+<span>
+
+1. getConsumoBase : replaced double return with 0.0d for Model/SmartDevice::getConsumoBase &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return consumoBase;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_40'/>
+40
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_40'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_41'/>
+41
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_41'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_42'/>
+42
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_42'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public void setConsumoBase(double consumoBase) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_43'/>
+43
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_43'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.consumoBase = consumoBase;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_44'/>
+44
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_44'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_45'/>
+45
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_45'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_46'/>
+46
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_46'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public boolean getModo() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_47'/>
+47
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_47'>2</a>
+<span>
+
+1. getModo : replaced boolean return with true for Model/SmartDevice::getModo &rarr; KILLED<br/>
+
+2. getModo : replaced boolean return with false for Model/SmartDevice::getModo &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return this.modo;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_48'/>
+48
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_48'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_49'/>
+49
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_49'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_50'/>
+50
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_50'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public void setModo(boolean b) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_51'/>
+51
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_51'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.modo = b;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_52'/>
+52
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_52'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_53'/>
+53
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_53'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_54'/>
+54
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_54'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public String getID() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_55'/>
+55
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_55'>1</a>
+<span>
+
+1. getID : replaced return value with &#34;&#34; for Model/SmartDevice::getID &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return this.id;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_56'/>
+56
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_56'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_57'/>
+57
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_57'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_58'/>
+58
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_58'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public String toString(){</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_59'/>
+59
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_59'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        StringBuilder sb = new StringBuilder();</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_60'/>
+60
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_60'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        sb.append(&#34;ID: &#34;).append(this.id).append(&#34;\n&#34;)</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_61'/>
+61
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_61'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>                .append(&#34;\tOn: &#34;).append(this.modo).append(&#34;;\n&#34;)</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_62'/>
+62
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_62'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>                .append(&#34;\tConsumo Base: &#34;).append(this.consumoBase).append(&#34;;\n&#34;);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_63'/>
+63
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_63'>1</a>
+<span>
+
+1. toString : replaced return value with &#34;&#34; for Model/SmartDevice::toString &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return sb.toString();</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_64'/>
+64
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_64'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_65'/>
+65
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_65'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_66'/>
+66
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_66'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public boolean equals(Object o){</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_67'/>
+67
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_67'>2</a>
+<span>
+
+1. equals : replaced boolean return with false for Model/SmartDevice::equals &rarr; SURVIVED<br/>
+
+2. equals : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        if(o==this) return true;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_68'/>
+68
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_68'>3</a>
+<span>
+
+1. equals : replaced boolean return with true for Model/SmartDevice::equals &rarr; SURVIVED<br/>
+
+2. equals : negated conditional &rarr; SURVIVED<br/>
+
+3. equals : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        else if(o==null || o.getClass()!=this.getClass()) return false;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_69'/>
+69
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_69'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        SmartDevice sd = (SmartDevice) o;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_70'/>
+70
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_70'>2</a>
+<span>
+
+1. equals : replaced boolean return with true for Model/SmartDevice::equals &rarr; KILLED<br/>
+
+2. equals : replaced boolean return with false for Model/SmartDevice::equals &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return this.id.equals(sd.getID());</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_71'/>
+71
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_71'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_72'/>
+72
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_72'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_73'/>
+73
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_73'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public abstract SmartDevice clone();</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_74'/>
+74
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_74'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_75'/>
+75
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_75'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public abstract double consumoDiario();</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_76'/>
+76
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_76'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_27'>27</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_27'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>&#60;init&#62;<br/><b>Killed by : </b>Model.SmartDevice_ESTest</span></span> removed call to Model/SmartDevice::setConsumoBase &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_39'>39</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_39'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getConsumoBase<br/><b>Killed by : </b>Model.SmartDevice_ESTest</span></span> replaced double return with 0.0d for Model/SmartDevice::getConsumoBase &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_47'>47</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_47'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getModo<br/><b>Killed by : </b>TestCasaInteligente.[engine:junit-jupiter]/[class:TestCasaInteligente]/[method:testNumberDevicesOn()]</span></span> replaced boolean return with true for Model/SmartDevice::getModo &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>getModo<br/><b>Killed by : </b>Model.SmartDevice_ESTest</span></span> replaced boolean return with false for Model/SmartDevice::getModo &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_55'>55</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_55'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getID<br/><b>Killed by : </b>Model.SmartCamera_ESTest</span></span> replaced return value with &#34;&#34; for Model/SmartDevice::getID &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_63'>63</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_63'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>toString<br/><b>Killed by : </b>Model.SmartCamera_ESTest</span></span> replaced return value with &#34;&#34; for Model/SmartDevice::toString &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_67'>67</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_67'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>Model.SmartBulb_ESTest</span></span> negated conditional &rarr; KILLED</p> <p class='SURVIVED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>none</span></span> replaced boolean return with false for Model/SmartDevice::equals &rarr; SURVIVED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_68'>68</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_68'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>none</span></span> replaced boolean return with true for Model/SmartDevice::equals &rarr; SURVIVED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>Model.SmartCamera_ESTest</span></span> negated conditional &rarr; KILLED</p> <p class='SURVIVED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>none</span></span> negated conditional &rarr; SURVIVED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@19fe8ac0_70'>70</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@19fe8ac0_70'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>Model.SmartBulb_ESTest</span></span> replaced boolean return with true for Model/SmartDevice::equals &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>Model.SmartCamera_ESTest</span></span> replaced boolean return with false for Model/SmartDevice::equals &rarr; KILLED</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+
+<li class='mutator'>CONDITIONALS_BOUNDARY</li>
+
+<li class='mutator'>EMPTY_RETURNS</li>
+
+<li class='mutator'>FALSE_RETURNS</li>
+
+<li class='mutator'>INCREMENTS</li>
+
+<li class='mutator'>INVERT_NEGS</li>
+
+<li class='mutator'>MATH</li>
+
+<li class='mutator'>NEGATE_CONDITIONALS</li>
+
+<li class='mutator'>NULL_RETURNS</li>
+
+<li class='mutator'>PRIMITIVE_RETURNS</li>
+
+<li class='mutator'>TRUE_RETURNS</li>
+
+<li class='mutator'>VOID_METHOD_CALLS</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>Model.SmartCamera_ESTest (44 ms)</li><li>TestCasaInteligente.[engine:junit-jupiter]/[class:TestCasaInteligente]/[method:testToString()] (1 ms)</li><li>Model.Tests.SmartSpeakerTest.[engine:junit-jupiter]/[class:Model.Tests.SmartSpeakerTest]/[method:testeClone()] (0 ms)</li><li>TestCasaInteligente.[engine:junit-jupiter]/[class:TestCasaInteligente]/[method:CasaConstructorTest3()] (1 ms)</li><li>Model.Tests.SmartCameraTest.[engine:junit-jupiter]/[class:Model.Tests.SmartCameraTest]/[method:testClone()] (0 ms)</li><li>Model.Tests.SmartCameraTest.[engine:junit-jupiter]/[class:Model.Tests.SmartCameraTest]/[method:testEquals()] (1 ms)</li><li>Model.Tests.SmartBulbTest.[engine:junit-jupiter]/[class:Model.Tests.SmartBulbTest]/[method:testConstructor()] (1 ms)</li><li>Model.Tests.SmartCameraTest.[engine:junit-jupiter]/[class:Model.Tests.SmartCameraTest]/[method:testGetTamanho()] (0 ms)</li><li>Model.Tests.SmartCameraTest.[engine:junit-jupiter]/[class:Model.Tests.SmartCameraTest]/[method:testToString()] (0 ms)</li><li>Model.Tests.SmartSpeakerTest.[engine:junit-jupiter]/[class:Model.Tests.SmartSpeakerTest]/[method:testToString()] (0 ms)</li><li>TestSmartCamera.[engine:junit-jupiter]/[class:TestSmartCamera]/[method:testToString()] (0 ms)</li><li>TestSmartSpeaker.[engine:junit-jupiter]/[class:TestSmartSpeaker]/[method:testClone()] (1 ms)</li><li>Model.Tests.CasaInteligenteTest.[engine:junit-jupiter]/[class:Model.Tests.CasaInteligenteTest]/[method:testeGetDevices()] (0 ms)</li><li>TestCasaInteligente.[engine:junit-jupiter]/[class:TestCasaInteligente]/[method:testHasRoom()] (1 ms)</li><li>TestCasaInteligente.[engine:junit-jupiter]/[class:TestCasaInteligente]/[method:testParseCasa()] (1 ms)</li><li>Model.Tests.SmartSpeakerTest.[engine:junit-jupiter]/[class:Model.Tests.SmartSpeakerTest]/[method:testEquals()] (0 ms)</li><li>TestCasaInteligente.[engine:junit-jupiter]/[class:TestCasaInteligente]/[method:CasaConstructorTest1()] (1 ms)</li><li>Model.Tests.SmartCameraTest.[engine:junit-jupiter]/[class:Model.Tests.SmartCameraTest]/[method:testConsumoDiario()] (0 ms)</li><li>TestSmartSpeaker.[engine:junit-jupiter]/[class:TestSmartSpeaker]/[method:parseSmartSpeaker()] (0 ms)</li><li>TestCasaInteligente.[engine:junit-jupiter]/[class:TestCasaInteligente]/[method:testSetAlldivision()] (0 ms)</li><li>Model.SmartDevice_ESTest (45 ms)</li><li>TestCasaInteligente.[engine:junit-jupiter]/[class:TestCasaInteligente]/[method:testAddDevice()] (0 ms)</li><li>TestCasaInteligente.[engine:junit-jupiter]/[class:TestCasaInteligente]/[method:testHasFatura()] (1 ms)</li><li>TestCasaInteligente.[engine:junit-jupiter]/[class:TestCasaInteligente]/[method:testHasLog()] (0 ms)</li><li>TestSmartBulb.[engine:junit-jupiter]/[class:TestSmartBulb]/[method:changetoCold()] (0 ms)</li><li>Model.Tests.SmartSpeakerTest.[engine:junit-jupiter]/[class:Model.Tests.SmartSpeakerTest]/[method:testConstructor()] (1 ms)</li><li>TestCasaInteligente.[engine:junit-jupiter]/[class:TestCasaInteligente]/[method:testClone()] (0 ms)</li><li>Model.SmartHouses_ESTest (386 ms)</li><li>TestCasaInteligente.[engine:junit-jupiter]/[class:TestCasaInteligente]/[method:testChecksAllrooms()] (1 ms)</li><li>TestCasaInteligente.[engine:junit-jupiter]/[class:TestCasaInteligente]/[method:testHasLogByDevice()] (0 ms)</li><li>TestCasaInteligente.[engine:junit-jupiter]/[class:TestCasaInteligente]/[method:testRemoveFatura()] (0 ms)</li><li>TestSmartBulb.[engine:junit-jupiter]/[class:TestSmartBulb]/[method:turnOnLamp()] (0 ms)</li><li>TestSmartBulb.[engine:junit-jupiter]/[class:TestSmartBulb]/[method:testEquals()] (0 ms)</li><li>Model.Tests.SmartCameraTest.[engine:junit-jupiter]/[class:Model.Tests.SmartCameraTest]/[method:testGetResolucao()] (0 ms)</li><li>Model.Tests.SmartCameraTest.[engine:junit-jupiter]/[class:Model.Tests.SmartCameraTest]/[method:testConstructor()] (1 ms)</li><li>TestCasaInteligente.[engine:junit-jupiter]/[class:TestCasaInteligente]/[method:testEquals()] (0 ms)</li><li>TestSmartSpeaker.[engine:junit-jupiter]/[class:TestSmartSpeaker]/[method:testToString()] (0 ms)</li><li>Model.Tests.CasaInteligenteTest.[engine:junit-jupiter]/[class:Model.Tests.CasaInteligenteTest]/[method:testSetDevices()] (0 ms)</li><li>Model.Tests.SmartSpeakerTest.[engine:junit-jupiter]/[class:Model.Tests.SmartSpeakerTest]/[method:testTurnSpeakerOFF()] (0 ms)</li><li>TestCasaInteligente.[engine:junit-jupiter]/[class:TestCasaInteligente]/[method:testRoomHasDevice()] (0 ms)</li><li>TestSmartCamera.[engine:junit-jupiter]/[class:TestSmartCamera]/[method:testturnCameraOff()] (0 ms)</li><li>Model.SmartBulb_ESTest (70 ms)</li><li>TestSmartCamera.[engine:junit-jupiter]/[class:TestSmartCamera]/[method:testturnCameraOn()] (0 ms)</li><li>Model.Tests.SmartBulbTest.[engine:junit-jupiter]/[class:Model.Tests.SmartBulbTest]/[method:testeClone()] (1 ms)</li><li>Model.Tests.CasaInteligenteTest.[engine:junit-jupiter]/[class:Model.Tests.CasaInteligenteTest]/[method:testSetDeviceOn()] (1 ms)</li><li>TestSmartSpeaker.[engine:junit-jupiter]/[class:TestSmartSpeaker]/[method:testEquals()] (0 ms)</li><li>Model.Tests.SmartBulbTest.[engine:junit-jupiter]/[class:Model.Tests.SmartBulbTest]/[method:testChangetoCold()] (1 ms)</li><li>Model.Tests.SmartSpeakerTest.[engine:junit-jupiter]/[class:Model.Tests.SmartSpeakerTest]/[method:testTurnSpeakerOn()] (0 ms)</li><li>TestCasaInteligente.[engine:junit-jupiter]/[class:TestCasaInteligente]/[method:testSetDevice()] (0 ms)</li><li>Model.Tests.SmartCameraTest.[engine:junit-jupiter]/[class:Model.Tests.SmartCameraTest]/[method:testTurnCameraOn()] (0 ms)</li><li>TestSmartCamera.[engine:junit-jupiter]/[class:TestSmartCamera]/[method:testEquals()] (0 ms)</li><li>Model.SmartSpeaker_ESTest (79 ms)</li><li>TestCasaInteligente.[engine:junit-jupiter]/[class:TestCasaInteligente]/[method:testSetAll()] (1 ms)</li><li>TestCasaInteligente.[engine:junit-jupiter]/[class:TestCasaInteligente]/[method:testGetDevice()] (0 ms)</li><li>TestCasaInteligente.[engine:junit-jupiter]/[class:TestCasaInteligente]/[method:testAddFatura()] (0 ms)</li><li>Model.Tests.SmartBulbTest.[engine:junit-jupiter]/[class:Model.Tests.SmartBulbTest]/[method:testEquals()] (0 ms)</li><li>TestSmartCamera.[engine:junit-jupiter]/[class:TestSmartCamera]/[method:testClone()] (0 ms)</li><li>TestCasaInteligente.[engine:junit-jupiter]/[class:TestCasaInteligente]/[method:testAddLog()] (0 ms)</li><li>TestSmartBulb.[engine:junit-jupiter]/[class:TestSmartBulb]/[method:testToString()] (0 ms)</li><li>Model.Tests.SmartBulbTest.[engine:junit-jupiter]/[class:Model.Tests.SmartBulbTest]/[method:testToString()] (0 ms)</li><li>Model.Tests.SmartBulbTest.[engine:junit-jupiter]/[class:Model.Tests.SmartBulbTest]/[method:testTurnOFFlamp()] (0 ms)</li><li>TestCasaInteligente.[engine:junit-jupiter]/[class:TestCasaInteligente]/[method:testNumeroDispositivosDivisao()] (1 ms)</li><li>TestSmartBulb.[engine:junit-jupiter]/[class:TestSmartBulb]/[method:turnOFFlamp()] (0 ms)</li><li>UI_ESTest (1154 ms)</li><li>TestSmartSpeaker.[engine:junit-jupiter]/[class:TestSmartSpeaker]/[method:consumoDiario()] (0 ms)</li><li>TestCasaInteligente.[engine:junit-jupiter]/[class:TestCasaInteligente]/[method:testAddToRoom()] (2 ms)</li><li>TestCasaInteligente.[engine:junit-jupiter]/[class:TestCasaInteligente]/[method:testExistsDeviceHome()] (0 ms)</li><li>Model.Tests.SmartCameraTest.[engine:junit-jupiter]/[class:Model.Tests.SmartCameraTest]/[method:testTurnCameraOff()] (0 ms)</li><li>TestCasaInteligente.[engine:junit-jupiter]/[class:TestCasaInteligente]/[method:testRemoveDevicesFromRoom()] (1 ms)</li><li>Model.Tests.SmartBulbTest.[engine:junit-jupiter]/[class:Model.Tests.SmartBulbTest]/[method:testTurnOnLamp()] (0 ms)</li><li>TestCasaInteligente.[engine:junit-jupiter]/[class:TestCasaInteligente]/[method:testSetDeviceOff()] (0 ms)</li><li>TestSmartBulb.[engine:junit-jupiter]/[class:TestSmartBulb]/[method:testClone()] (0 ms)</li><li>TestCasaInteligente.[engine:junit-jupiter]/[class:TestCasaInteligente]/[method:testRemoveLog()] (0 ms)</li><li>Model.CasaInteligente_ESTest (510 ms)</li><li>TestCasaInteligente.[engine:junit-jupiter]/[class:TestCasaInteligente]/[method:testHasDevice()] (0 ms)</li><li>TestCasaInteligente.[engine:junit-jupiter]/[class:TestCasaInteligente]/[method:testNumberDevicesOn()] (1 ms)</li><li>TestCasaInteligente.[engine:junit-jupiter]/[class:TestCasaInteligente]/[method:testNumeroDispositivos()] (0 ms)</li><li>TestSmartBulb.[engine:junit-jupiter]/[class:TestSmartBulb]/[method:parseSmartBulb()] (0 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='https://pitest.org'>PIT</a> 1.11.6
+
+</body>
+</html>

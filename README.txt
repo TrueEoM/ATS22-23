@@ -1,3 +1,32 @@
+Elementos do Grupo:
+Tom ́as Ferreira de Sousa Dias - A89486
+Pedro Alexandre da Silva Oliveira - A98712
+Eduardo Fernando Cruz Henriques - A9318
+
+• /Generators
+	– /HypothesisClasses
+		∗ Casa.py
+		∗ Divisao.py
+		∗ Fornecedor.py
+		∗ SmartBulb.py
+		∗ SmartCamera.py
+		∗ SmartSpeaker.py
+	– generator.py
+	– generators.hs
+• /src
+	– /main/java
+		∗ /Model/... (CODIGO FONTE)
+		∗ Main.java
+		∗ Menu.java
+		∗ UI.java
+	– /test
+		∗ ... (CODIGO TESTES)
+• /target
+	– /pit-reports
+	∗ index.html
+• pom.xml
+• README.txt
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         MANUAL DA APLICAÇÃO DE CASAS INTELIGENTES - ANÁLISE DE PROJETOS 22-23
