@@ -1,21 +1,23 @@
 import Test.QuickCheck
 import System.Environment
+import Data.List (delete)
 
 fornecedores :: [String]
 fornecedores = ["EDP Comercial","Galp Energia","Iberdrola","Endesa","Gold Energy","Coopernico","Enat","YIce","Meo Energia","Muon","Luzboa","Energia Simples","SU Eletricidade","EDA"]
 
 data Fornecedor = Fornecedor String Float
 
-instance Arbitrary Fornecedor where 
-    arbitrary = genFornecedor
-
 instance Show Fornecedor where
     show (Fornecedor x y) = x ++ "," ++ show y
 
-genFornecedor :: Gen Fornecedor
-genFornecedor =  do s <- elements fornecedores
-                    f <- choose(0.0,1.0)
-                    return (Fornecedor s f)
+genFornecedor :: [String] -> Int -> Gen [Fornecedor]
+genFornecedor _ 0 = return []
+genFornecedor lfornecedor n = do s <- elements lfornecedor
+                                 let s' = delete s lfornecedor
+                                 rate <- choose(0.0,1.0)
+                                 fs <- genFornecedor s' (n-1)
+                                 let f = (Fornecedor s rate)
+                                 return (f : fs)
 
 data SmartBulb = SmartBulb String Int Float String
 
@@ -112,7 +114,7 @@ genCasa = do proprietario <- listOf1 $ choose('a' ,'z')
              return (Casa proprietario nif fornecedor ("Casa"++id) morada divs)
 
 main = do
-    fornecedor <- generate (vectorOf 10 genFornecedor)
+    fornecedor <- generate (genFornecedor fornecedores 5)
     houses <- generate (vectorOf 3 genCasa)
     writeFile "log.txt" (unlines (map show fornecedor))
     appendFile "log.txt" (unlines (map show houses))
